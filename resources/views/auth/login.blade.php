@@ -106,8 +106,8 @@
                         </div>
                     @endif
                         <div class="card-body px-5 py-5">
-                            <img src="{{asset('Admin/assets/images/logo-mini.svg')}}" alt="" width="150" height="120">
-                            {{-- <h3 class="card-title text-center mb-3" style="color: #000">Login</h3> --}}
+                            <img src="{{asset('Admin/assets/images/logo-custom.png')}}" alt="" width="150" height="120">
+                            <h3 class="card-title text-center mb-3" style="color: #fff">Login</h3>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row mb-3">

@@ -11,10 +11,16 @@
         <div class="collapse navbar-collapse" id="navbarsFurni">
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                 {{-- <li class="nav-item active">
-                    <a class="nav-link" href="{{route ('user')}}">Home</a>
+                    <a class="nav-link" href="#">Home</a>
                 </li> --}}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('login')}}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('register')}}">Register</a>
+                </li>
             </ul>
-        </div>
+        </div>       
     </div>
         
 </nav>

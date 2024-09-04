@@ -33,7 +33,7 @@
                 <tr>
                     @php $no = 1; @endphp 
 
-                    <td>{{ $no }}</td>
+                    <td>{{ $loop->index+1 }}</td>
                     <td>{{ $data->judul }}</td>
                     <td>{{ $data->jumlah_buku}}</td>
                     <td>{{ $data->tahun_penerbit }}</td>
