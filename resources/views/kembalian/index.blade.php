@@ -31,7 +31,7 @@
                         @foreach ($kembali as $data)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $data->data->nama }}</td>
+                                <td>{{ $data->buku->judul }}</td>
                                 <td>{{ $data->jumlah }}</td>
                                 <td>{{ $data->formatted_tanggal }}</td>
                                 <td>{{ $data->nama }}</td>

@@ -27,7 +27,7 @@
 	<body>
 
 		<!-- Start Header/Navigation -->
-        @include('frontend.navbar')
+        @include('layouts.frontend.navbar')
 		<!-- End Header/Navigation -->
 
 		<!-- Start Product Section -->
@@ -285,7 +285,7 @@
 
 
 		<!-- Start Footer Section -->
-		@include('frontend.footer')
+		@include('layouts.frontend.footer')
 		<!-- End Footer Section -->	
 
 

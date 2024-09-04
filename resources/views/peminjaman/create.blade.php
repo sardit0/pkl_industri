@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form class="row" method="POST" action="{{ route('peminjaman.store') }}">
                         @csrf
-                        <div class="mb-3">
+                        <div class="col-md-12">
                             <label for="id_buku" class="form-label">Judul Buku</label>
                             <select name="id_buku" id="id_buku" class="form-control">
                                 <option disabled selected>Judul Buku</option>
@@ -48,14 +48,14 @@
                                 <span class="position-absolute top-50 translate-middle-y"></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword4">Status</label>
+                        <div class="col-md-12">
+                            <label for="input17"  class="form-label">Status</label>
                             <select name="status" class="form-control" id="" style="color: #ffffff;">
                                 <option value="Sedang Diminjem">Sedang Diminjem</option>
                                 <option value="Sudah Dikembalikan">Sudah Dikembalikan</option>
                             </select>
                         </div>
-                        <div class="mt-3">
+                        <div class="col-md-12 mt-5">
                             <button type="submit" class="btn btn-success">Submit</button>
                             <a href="{{ route('buku.index') }}" class="btn btn-danger">Cancel</a>
                         </div>

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('Admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Admin/assets/vendors/css/vendor.bundle.base.css') }}">
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{asset ('Admin/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('Admin/assets/css/style.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('Admin/assets/vendors/jvectormap/jquery-jvectormap.css') }}">
@@ -32,11 +32,11 @@
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_sidebar.html -->
-        @include('backend.sidebar')
+        @include('layouts.backend.sidebar')
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_navbar.html -->
-            @include('backend.header')
+            @include('layouts.backend.header')
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -45,7 +45,7 @@
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
-                @include('backend.footer')
+                @include('layouts.backend.footer')
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->
@@ -77,7 +77,7 @@
     <script src="{{ asset('Admin/assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/misc.js') }}"></script>
-    <script src="{{ asset('Admin/assets/js/chart.js')}}"></script>
+    <script src="{{ asset('Admin/assets/js/chart.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/settings.js') }}"></script>
     <script src="{{ asset('Admin/assets/js/todolist.js') }}"></script>
     <!-- endinject -->

@@ -6,6 +6,8 @@ use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Penulis;
 use App\Models\Buku;
+use App\Models\Minjem;
+use App\Models\Kembali;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,8 @@ class HomeController extends Controller
         $penulis = Penulis::count('id');
         $penerbit = Penerbit::count('id');
         $buku = Buku::count('id');
-        return view('home', compact('buku', 'penerbit', 'penulis', 'kategori'));
+        $minjem = Minjem::count('id');
+        $kembali = Minjem::where('status', 'Sudah Dikembalikan')->count('id');
+        return view('home', compact('buku', 'penerbit', 'penulis', 'kategori','kembali','minjem'));
     }
 }

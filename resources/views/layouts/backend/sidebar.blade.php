@@ -27,25 +27,9 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('peminjaman.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
-                </span>
-                <span class="menu-title">Data Peminjaman</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('kembalian.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
-                </span>
-                <span class="menu-title">Data Pengembalian</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('penulis.index') }}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
+                    <i class="mdi  mdi-border-color icon-item"></i>
                 </span>
                 <span class="menu-title">Data Penulis</span>
             </a>
@@ -53,7 +37,7 @@
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('penerbit.index') }}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
+                    <i class="mdi mdi-account"></i>
                 </span>
                 <span class="menu-title">Data Penerbit</span>
             </a>
@@ -61,11 +45,29 @@
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('buku.index') }}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-playlist-play"></i>
+                    <i class="mdi mdi-book"></i>
                 </span>
                 <span class="menu-title">Data Buku</span>
             </a>
         </li>
-        
+        <li class="nav-item nav-category">
+            <hr>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjaman.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-arrow-bottom-left"></i>
+                </span>
+                <span class="menu-title">Data Peminjaman</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('kembalian.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-arrow-top-right"></i>
+                </span>
+                <span class="menu-title">Data Pengembalian</span>
+            </a>
+        </li>
     </ul>
 </nav>
