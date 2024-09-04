@@ -20,16 +20,24 @@ class Buku extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class , 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'id_kategori');
     }
 
     public function penulis()
     {
-        return $this->belongsTo(Penulis::class , 'id_penulis');
+        return $this->belongsTo(Penulis::class, 'id_penulis');
     }
 
     public function penerbit()
     {
-        return $this->belongsTo(Penerbit::class , 'id_penerbit');
+        return $this->belongsTo(Penerbit::class, 'id_penerbit');
+    }
+    public function Minjem()
+    {
+        return $this->belongsTo(Minjem::class);
+    }
+    public function Kembali()
+    {
+        return $this->belongsTo(Kembali::class);
     }
 }

@@ -3,7 +3,9 @@
 <div class="col-12 col-xl-12">
     <div class="card m-3">
         <div class="card-body p-4">
-            <h5 class="mb-4">Tambah Penerbit</h5>
+            <div class="card-header mb-4">
+                <h3>Tambah Penerbit</h3>
+            </div>
             <form class="row g-3" method="POST" action="{{ route('penerbit.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-12">

@@ -27,6 +27,22 @@
             </a>
         </li>
         <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjaman.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-table-large"></i>
+                </span>
+                <span class="menu-title">Data Peminjaman</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('kembalian.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-table-large"></i>
+                </span>
+                <span class="menu-title">Data Pengembalian</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('penulis.index') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-table-large"></i>

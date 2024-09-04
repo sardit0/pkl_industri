@@ -62,7 +62,7 @@
                                 ipsum duo et no et, ipsum ipsum erat duo amet clita duo
                             </p> --}}
                         </div>
-                        <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                        <a href="#" class="btn btn-primary px-4 mx-auto mb-4">Lihat</a>
                     </div>
                 </div>
             @endforeach

@@ -2,23 +2,34 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+
+    <style>
+        .position-relative {
+            position: relative;
+        }
+        .tambah-buku {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 10; /* Supaya berada di atas elemen lain */
+        }
+    </style>
+
 @endsection
 @section('content')
 <h6 class="mb-0 text-uppercase"></h6>
 <hr>
-<div class="card m-3">
-    <div class="card-body">
-        <div class="col-lg-2">
-            <a href="{{ route('buku.create') }}" class="btn btn-success px-4 raised">
-                <i class="material-icons-outlined"></i>
-                Tambah Buku
-            </a>
+<div class="card-header mb-4">
+            <h3>Tabel Buku</h3>
         </div>
+<div class="card m-3">
+    <div class="card-body position-relative">
         <table class="table mb-0 table-striped" id="example">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Judul Buku</th>
+                    <th scope="col">Deskripsi</th>
                     <th scope="col">Jumlah Buku</th>
                     <th scope="col">Tahun Penerbit</th>
                     <th scope="col">Gambar</th>
@@ -35,6 +46,7 @@
 
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $data->judul }}</td>
+                    <td>{{ $data->desk }}</td>
                     <td>{{ $data->jumlah_buku}}</td>
                     <td>{{ $data->tahun_penerbit }}</td>
                     <td><img src="{{ asset('images/buku/' . $data->image) }}" alt="" width="70%"></td>
@@ -75,9 +87,20 @@
                 </tr>
                 @endforeach
             </tbody>
+            
         </table>
+        <div class="tambah-buku">
+            <div class="col-lg-2 mb-3">
+                <a href="{{ route('buku.create') }}" class="btn btn-success px-4 raised">
+                    <i class="material-icons-outlined"></i>
+                    Tambah Buku
+                </a>
+            </div>
+        </div>
     </div>
 </div>
+
+
 @endsection
 
 @push('scripts')

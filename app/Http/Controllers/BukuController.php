@@ -49,6 +49,7 @@ class BukuController extends Controller
         //validate form
         $this->validate($request, [
             'judul' => 'required|min:1|unique:bukus,judul',
+            'desk' => 'required|min:1|',
             'jumlah_buku' => 'required',
             'tahun_penerbit' => 'required|date',
             'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
@@ -61,6 +62,7 @@ class BukuController extends Controller
 
         $buku = new buku();
         $buku->judul = $request->judul;
+        $buku->desk = $request->desk;
         $buku->jumlah_buku = $request->jumlah_buku;
         $buku->tahun_penerbit = $request->tahun_penerbit;
         $buku->id_kategori = $request->id_kategori;
@@ -117,14 +119,19 @@ class BukuController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'judul' => 'required|min:3',
+            'judul' => 'required|min:1|unique:bukus,judul',
             'jumlah_buku' => 'required',
             'tahun_penerbit' => 'required|date',
             'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
-        ]);
+        ],
+    [
+        'judul.required' => 'Judul Buku Harus Di isi!',
+        'judul.unique' => 'Judul Buku dengan Nama tersebut sudah ada!',
+    ]);
 
         $buku = buku::findOrFail($id);
         $buku->judul = $request->judul;
+        $buku->desk = $request->desk;
         $buku->jumlah_buku = $request->jumlah_buku;
         $buku->tahun_penerbit = $request->tahun_penerbit;
         $buku->id_kategori = $request->id_kategori;

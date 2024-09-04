@@ -6,6 +6,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PenulisController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\MinjemController;
+use App\Http\Controllers\KembaliController;
 use App\Http\Middleware\IsAdmin;
 
 
@@ -30,6 +32,8 @@ Route::group(['prefix' => 'dashboard','middleware'  => ['auth', IsAdmin::class]]
     Route::resource('penerbit', PenerbitController::class);
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
+    Route::resource('peminjaman', MinjemController::class);
+    Route::resource('kembalian', KembaliController::class);
     
 });
 

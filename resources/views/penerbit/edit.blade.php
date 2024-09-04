@@ -20,11 +20,9 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="d-md-flex d-grid align-items-center gap-3">
-                        <button type="submit" class="btn btn-success px-4">Submit</button>
-                        <a type="submit" href="{{route('penerbit.index')}}" class="btn btn-danger">Cancel</a>
-                    </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="{{ route('penerbit.index') }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>

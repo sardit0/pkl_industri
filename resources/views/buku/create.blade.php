@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-12 col-xl-12">
+            <div class="card m-3">
                 <div class="card-header">
-                    <h3>Add New Book</h3>
+                    <h3>Tambah Buku</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('buku.store') }}" method="POST" enctype="multipart/form-data">
@@ -15,6 +15,15 @@
                             <label for="judul" class="form-label">Judul</label>
                             <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Nama Judul">
                             @error('judul')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="desk" class="form-label">Deskripsi</label>
+                            <textarea type="text" name="desk" class="form-control @error('desk') is-invalid @enderror" id="desk" placeholder="Deskripsi"></textarea>
+                            @error('desk')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
