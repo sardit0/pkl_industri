@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
         <a class="sidebar-brand brand-logo" href="{{ route('home') }}"><img
-                src="{{ asset('Admin/assets/images/logo-custom.png') }}" alt="logo" style="width: 200" /></a>
+                src="{{ asset('Admin/assets/images/logo-custom.png') }}" alt="logo" style="width: 100px;height:80px" /></a>
     </div>
     <ul class="nav">
         <li class="nav-item nav-category">

@@ -13,7 +13,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Nama penulis">
+                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Nama Judul">
                             @error('judul')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                         <div class="mb-3">
                             <label for="id_kategori" class="form-label">Nama Kategori</label>
                             <select name="id_kategori" id="id_kategori" class="form-control">
-                                <option disabled selected>Penulis</option>
+                                <option disabled selected>Kategori</option>
                                 @forelse ($kategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                 @empty

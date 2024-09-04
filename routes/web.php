@@ -20,21 +20,21 @@ use App\Http\Middleware\IsAdmin;
 |
 */
 
+Route::get('/', function () {
+    return view('layouts.admin');
+})-> middleware('auth');
 
 
 Route::group(['prefix' => 'dashboard','middleware'  => ['auth', IsAdmin::class]], function () {
-    Route::get('/', function () {
-        return view('home');
-    });
     Route::resource('kategori', KategoriController::class);
     Route::resource('penerbit', PenerbitController::class);
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
-
+    
 });
 
-Route::resource('yuser', TakaanController::class);
-
+Route::resource('', TakaanController::class);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

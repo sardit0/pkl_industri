@@ -44,24 +44,29 @@
 					<!-- End End Title -->
 
 					<!-- Start Column 1 -->
-			@foreach ($buku as $data)
-                <div class="col-lg-4 mb-5">
+					<div class="row">
+						@php
+						$limitedBuku = $buku->take(4);
+						@endphp
+			@foreach ($limitedBuku as $data)
+                <div class="col-lg-3 mb-5">
                     <div class="card border-0 bg-light shadow-sm pb-2">
                         <a href="{{ url('show' , $data->id) }}">
                             <img src="{{ asset('images/buku/' . $data->image) }}" alt=""
-                                class="card-img-top" alt="...">
+                                1class="card-img-top" alt="..." width="100%" height="380" >
                         </a>
                         <div class="card-body text-center">
                             <h4 class="card-title">{{$data->judul}}</h4>
-                            <p class="card-text">
+                            {{-- <p class="card-text">
                                 Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
                                 ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                            </p>
+                            </p> --}}
                         </div>
                         <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                     </div>
                 </div>
             @endforeach
+		</div>
 					<!-- End Column 1 -->
 
 				</div>
