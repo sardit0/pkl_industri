@@ -38,7 +38,10 @@ Route::group(['prefix' => 'dashboard','middleware'  => ['auth', IsAdmin::class]]
 });
 
 Route::resource('', TakaanController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('show/{id}',[TakaanController::class,'show']);
+
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

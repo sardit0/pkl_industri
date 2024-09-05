@@ -30,7 +30,7 @@ class KembaliController extends Controller
             $data->formatted_tanggal = Carbon::parse($data->tanggal_kembali)->translatedFormat('l, d F Y');
         }
 
-        return view('kembalian.index', compact('kembali'));
+        return view('admin.kembalian.index', compact('kembali'));
     }
 
     /**

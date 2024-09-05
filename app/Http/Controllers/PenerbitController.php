@@ -15,12 +15,12 @@ class PenerbitController extends Controller
     public function index()
     {
         $penerbit = penerbit::latest()->paginate(5);
-        return view('penerbit.index', compact('penerbit'));
+        return view('admin.penerbit.index', compact('penerbit'));
     }
 
     public function create()
     {
-        return view('penerbit.create');
+        return view('admin.penerbit.create');
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class PenerbitController extends Controller
     public function show($id)
     {
         $penerbit = penerbit::findOrFail($id);
-        return view('penerbit.show', compact('penerbit'));
+        return view('admin.penerbit.show', compact('penerbit'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PenerbitController extends Controller
     public function edit($id)
     {
         $penerbit = penerbit::findOrFail($id);
-        return view('penerbit.edit', compact('penerbit'));
+        return view('admin.penerbit.edit', compact('penerbit'));
     }
 
     public function update(Request $request, $id)

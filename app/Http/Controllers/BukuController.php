@@ -22,7 +22,7 @@ class BukuController extends Controller
         $penerbit = penerbit::all();
         $penulis = penulis::all();
         $buku = Buku::latest()->paginate(5);
-        return view('buku.index', compact('kategori', 'penerbit', 'penulis','buku'));
+        return view('admin.buku.index', compact('kategori', 'penerbit', 'penulis','buku'));
     }
 
     /**
@@ -35,7 +35,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        return view('buku.create', compact('kategori','penerbit','penulis'));
+        return view('admin.buku.create', compact('kategori','penerbit','penulis'));
     }
 
     /**
@@ -90,7 +90,7 @@ class BukuController extends Controller
     public function show($id)
     {
         $buku = buku::findOrFail($id);
-        return view('buku.show', compact('buku'));
+        return view('admin.buku.show', compact('buku'));
     }
 
     /**
@@ -105,7 +105,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        return view('buku.create', compact('kategori','penerbit','penulis'));
+        return view('admin.buku.create', compact('kategori','penerbit','penulis'));
     }
 
     /**

@@ -19,4 +19,10 @@ class TakaanController extends Controller
         $buku = Buku::all();
         return view('layouts.user', compact('buku'));
     }
+
+    public function show($id)
+    {
+        $buku = Buku::findOrFail($id);
+        return view('user.show',compact('buku'));
+    }
 }

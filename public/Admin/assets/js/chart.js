@@ -5,7 +5,7 @@ $(function() {
    */
   'use strict';
   var data = {
-    labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+    labels: ["Buku", "Peminjaman", "Pengembalian", "Kategori", "Penulis", "Penerbit"],
     datasets: [{
       label: '# of Votes',
       data: [10, 19, 3, 5, 2, 3],

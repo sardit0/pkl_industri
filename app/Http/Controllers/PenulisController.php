@@ -15,12 +15,12 @@ class PenulisController extends Controller
     public function index()
     {
         $penulis = penulis::latest()->paginate(5);
-        return view('penulis.index', compact('penulis'));
+        return view('admin.penulis.index', compact('penulis'));
     }
 
     public function create()
     {
-        return view('penulis.create');
+        return view('admin.penulis.create');
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class PenulisController extends Controller
     public function show($id)
     {
         $penulis = penulis::findOrFail($id);
-        return view('penulis.show', compact('penulis'));
+        return view('admin.penulis.show', compact('penulis'));
     }
 
     /**
@@ -65,7 +65,7 @@ class PenulisController extends Controller
     public function edit($id)
     {
         $penulis = penulis::findOrFail($id);
-        return view('penulis.edit', compact('penulis'));
+        return view('admin.penulis.edit', compact('penulis'));
     }
 
     public function update(Request $request, $id)

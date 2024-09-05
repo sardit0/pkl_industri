@@ -62,10 +62,32 @@
                                 ipsum duo et no et, ipsum ipsum erat duo amet clita duo
                             </p> --}}
                         </div>
-                        <a href="#" class="btn btn-primary px-4 mx-auto mb-4">Lihat</a>
+                        <a href="{{ url('show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4" >Lihat Sini!</a>
                     </div>
                 </div>
             @endforeach
+		</div>
+		<div class="col-12 col-xl-6">
+			<!-- Modal -->
+			<div class="modal fade" id="ScrollableModal" aria-hidden="true" style="display: none;">
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header border-bottom-0 bg-grd-primary py-2">
+							<h5 class="modal-title">Detail</h5>
+							<a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="modal">
+								<i class="material-icons-outlined"></i>
+							</a>
+						</div>
+						<div class="modal-body">
+
+						</div>
+						<div class="modal-footer border-top-0">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Batal</button>
+							<button type="button" class="btn btn-primary">Pinjam buku</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 					<!-- End Column 1 -->
 

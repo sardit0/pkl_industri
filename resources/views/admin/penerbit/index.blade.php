@@ -2,19 +2,6 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
-    <style>
-        .position-relative {
-            position: relative;
-        }
-
-        .tambah-buku {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 10;
-            /* Supaya berada di atas elemen lain */
-        }
-    </style>
 @endsection
 @section('content')
     <h6 class="mb-0 text-uppercase"></h6>
@@ -78,11 +65,17 @@
 
     <script>
         new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: ['pdf', 'excel']
-                }
-            }
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: 'Tambah Penerbit',
+                    className: 'btn btn-success px-4 raised',
+                    action: function (e, dt, node, config) {
+                        window.location.href = "{{ route('penerbit.create') }}";
+                    }
+                },
+                'pdf', 'excel'
+            ]
         });
     </script>
 @endpush

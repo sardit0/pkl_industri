@@ -9,7 +9,7 @@ class Kembali extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','jumlah','tanggal_kembali','nama','status','id_minjem','id_data'];
+    protected $fillable = ['id','jumlah','tanggal_kembali','nama','status','id_minjem','id_buku'];
 
     public $timestamps = true;
 

@@ -35,9 +35,16 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="input17" class="form-label">Tanggal Pinjam</label>
+                            <label for="input17" class="form-label">Tanggal Peminjaman</label>
                             <div class="position-relative input-icon">
                                 <input type="date" name="tanggal_minjem" class="form-control" id="input17">
+                                <span class="position-absolute top-50 translate-middle-y"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="input17" class="form-label">Tanggal Pengembalian</label>
+                            <div class="position-relative input-icon">
+                                <input type="date" name="tanggal_kembali" class="form-control" id="input17">
                                 <span class="position-absolute top-50 translate-middle-y"></span>
                             </div>
                         </div>

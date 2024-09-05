@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('jumlah');
             $table->date('tanggal_minjem');
+            $table->date('tanggal_kembali');
             $table->string('nama');
             $table->string('status');
             $table->unsignedBigInteger('id_buku');

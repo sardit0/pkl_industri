@@ -1,8 +1,15 @@
 @extends('layouts.admin')
+
+@section('js')
+    <script src="{{ $chart->cdn() }}"></script>
+    {{ $chart->script() }}
+
+    
+@endsection
 @section('content')
     <div class="row">
         <div class="col-12 col-xl-12">
-            <div class="card m-3">                
+            <div class="card m-3">
                 <div class="card-body p-4">
                     <div class="d-flex flex-row justify-content-center">
                     </div>
@@ -11,16 +18,15 @@
                             <div class="col-12">
                                 <h4 class="card-title mt-5">Selamat datang di Web Perpustakaan</h4>
                                 <h4 class="card-title mt-2">Ini adalah halaman Admin Dashboard</h4>
-                                <div class="col-sm-4 grid-margin">
-                                    <div class="card m-3 ">
+                                <div class="col-sm-6 grid-margin">
+                                    <div class="card m-3">
                                         <div class="card">
                                             <div class="card-body">
-                                              <h4 class="card-title">Grafik</h4>
-                                              <canvas id="lineChart" style="height:200"></canvas>
+                                                {!! $chart->container() !!}
                                             </div>
-                                          </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </center>
@@ -28,7 +34,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
@@ -72,7 +78,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
@@ -84,7 +90,7 @@
 
                             </div>
                             <a href="{{ route('penulis.index') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
-                            
+
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
@@ -108,7 +114,7 @@
 
                             </div>
                             <a href="{{ route('buku.index') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
-                          
+
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
@@ -126,11 +132,11 @@
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
-                            <h2 class="mb-0">{{ $minjem }} Data</h2>
+                                <h2 class="mb-0">{{ $minjem }} Data</h2>
 
                             </div>
                             <a href="{{ route('peminjaman.index') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
-                          
+
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-danger">
@@ -152,7 +158,7 @@
 
                             </div>
                             <a href="{{ route('kembalian.index') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
-                          
+
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-success">
@@ -163,6 +169,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 @endsection
