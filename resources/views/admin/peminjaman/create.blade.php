@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <label for="input17" class="form-label">Jumlah Barang</label>
                             <div class="position-relative input-icon">
-                                <input type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror" id="input17" placeholder="Stock">
+                                <input type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror" id="input17" placeholder="Jumlah">
                                 <span class="position-absolute top-50 translate-middle-y"></span>
                                 @error('jumlah')
                                     <span class="invalid-feedback" role="alert">
@@ -58,13 +58,13 @@
                         <div class="col-md-12">
                             <label for="input17"  class="form-label">Status</label>
                             <select name="status" class="form-control" id="" style="color: #ffffff;">
-                                <option value="Sedang Diminjem">Sedang Diminjem</option>
+                                <option value="Sedang Diminjem">Sedang Dipinjam</option>
                                 <option value="Sudah Dikembalikan">Sudah Dikembalikan</option>
                             </select>
                         </div>
                         <div class="col-md-12 mt-5">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('buku.index') }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
                 </div>
