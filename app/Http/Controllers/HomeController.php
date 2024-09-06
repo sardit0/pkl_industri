@@ -13,24 +13,12 @@ use App\Charts\BukuChart;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(BukuChart $chart)
     {
-        $chartInstance = $chart->build(); // Membuat chart
-
         // BUAT KE CHART
         // $masukPemasukan = Pemasukan::select('jumlah_pemasukan')->get();
         // $totalPemasukan = $masukPemasukan->sum('jumlah_pemasukan');
@@ -52,7 +40,6 @@ class HomeController extends Controller
             'kategori' => $kategori,
             'kembali' => $kembali,
             'minjem' => $minjem,
-            'chart' => $chartInstance // Pastikan ini adalah objek chart
         ]);
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.backend.admin')
 @section('content')
     <div class="row">
         <div class="col-12 col-xl-12">

@@ -19,41 +19,6 @@
             <span class="nav-link">Daftar Tabel</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('kategori.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
-                </span>
-                <span class="menu-title">Data Kategori</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('penulis.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi  mdi-border-color icon-item"></i>
-                </span>
-                <span class="menu-title">Data Penulis</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('penerbit.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-account"></i>
-                </span>
-                <span class="menu-title">Data Penerbit</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('buku.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-book"></i>
-                </span>
-                <span class="menu-title">Data Buku</span>
-            </a>
-        </li>
-        <li class="nav-item nav-category">
-            <hr>
-        </li>
-        <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('peminjaman.index') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-arrow-bottom-left"></i>

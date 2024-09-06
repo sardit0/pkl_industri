@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.backend.admin')
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">

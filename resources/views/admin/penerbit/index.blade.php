@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.backend.admin')
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
@@ -39,14 +39,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="tambah-buku">
-                <div class="col-lg-2">
-                    <a href="{{ route('penerbit.create') }}" class="btn btn-success px-4 raised ">
-                        <i class="material-icons-outlined"></i>
-                        Tambah Penerbit
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
@@ -66,11 +58,10 @@
     <script>
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Tambah Penerbit',
                     className: 'btn btn-success px-4 raised',
-                    action: function (e, dt, node, config) {
+                    action: function(e, dt, node, config) {
                         window.location.href = "{{ route('penerbit.create') }}";
                     }
                 },

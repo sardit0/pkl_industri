@@ -8,6 +8,8 @@ use App\Http\Controllers\PenulisController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\MinjemController;
 use App\Http\Controllers\KembaliController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
 
 
@@ -23,25 +25,32 @@ use App\Http\Middleware\IsAdmin;
 */
 
 Route::get('/', function () {
-    return view('layouts.admin');
-})-> middleware('auth');
+    return view('layouts.backend.admin');
+
+})->middleware('auth');
 
 
-Route::group(['prefix' => 'dashboard','middleware'  => ['auth', IsAdmin::class]], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], function () {
+    Route::get('home', [DashboardController::class, 'index'])->name('home');
     Route::resource('kategori', KategoriController::class);
     Route::resource('penerbit', PenerbitController::class);
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
-    Route::resource('peminjaman', MinjemController::class);
-    Route::resource('kembalian', KembaliController::class);
-    
+    Route::resource('user', UserController::class);
+
 });
 
-Route::resource('', TakaanController::class);
-Route::get('show/{id}',[TakaanController::class,'show']);
-
+Route::group(['prefix' => 'peminjam'], function () {
+Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
+Route::get('buku', [TakaanController::class, 'buku'])->name('buku');
+Route::get('show/{id}', [TakaanController::class, 'show']);
+Route::get('profile', [App\Http\Controllers\TakaanController::class, 'profile'])->name('profile');
+Route::get('dashboarduser', [App\Http\Controllers\TakaanController::class, 'dashboard'])->name('dashboarduser');
+Route::resource('peminjaman', MinjemController::class);
+Route::resource('kembalian', KembaliController::class);
+});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 

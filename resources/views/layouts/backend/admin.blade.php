@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Perpustakaan</title>
+    <title>Perpustakaan Admin</title>
     <script src="sweetalert2.min.js"></script>
     <link rel="stylesheet" href="sweetalert2.min.css">
     <!-- plugins:css -->
@@ -32,11 +32,11 @@
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_sidebar.html -->
-        @include('layouts.backend.sidebar')
+        @include('include.backend.sidebar')
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_navbar.html -->
-            @include('layouts.backend.header')
+            @include('include.backend.header')
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -45,7 +45,7 @@
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
-                @include('layouts.backend.footer')
+                @include('include.backend.footer')
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->

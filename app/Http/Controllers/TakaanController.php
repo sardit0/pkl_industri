@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use App\Models\Kategori;
+use App\Models\Penerbit;
+use App\Models\Penulis;
 use App\Models\Buku;
-
-
+use App\Models\Minjem;
+use App\Models\User;
+use App\Models\Kembali;
+use App\Charts\BukuChart;
+use Illuminate\Http\Request;
 
 class TakaanController extends Controller
 {
@@ -17,12 +23,44 @@ class TakaanController extends Controller
     public function index()
     {
         $buku = Buku::all();
-        return view('layouts.user', compact('buku'));
+        return view('user.home', compact('buku'));
+    }
+    public function dashboard(BukuChart $chart)
+    {
+        $chartInstance = $chart->build(); // Membuat chart
+
+        $kategori = Kategori::count('id');
+        $penulis = Penulis::count('id');
+        $penerbit = Penerbit::count('id');
+        $buku = Buku::count('id');
+        $minjem = Minjem::count('id');
+        $kembali = Minjem::where('status', 'Sudah Dikembalikan')->count('id');
+        
+        // Kirimkan variabel ke view
+        return view('user.dashboarduser', [
+            'buku' => $buku,
+            'penerbit' => $penerbit,
+            'penulis' => $penulis,
+            'kategori' => $kategori,
+            'kembali' => $kembali,
+            'minjem' => $minjem,
+            'chart' => $chartInstance
+        ]);
+    }
+    public function buku()
+    {
+        $buku = Buku::all();
+        return view('user.buku', compact('buku'));
     }
 
     public function show($id)
     {
         $buku = Buku::findOrFail($id);
         return view('user.show',compact('buku'));
+    }
+    public function profile($id)
+    {
+        $buku = Buku::findOrFail($id);
+        return view('user.profile',compact('buku'));
     }
 }

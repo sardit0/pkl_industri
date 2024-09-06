@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::orderBy('id', 'desc')->get();
-        return view('user.index', compact('user'));
+        return view('admin.user.index', compact('user'));
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -40,15 +40,15 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'alamat' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = new User();
         $user->name = $request->name;
-        $user->alamat = $request->alamat;
         $user->email = $request->email;
+        $user->number = $request->number;
+        $user->alamat = $request->alamat;
         $user->password = Hash::make($request->password);
         $user->isAdmin = $request->isAdmin;
         $user->save();
@@ -61,7 +61,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -79,7 +79,6 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'alamat' => ['required', 'string', 'max:255'],
             'email' => [
                 'required', 'string', 'email', 'max:255',
                 // use Illuminate\Validation\Rule;
@@ -88,11 +87,12 @@ class UserController extends Controller
         ]);
 
         $user->name = $request->name;
-        $user->alamat = $request->alamat;
         $user->email = $request->email;
+        $user->alamat = $request->alamat;
+        $user->number = $request->number;
         $user->isAdmin = $request->isAdmin;
         $user->save();
-        return redirect()->route('user.index');
+        return redirect()->route('admin.user.index');
     }
 
     /**

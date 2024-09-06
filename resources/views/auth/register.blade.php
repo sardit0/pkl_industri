@@ -152,6 +152,19 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="number" class="col-md-4 col-form-label text-md-end">{{ __('No. Telepon') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input id="number" type="number" class="form-control @error('number') is-invalid @enderror" name="number" value="{{ old('number') }}" required autocomplete="number">
+    
+                                    @error('number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
     
                             <div class="row mb-3">
                                 <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
@@ -175,7 +188,7 @@
                                 </div>
                             </div>
     
-                            <div class="row mb-0">
+                            <div class="row mt-3">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
