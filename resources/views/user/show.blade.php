@@ -2,54 +2,6 @@
 <!-- insert model -->
 @extends('layouts.frontend.user')
 @section('content')
-<div class="modal fade" id="insertdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="insertdataLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="insertdataLabel">Silahkan Dipinjam</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="jumlah" class="form-label">Jumlah Yang Ingin Dipinjam?</label>
-                <input min="1" type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror" id="jumlah" placeholder="Jumlah">
-                @error('jumlah')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        
-            <div class="mb-3">
-                <label for="tanggal_pinjam" class="form-label">Tanggal Peminjaman</label>
-                <input type="date" name="tanggal_pinjam" class="form-control @error('tanggal_pinjam') is-invalid @enderror" id="tanggal_pinjam" placeholder="">
-                @error('tanggal_pinjam')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama Peminjam</label>
-                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Namaewa?">
-                @error('nama')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <span><center>Terimakasih Sudah Meminjam di Perpustakaan Kami><</center></span>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Pinjam</button>
-        </div>
-    </div>
-</div>
-</div>
-
 <div class="container-fluid pt-5" style="margin-top: 50px ">
 <div class="container pb-3">
     <div class="row">
@@ -77,9 +29,11 @@ aria-labelledby="insertdataLabel" aria-hidden="true">
                             <p>Deskripsi : {{ $buku->desk }}</p>
                         </div>
                     </div>
-                    <a href="" type="button" class="btn btn-primary float-end mb-4 mr-5" data-bs-toggle="modal"
-                        data-bs-target="#insertdata">
+                    <a href="{{route ('peminjaman.create')}}" type="button" class="btn btn-primary">
                         Pinjam disini
+                </a>
+                    <a href="{{route ('buku')}}" type="button" class="btn btn-primary">
+                        Kembali
                 </a>
                 </div>
             </div>

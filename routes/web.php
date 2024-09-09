@@ -40,14 +40,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
 
 });
 
-Route::group(['prefix' => 'peminjam'], function () {
 Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
+
+Route::group(['prefix' => 'peminjam'], function () {
 Route::get('buku', [TakaanController::class, 'buku'])->name('buku');
 Route::get('show/{id}', [TakaanController::class, 'show']);
-Route::get('profile', [App\Http\Controllers\TakaanController::class, 'profile'])->name('profile');
-Route::get('dashboarduser', [App\Http\Controllers\TakaanController::class, 'dashboard'])->name('dashboarduser');
-Route::resource('peminjaman', MinjemController::class);
-Route::resource('kembalian', KembaliController::class);
+Route::get('profile', [TakaanController::class, 'profile'])->name('profile');
+Route::get('dashboarduser', [TakaanController::class, 'dashboard'])->name('dashboarduser');
+});
+
+Route::group(['prefix' => 'middleware'], function () {
+    Route::resource('peminjaman', MinjemController::class);
+    Route::resource('kembalian', KembaliController::class);
 });
 Auth::routes();
 

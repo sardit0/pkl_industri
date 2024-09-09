@@ -9,13 +9,16 @@ class Kembali extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','jumlah','tanggal_kembali','nama','status','id_minjem','id_buku'];
+    protected $fillable = ['id','jumlah','tanggal_kembali','id_user','status','id_minjem','id_buku'];
 
     public $timestamps = true;
 
 
     public function buku() {
         return $this->belongsTo(Buku::class,'id_buku');
+    }
+    public function user() {
+        return $this->belongsTo(User::class,'id_buku');
     }
 
     public function minjem() {

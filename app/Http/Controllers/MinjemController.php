@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Minjem;
 use App\Models\Kembali;
 use App\Models\Buku;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -18,8 +20,9 @@ class MinjemController extends Controller
 
     public function index()
     {
+        $user = User::all();
         $minjem = minjem::latest()->paginate(5);
-        return view('admin.peminjaman.index', compact('minjem'));
+        return view('user.peminjaman.index', compact('minjem'));
     }
 
     /**
@@ -30,9 +33,14 @@ class MinjemController extends Controller
     public function create()
     {
         $buku = Buku::all();
+        $user = User::all();
         $minjem = Minjem::all();
         $kembali = Kembali::all();
-        return view('admin.peminjaman.create', compact('minjem','buku','kembali'));
+
+        $batastanggal = Carbon::now()->addWeek()->format('Y-m-d');
+        $sekarang = now()->format('Y-m-d');
+        
+        return view('user.peminjaman.create', compact('minjem','buku','kembali','user','sekarang','batastanggal'));
     }
 
     /**
@@ -56,6 +64,7 @@ class MinjemController extends Controller
         $minjem = new minjem();
         $minjem->jumlah = $request->jumlah;
         $minjem->tanggal_minjem = $request->tanggal_minjem;
+        $minjem->batas_tanggal = $request->batas_tanggal;
         $minjem->tanggal_kembali = $request->tanggal_kembali;
         $minjem->nama = $request->nama;
         $minjem->status = $request->status;
@@ -92,7 +101,7 @@ class MinjemController extends Controller
     public function show($id)
     {
         $minjem = minjem::findOrFail($id);
-        return view('admin.peminjaman.show', compact('minjem'));
+        return view('user.peminjaman.show', compact('minjem'));
     }
 
     /**
@@ -104,8 +113,9 @@ class MinjemController extends Controller
     public function edit($id)
     {
         $buku = Buku::all();
+        $user = User::all();
         $minjem = minjem::findOrFail($id);
-        return view('admin.peminjaman.edit', compact('minjem','buku'));
+        return view('user.peminjaman.edit', compact('minjem','buku','user'));
     }
 
     public function update(Request $request, $id)
@@ -136,6 +146,6 @@ class MinjemController extends Controller
     {
         $minjem = minjem::findOrFail($id);
         $minjem->delete();
-        return redirect()->route('admin.peminjaman.index');
+        return redirect()->route('peminjaman.index');
     }
 }

@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="tahun_penerbit" class="form-label">Nama Penerbit</label>
+                            <label for="tahun_penerbit" class="form-label">Tahun Terbit</label>
                             <input type="date" name="tahun_penerbit" class="form-control @error('tahun_penerbit') is-invalid @enderror" id="tahun_penerbit">
                             @error('tahun_penerbit')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
 
                         <div class="mb-3">
                             <label for="id_kategori" class="form-label">Nama Kategori</label>
-                            <select name="id_kategori" id="id_kategori" class="form-control">
+                            <select name="id_kategori" id="id_kategori" class="form-control" style="color: #ffffff">
                                 <option disabled selected>Kategori</option>
                                 @forelse ($kategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
@@ -74,7 +74,7 @@
 
                         <div class="mb-3">
                             <label for="id_penerbit" class="form-label">Nama Penerbit</label>
-                            <select name="id_penerbit" id="id_penerit" class="form-control">
+                            <select name="id_penerbit" id="id_penerit" class="form-control" style="color: #ffffff">
                                 <option disabled selected>Penerbit</option>
                                 @forelse ($penerbit as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_penerbit }}</option>
@@ -86,7 +86,7 @@
 
                         <div class="mb-3">
                             <label for="id_penulis" class="form-label">Nama Penulis</label>
-                            <select name="id_penulis" id="id_penulis" class="form-control">
+                            <select name="id_penulis" id="id_penulis" class="form-control" style="color: #ffffff">
                                 <option disabled selected>Penulis</option>
                                 @forelse ($penulis as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_penulis }}</option>

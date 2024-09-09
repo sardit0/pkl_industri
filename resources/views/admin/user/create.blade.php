@@ -7,7 +7,7 @@
             <form class="row g-3" method="POST" action="{{ route('user.store') }}">
                 @csrf
                 <div class="col-md-12">
-                    <label for="input13" class="form-label">Full Name</label>
+                    <label for="input16" class="form-label">Full Name</label>
                     <div class="position-relative input-icon">
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="input13" value="{{ old('name') }}" placeholder="Full Name" required>
                         <span class="position-absolute top-50 translate-middle-y"></span>
@@ -36,18 +36,6 @@
                         <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" id="input16" placeholder="Alamat" required>
                         <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('alamat')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <label for="input16" class="form-label">No Telepon</label>
-                    <div class="position-relative input-icon">
-                        <input type="text" name="number" class="form-control @error('number') is-invalid @enderror" value="{{ old('number') }}" id="input16" placeholder="NO Telepon" required>
-                        <span class="position-absolute top-50 translate-middle-y"></span>
-                        @error('number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

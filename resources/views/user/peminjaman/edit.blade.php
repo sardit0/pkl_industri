@@ -1,4 +1,4 @@
-@extends('layouts.backend.admin')
+@extends('user.usertemp')
 @section('content')
     <div class="card">
         <div class="card-body">
@@ -10,7 +10,7 @@
                 @method('PUT')
                 <div class="mb-3">  
                     <label for="nama" class="form-label">Nama Buku</label>
-                    <select name="id_buku" id="nama" class="form-control">
+                    <select name="id_buku" id="nama" class="form-control" style="color: #ffffff">
                         <option disabled selected ="">Isi Disini</option>
                         @foreach ($buku as $item)
                             <option value="{{ $item->id }}">{{ $item->judul }}</option>
@@ -30,14 +30,14 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword4">Nama Peminjam</label>
-                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Stok"
-                        name="nama" value="{{ $minjem->nama_peminjam }}">
+                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Nama Peminjam"
+                        name="nama" value="{{ Auth::user()->name }}">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword4">Status</label>
-                    <select name="status" class="form-control" id="" value="{{ $minjem->status }}" style="color: #000000;">
-                        <option value="Sedang Diminjem">Sedang Diminjem</option>
-                        <option value="Sudah Dikembalikan">Sudah Dikembalikan</option>
+                    <select name="status" class="form-control" id="" value="{{ $minjem->status }}" style="color: #ffffff;">
+                        <option value="Dipinjem">Dipinjem</option>
+                        <option value="Dikembalikan">Dikembalikan</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Edit</button>

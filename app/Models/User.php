@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'alamat',
-        'number',
+        'no_hp',
         'email',
         'password',
     ];
@@ -43,4 +43,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    use HasFactory;
+
+
+    public function user()
+    {
+        return $this->hasMany(User::class , 'id_user');
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\IsAdmin;
 use App\Models\User;
+use App\Models\Kembali;
+use App\Models\Minjem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,8 +23,11 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        $minjem = Minjem::all();
+        $kembali = Kembali::all();
         $user = User::orderBy('id', 'desc')->get();
-        return view('admin.user.index', compact('user'));
+        return view('admin.user.index', compact('user','minjem','kembali'));
     }
 
     /**
@@ -40,6 +45,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'no_hp' => ['required', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -47,7 +53,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->number = $request->number;
+        $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
         $user->password = Hash::make($request->password);
         $user->isAdmin = $request->isAdmin;
@@ -88,8 +94,8 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
-        $user->number = $request->number;
         $user->isAdmin = $request->isAdmin;
         $user->save();
         return redirect()->route('admin.user.index');

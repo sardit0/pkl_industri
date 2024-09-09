@@ -14,7 +14,6 @@
                     <th scope="col">No</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
-                    <th scope="col">No. Telepon</th>
                     <th scope="col">Alamat</th>
                     <th scope="col">Is Admin ?</th>
                     <th scope="col">Aksi</th>
@@ -26,7 +25,6 @@
                     <th scope="row">{{ $loop->index+1 }}</th>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
-                    <td>{{ $item->number }}</td>
                     <td>{{ $item->alamat }}</td>
                     <td>{{ $item->isAdmin ? 'Admin' : 'Peminjam' }}</td>
                     <td>

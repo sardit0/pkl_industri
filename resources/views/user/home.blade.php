@@ -23,7 +23,7 @@
                             {{-- {{$data->deskripsi}} --}}
                         </p>
                     </div>
-                    <a href="{{ url('show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Lihat Detail</a>
+                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Lihat Detail</a>
                 </div>
             </div>
             @endforeach

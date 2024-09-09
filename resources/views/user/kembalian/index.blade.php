@@ -1,4 +1,4 @@
-@extends('layouts.backend.admin')
+@extends('user.usertemp')
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
@@ -6,11 +6,6 @@
 @section('content')
     <div class="card m-3">
         <div class="card-body p-4">
-            @if (session('success'))
-                <div class="alert alert-success fade show" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
             <h4 class="card-title">Pengembalian</h4>
             <div class="table-responsive">
                 <table class="table" id="example">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Minjem;
+use App\Models\User;
 use App\Models\Kembali;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class KembaliController extends Controller
             $data->formatted_tanggal = Carbon::parse($data->tanggal_kembali)->translatedFormat('l, d F Y');
         }
 
-        return view('admin.kembalian.index', compact('kembali'));
+        return view('user.kembalian.index', compact('kembali'));
     }
 
     /**

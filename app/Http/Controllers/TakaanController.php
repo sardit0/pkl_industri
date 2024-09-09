@@ -11,6 +11,7 @@ use App\Models\Minjem;
 use App\Models\User;
 use App\Models\Kembali;
 use App\Charts\BukuChart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TakaanController extends Controller
@@ -35,10 +36,13 @@ class TakaanController extends Controller
         $buku = Buku::count('id');
         $minjem = Minjem::count('id');
         $kembali = Minjem::where('status', 'Sudah Dikembalikan')->count('id');
-        
+
+        $bukus = Buku::all();
+        $user = auth()->user();
         // Kirimkan variabel ke view
         return view('user.dashboarduser', [
             'buku' => $buku,
+            'bukus' => $bukus,
             'penerbit' => $penerbit,
             'penulis' => $penulis,
             'kategori' => $kategori,
@@ -58,9 +62,9 @@ class TakaanController extends Controller
         $buku = Buku::findOrFail($id);
         return view('user.show',compact('buku'));
     }
-    public function profile($id)
+    public function profile()
     {
-        $buku = Buku::findOrFail($id);
-        return view('user.profile',compact('buku'));
+        $user = Auth::user();
+        return view('user.profile',['user' => $user]);
     }
 }

@@ -9,7 +9,7 @@ class Minjem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','jumlah','tanggal_minjem','tanggal_kembali','nama','status','id_buku',
+    protected $fillable = ['id','jumlah','tanggal_minjem','tanggal_kembali','batas_tgl','id_user','status','id_buku',
     ];
 
     public $timestamps = true;
@@ -17,6 +17,9 @@ class Minjem extends Model
 
     public function buku() {
         return $this->belongsTo(Buku::class,'id_buku');
+    }
+    public function user() {
+        return $this->belongsTo(User::class,'id_user');
     }
 
     public function kembali() {

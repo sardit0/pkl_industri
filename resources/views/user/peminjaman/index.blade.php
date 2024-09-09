@@ -1,4 +1,4 @@
-@extends('layouts.backend.admin')
+@extends('user.usertemp')
 @section('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
@@ -15,6 +15,7 @@
                         <th scope="col">Nama Buku</th>
                         <th scope="col">Jumlah</th>
                         <th scope="col">Tanggal Peminjaman</th>
+                        <th scope="col">Batas Peminjaman</th>
                         <th scope="col">Tanggal Pengembalian</th>
                         <th scope="col">Nama Peminjam</th>
                         <th scope="col">Status</th>
@@ -28,6 +29,7 @@
                             <td>{{ $item->buku->judul }}</td>
                             <td>{{ $item->jumlah }}</td>
                             <td>{{ $item->tanggal_minjem }}</td>
+                            <td>{{ $item->batas_tanggal }}</td>
                             <td>{{ $item->tanggal_kembali }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->status }}</td>
@@ -69,11 +71,10 @@
     <script>
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Tambah Peminjaman',
                     className: 'btn btn-success px-4 raised',
-                    action: function (e, dt, node, config) {
+                    action: function(e, dt, node, config) {
                         window.location.href = "{{ route('peminjaman.create') }}";
                     }
                 },

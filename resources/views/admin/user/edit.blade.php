@@ -7,11 +7,11 @@
             <form class="row g-3" method="POST" action="{{ route('user.update', $user->id) }}">
                 @method('PATCH')
                 @csrf
-                <div class="col-md-4x">
+                <div class="col-md-12">
                     <label for="input13" class="form-label">Full Name</label>
                     <div class="position-relative input-icon">
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="input13" value="{{ $user->name }}" placeholder="Full Name" required>
-                        <span class="position-absolute top-50 translate-middle-y"><i class="material-icons-outlined fs-5">person_outline</i></span>
+                        <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -23,7 +23,7 @@
                     <label for="input16" class="form-label">Email</label>
                     <div class="position-relative input-icon">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" id="input16" placeholder="Email" required>
-                        <span class="position-absolute top-50 translate-middle-y"><i class="material-icons-outlined fs-5">email</i></span>
+                        <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -52,14 +52,15 @@
                 </div> --}}
                 <div class="col-md-12">
                     <label for="input19" class="form-label">Is Admin ?</label>
-                    <select id="input19" name="isAdmin" class="form-select">
+                    <select id="input19" name="isAdmin" class="form-control">
                         <option value="0" {{ $user->isAdmin == 0 ? 'selected' : '' }}>No</option>
                         <option value="1" {{ $user->isAdmin ? 'selected' : '' }}>Yes</option>
                     </select>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mt-3">
                     <div class="d-md-flex d-grid align-items-center gap-3">
-                        <button type="submit" class="btn btn-grd-primary px-4">Submit</button>
+                        <button type="submit" class="btn btn-success px-4 mr-3">Submit</button>
+                        <a type="submit" href="{{route('user.index')}}" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
             </form>
