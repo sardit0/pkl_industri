@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -59,6 +60,14 @@ class UserController extends Controller
         $user->isAdmin = $request->isAdmin;
         $user->save();
 
+        if ($request->hasFile('fotoprofile')) {
+            $img = $request->file('fotoprofile');
+            $name = rand(1000, 9999) . $img->getClientOriginalName();
+            $img->move('images/user', $name);
+            $user->fotoprofile = $name;
+        }
+
+        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
         return redirect()->route('user.index');
     }
 
@@ -97,8 +106,18 @@ class UserController extends Controller
         $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
         $user->isAdmin = $request->isAdmin;
+
+
+        if ($request->hasFile('fotoprofile')) {
+            $img = $request->file('fotoprofile');
+            $name = rand(1000, 9999) . $img->getClientOriginalName();
+            $img->move('images/user', $name);
+            $user->fotoprofile = $name;
+        }
+
         $user->save();
-        return redirect()->route('admin.user.index');
+        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
+        return redirect()->route('user.index');
     }
 
     /**

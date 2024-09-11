@@ -15,7 +15,9 @@
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
                     <th scope="col">Alamat</th>
+                    <th scope="col">No HandPhone</th>
                     <th scope="col">Is Admin ?</th>
+                    <th scope="col">Foto</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -26,7 +28,11 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->alamat }}</td>
+                    <td>{{ $item->no_hp }}</td>
                     <td>{{ $item->isAdmin ? 'Admin' : 'Peminjam' }}</td>
+                    <td>
+                        <img src="{{ asset('images/user/' . $item->fotoprofile) }}"  class="rounded-circle p-1 border mb-4" width="80" height="80" style="object-fit: cover;" alt="">
+                    </td>
                     <td>
                         <a href="{{ route('user.show', $item->id) }}" class="btn btn-grd-primary gap-2">Show</a>
                         <a href="{{ route('user.edit', $item->id) }}" class="btn btn-grd-warning px-2">Edit</a>

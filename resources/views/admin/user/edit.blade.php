@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body p-4">
             <h5 class="mb-4">Edit User {{ $user->name }}</h5>
-            <form class="row g-3" method="POST" action="{{ route('user.update', $user->id) }}">
+            <form class="row g-3" method="POST" action="{{ route('user.update', $user->id) }}"enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="col-md-12">
@@ -25,6 +25,30 @@
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" id="input16" placeholder="Email" required>
                         <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="input16" class="form-label">Alamat</label>
+                    <div class="position-relative input-icon">
+                        <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" id="input16" placeholder="Alamat" required>
+                        <span class="position-absolute top-50 translate-middle-y"></span>
+                        @error('alamat')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="input17" class="form-label">NO HP</label>
+                    <div class="position-relative input-icon">
+                        <input type="number" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="input17" placeholder="No HandPhone">
+                        <span class="position-absolute top-50 translate-middle-y"></span>
+                        @error('no_hp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -56,6 +80,12 @@
                         <option value="0" {{ $user->isAdmin == 0 ? 'selected' : '' }}>No</option>
                         <option value="1" {{ $user->isAdmin ? 'selected' : '' }}>Yes</option>
                     </select>
+                </div>
+                <div class="col-md-12">
+                    <label for="input13" class="form-label">Foto Profile</label>
+                    <div class="position-relative ">
+                        <input class="form-control mb-3" type="file" name="fotoprofile" required>
+                    </div>
                 </div>
                 <div class="col-md-12 mt-3">
                     <div class="d-md-flex d-grid align-items-center gap-3">
