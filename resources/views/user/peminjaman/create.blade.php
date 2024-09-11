@@ -14,12 +14,9 @@
                             <div class="col-md-12">
                                 <label for="id_buku" class="form-label">Judul Buku</label>
                                 <select name="id_buku" id="id_buku" class="form-control" style="color: #ffffff;">
-                                    <option disabled selected>Judul Buku</option>
-                                    @forelse ($buku as $item)
-                                        <option value="{{ $item->id }}">{{ $item->judul }}</option>
-                                    @empty
-                                        <option value="" disabled>Data Belum Tersedia</option>
-                                    @endforelse
+                                    @foreach ($buku as $data)
+                                    <option value="{{ $data->id }}">{{ $data->judul }} </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-12">

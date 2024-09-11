@@ -15,16 +15,20 @@ return new class extends Migration
     {
         Schema::create('minjems', function (Blueprint $table) {
             $table->id();
-            $table->string('jumlah');
+            // $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_buku');
+            $table->integer('jumlah');
+            $table->string('nama');
             $table->date('tanggal_minjem');
             $table->date('batas_tanggal');
             $table->date('tanggal_kembali');
-            $table->string('nama');
             $table->string('status');
-            $table->unsignedBigInteger('id_buku');
             $table->timestamps();
-            
+        
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_buku')->references('id')->on('bukus')->onDelete('cascade');
         });
+        
     }
 
     /**

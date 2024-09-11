@@ -32,11 +32,11 @@ class Buku extends Model
     {
         return $this->belongsTo(Penerbit::class, 'id_penerbit');
     }
-    public function Minjem()
+    public function minjem()
     {
         return $this->belongsTo(Minjem::class);
     }
-    public function Kembali()
+    public function kembali()
     {
         return $this->belongsTo(Kembali::class);
     }

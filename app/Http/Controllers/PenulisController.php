@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penulis;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenulisController extends Controller
 {
@@ -41,6 +42,7 @@ class PenulisController extends Controller
         $penulis->nama_penulis = $request->nama_penulis;
 
         $penulis->save();
+        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
         return redirect()->route('penulis.index');
     }
 
@@ -78,6 +80,7 @@ class PenulisController extends Controller
         $penulis->nama_penulis = $request->nama_penulis;
 
         $penulis->save();
+        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
         return redirect()->route('penulis.index');
     }
 

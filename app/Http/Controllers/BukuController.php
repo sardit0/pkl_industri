@@ -7,6 +7,7 @@ use App\Models\Penerbit;
 use App\Models\Penulis;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class BukuController extends Controller
@@ -78,6 +79,7 @@ class BukuController extends Controller
         }
 
         $buku->save();
+        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
         return redirect()->route('buku.index');
     }
 
@@ -156,6 +158,7 @@ class BukuController extends Controller
         }
 
         $buku->save();
+        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
         return redirect()->route('buku.index');
     }
 

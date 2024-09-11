@@ -21,6 +21,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                     aria-labelledby="profileDropdown">
+                    <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ route('buku') }}">
+                        <span class="mdi mdi-book"></span>Buku</a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item preview-item"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

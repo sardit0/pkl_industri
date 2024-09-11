@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -20,6 +21,9 @@ return new class extends Migration
             $table->string('status');
             $table->unsignedBigInteger('id_minjem');
             $table->unsignedBigInteger('id_buku');
+
+            $table->foreign('id_minjem')->references('id')->on('minjems')->onDelete('cascade');
+            $table->foreign('id_buku')->references('id')->on('bukus')->onDelete('cascade');
             $table->timestamps();
             
         });

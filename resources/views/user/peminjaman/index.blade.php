@@ -8,7 +8,8 @@
     <hr>
     <div class="card m-3">
         <div class="card-body">
-            <table class="table mb-0 table-striped" id="example">
+            <div class="table-responsive">
+                <table class="table mb-0 table-striped" id="example">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -52,6 +53,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 @endsection

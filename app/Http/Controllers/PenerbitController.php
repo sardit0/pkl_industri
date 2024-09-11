@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenerbitController extends Controller
 {
@@ -40,6 +41,7 @@ class PenerbitController extends Controller
         $penerbit->nama_penerbit = $request->nama_penerbit;
 
         $penerbit->save();
+        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
         return redirect()->route('penerbit.index');
     }
 
@@ -77,6 +79,7 @@ class PenerbitController extends Controller
         $penerbit->nama_penerbit = $request->nama_penerbit;
 
         $penerbit->save();
+        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
         return redirect()->route('penerbit.index');
     }
 

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Minjem;
-use App\Models\Kembali;
 use App\Models\Buku;
 use App\Models\User;
+use App\Models\Kategori;
+use App\Models\Penulis;
+use App\Models\Penerbit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class MinjemController extends Controller
 {
@@ -20,9 +23,13 @@ class MinjemController extends Controller
 
     public function index()
     {
-        $user = User::all();
-        $minjem = minjem::latest()->paginate(5);
-        return view('user.peminjaman.index', compact('minjem'));
+        $buku = Buku::all();
+        $user = Auth::user();
+        $kategori = Kategori::all();
+        $penulis = Penulis::all();
+        $penerbit = Penerbit::all();
+        $minjem = Minjem::latest()->paginate(5);
+        return view('user.peminjaman.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem','user'));
     }
 
     /**
@@ -35,12 +42,11 @@ class MinjemController extends Controller
         $buku = Buku::all();
         $user = User::all();
         $minjem = Minjem::all();
-        $kembali = Kembali::all();
 
         $batastanggal = Carbon::now()->addWeek()->format('Y-m-d');
         $sekarang = now()->format('Y-m-d');
-        
-        return view('user.peminjaman.create', compact('minjem','buku','kembali','user','sekarang','batastanggal'));
+
+        return view('user.peminjaman.create', compact('minjem', 'buku', 'sekarang', 'batastanggal'));
     }
 
     /**
@@ -60,8 +66,18 @@ class MinjemController extends Controller
             'id_buku' => 'required',
         ]);
 
-        // Create a new instance of minjem
-        $minjem = new minjem();
+        // Mencari data buku berdasarkan ID yang diberikan
+        $buku = Buku::findOrFail($request->id_buku);
+
+        // Cek apakah jumlah yang diminta lebih dari stok buku yang tersedia
+        if ($request->jumlah > $buku->jumlah_buku) {
+            // Jika lebih, tampilkan SweetAlert dengan pesan error
+            Alert::error('Error', 'Jumlah buku yang diminta melebihi stok yang tersedia.')->autoclose(1500);
+            return redirect()->back();
+        }
+
+        // Jika jumlah cukup, lanjutkan dengan menyimpan data peminjaman
+        $minjem = new Minjem();
         $minjem->jumlah = $request->jumlah;
         $minjem->tanggal_minjem = $request->tanggal_minjem;
         $minjem->batas_tanggal = $request->batas_tanggal;
@@ -69,27 +85,24 @@ class MinjemController extends Controller
         $minjem->nama = $request->nama;
         $minjem->status = $request->status;
         $minjem->id_buku = $request->id_buku;
+        // $minjem->id_user = $request->id_user;
+        
 
-        // Attempt to find the associated Data record
-        $buku = Buku::findOrFail($request->id_buku);
+        // Kurangi stok buku sesuai dengan jumlah yang dipinjam
+        $buku->jumlah_buku -= $request->jumlah;
+        $buku->save();
 
-        // Check if Data record was found
-        if ($buku) {
-            // Update stok in Data record
-            $buku->jumlah_buku -= $request->jumlah;
-            $buku->save();
+        // Simpan data peminjaman
+        $minjem->save();
 
-            // Save the minjem record
-            $minjem->save();
+        // Tampilkan SweetAlert dengan pesan sukses
+        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
 
-            // Redirect to the index route of minjem
-            return redirect()->route('peminjaman.index');
-        } else {
-            // Handle the case where Data record was not found
-            // For example, you can redirect back with an error message
-            return redirect()->back()->with('error', 'Buku tidak ditemukan');
-        }
+        // Redirect ke halaman index peminjaman
+        return redirect()->route('peminjaman.index');
     }
+
+
 
 
     /**
@@ -100,7 +113,7 @@ class MinjemController extends Controller
      */
     public function show($id)
     {
-        $minjem = minjem::findOrFail($id);
+        $minjem = Minjem::findOrFail($id);
         return view('user.peminjaman.show', compact('minjem'));
     }
 
@@ -113,31 +126,37 @@ class MinjemController extends Controller
     public function edit($id)
     {
         $buku = Buku::all();
+        $kategori = Kategori::all();
+        $penulis = Penulis::all();
         $user = User::all();
-        $minjem = minjem::findOrFail($id);
-        return view('user.peminjaman.edit', compact('minjem','buku','user'));
+        $penerbit = Penerbit::all();
+        $minjem = Minjem::findOrFail($id);
+        return view('user.peminjaman.edit', compact('minjem', 'buku', 'kategori', 'penulis', 'penerbit','user'));
     }
 
     public function update(Request $request, $id)
     {
-        $minjem = minjem::findOrFail($id);
-        $buku = Buku::findOrFail($minjem->id_buku);
+        $validated = $request->validate([
+            'status' => 'required',
+        ]);
 
-        $minjem->update($request->all());
+        $minjem = Minjem::findOrFail($id);
 
-        if ($buku->jumlah_buku < $request->jumlah) {
-            Alert::warning('Warning', 'Jumlah buku Tidak Cukup')->autoClose(1500);
-            return redirect()->route('peminjaman.index');
-        } else {
-            $buku->jumlah_buku += $minjem->jumlah;
-            $buku->jumlah_buku -= $request->jumlah;
-            $buku->save();
-        }
-
-        if ($request->status == "Sudah Dikembalikan") {
+        if ($validated['status'] === 'Dikembalikan') {
+            $buku = Buku::findOrFail($minjem->id_buku);
+    
             $buku->jumlah_buku += $minjem->jumlah;
             $buku->save();
+    
+            $totalpinjam = Minjem::where('nama')->sum('jumlah');
+            $totalpinjam -= $minjem->jumlah;
+    
+            if ($totalpinjam < 0) {
+                $totalpinjam = 0;
+            }
         }
+    
+        $minjem->update($validated);
         $minjem->save();
         Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
         return redirect()->route('peminjaman.index');

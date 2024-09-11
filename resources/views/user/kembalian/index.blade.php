@@ -14,6 +14,7 @@
                             <th>No</th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
+                            <th>Tanggal Pinjam</th>
                             <th>Tanggal Kembali</th>
                             <th>Nama Peminjam</th>
                             <th>Status</th>
@@ -29,7 +30,8 @@
                                 <td>{{ $data->buku->judul }}</td>
                                 <td>{{ $data->jumlah }}</td>
                                 <td>{{ $data->formatted_tanggal }}</td>
-                                <td>{{ $data->nama }}</td>
+                                <td>{{ $data->tanggal_kembali }}</td>
+                                <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->status }}</td>
                             </tr>
                         @endforeach

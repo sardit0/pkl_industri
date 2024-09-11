@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="{{ asset('Admin/assets/images/favicon.png') }}">
 
     <meta name="description" content="" />
-    <meta name="keywords" content="bootstrap, bootstrap4" />
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('User/assets/css/bootstrap.min.css') }}" rel="stylesheet">

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Minjem;
-use App\Models\User;
+use App\Models\Buku;
+use App\Models\User;    
 use App\Models\Kembali;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

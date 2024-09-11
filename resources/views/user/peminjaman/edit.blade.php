@@ -8,40 +8,52 @@
                 class="forms-sample">
                 @csrf
                 @method('PUT')
-                <div class="mb-3">  
-                    <label for="nama" class="form-label">Nama Buku</label>
-                    <select name="id_buku" id="nama" class="form-control" style="color: #ffffff">
-                        <option disabled selected ="">Isi Disini</option>
-                        @foreach ($buku as $item)
-                            <option value="{{ $item->id }}">{{ $item->judul }}</option>
-                            {{-- @empty --}}
+                <div class="col-md-12">
+                    <label for="id_buku" class="form-label">Judul Buku</label>
+                    <select name="id_buku" id="id_buku" class="form-control" style="color: #ffffff;">
+                        @foreach ($buku as $data)
+                            <option value="{{ $data->id }}" {{ $data->id == $minjem->id_buku ? 'selected' : '' }}>
+                                {{ $data->judul }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail3">Jumlah</label>
-                    <input type="number" class="form-control" id="exampleInputEmail3" placeholder="Jumlah" name="jumlah"
-                        value="{{ $minjem->jumlah }}">
+                <div class="col-md-12">
+                    <label for="input17" class="form-label">Jumlah Barang</label>
+                    <div class="position-relative input-icon">
+                        <input type="number" name="jumlah"
+                            class="form-control @error('jumlah') is-invalid @enderror" id="input17"
+                            placeholder="Jumlah" value="{{ old('jumlah', $minjem->jumlah) }}">
+                        <span class="position-absolute top-50 translate-middle-y"></span>
+                        @error('jumlah')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Tanggal Minjem</label>
-                    <input type="date" class="form-control" id="exampleInputPassword4" placeholder="Stok"
-                        name="tanggal_minjem" value="{{ $minjem->tanggal_minjem }}">
+                <div class="col-md-12">
+                    <label for="input13" class="form-label">Nama Peminjam</label>
+                    <input class="form-control mb-3" type="text" name="nama" placeholder="Nama Peminjam"
+                        value="{{ old('nama', $minjem->nama) }}" required>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Nama Peminjam</label>
-                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="Nama Peminjam"
-                        name="nama" value="{{ Auth::user()->name }}">
+
+                <div class="col-md-12">
+                    <label for="input13" class="form-label">Tanggal Pengembalian</label>
+                    <input class="form-control mb-3" type="date" name="tanggal_kembali" value="{{ old('tanggal_kembali', $minjem->tanggal_kembali) }}" required>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Status</label>
-                    <select name="status" class="form-control" id="" value="{{ $minjem->status }}" style="color: #ffffff;">
-                        <option value="Dipinjem">Dipinjem</option>
-                        <option value="Dikembalikan">Dikembalikan</option>
+
+                <div class="col-md-12">
+                    <label for="input17" class="form-label">Status</label>
+                    <select name="status" class="form-control" id="" style="color: #ffffff;">
+                        <option value="Dipinjam" {{ $minjem->status == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+                        <option value="Dikembalikan" {{ $minjem->status == 'Dikembalikan' ? 'selected' : '' }}>Dikembalikan</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary mr-2">Edit</button>
-                <a href="{{ route('peminjaman.index') }}" class="btn btn-dark">Cancel</a>
+                <div class="col-md-12 mt-5">
+                    <button type="submit" class="btn btn-success">Edit</button>
+                    <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Cancel</a>
+                </div>
             </form>
         </div>
     </div>
