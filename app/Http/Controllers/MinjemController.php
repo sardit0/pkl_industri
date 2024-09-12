@@ -223,6 +223,6 @@ public function history()
     {
         $minjem = minjem::findOrFail($id);
         $minjem->delete();
-        return redirect()->route('peminjamanadmin.index');
+        return redirect()->route('peminjamanadmini.index');
     }
 }

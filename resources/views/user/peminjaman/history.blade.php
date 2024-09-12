@@ -37,13 +37,14 @@
                                     <td>{{ $item->tanggal_minjem }}</td>
                                     <td>{{ $item->tanggal_kembali }}</td>
                                     <td>
-                                        @if($item->status == 'Dikembalikan')
+                                        {{-- @if($item->status == 'Dikembalikan')
                                             <span class="badge bg-success">Dikembalikan</span>
                                         @elseif($item->status == 'Ditolak')
                                             <span class="badge bg-danger">Ditolak</span>
                                         @else
                                             <span class="badge bg-warning">Ditahan</span>
-                                        @endif
+                                        @endif --}}
+                                        {{ $item->status}}
                                     </td>
                                 </tr>
                                 @endforeach

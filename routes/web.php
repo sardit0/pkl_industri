@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
 });
 
 
+Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
 
 // Rute untuk pengguna
 Route::group(['prefix' => 'peminjam'], function () {
