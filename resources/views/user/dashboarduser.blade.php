@@ -54,19 +54,19 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Buku Yang Anda Sukai</h5>
+                    <h5>Riwayat Peminjaman Buku</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-sm-block d-md-flex align-items-center">
-                                <h2 class="mb-0">{{ $kembali }} Data</h2>
+                                <h2 class="mb-0">{{ $minjem }} Data</h2>
 
                             </div>
-                            <a href="{{ route('kembalian.index') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
+                            <a href="{{ route('peminjaman.history') }}" class="btn btn-primary btn-sm mt-2">Lihat</a>
 
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
-                                <span class="mdi mdi-thumb-up"></span>
+                                <span class="mdi mdi-clock"></span>
                             </div>
                         </div>
                     </div>

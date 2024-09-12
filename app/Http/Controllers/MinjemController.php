@@ -21,6 +21,45 @@ class MinjemController extends Controller
         $this->middleware('auth');
     }
 
+//     public function kembalikan(Request $request, $id)
+// {
+//     $this->validate($request, [
+//         'jumlah' => 'required|integer|min:1',
+//     ]);
+
+//     $minjem = Minjem::findOrFail($id);
+
+//     if ($minjem->status !== 'Dipinjam') {
+//         Alert::error('Error', 'Status peminjaman tidak valid untuk pengembalian.')->autoclose(1500);
+//         return redirect()->back();
+//     }
+
+//     $buku = Buku::findOrFail($minjem->id_buku);
+
+//     if ($request->jumlah > $minjem->jumlah) {
+//         Alert::error('Error', 'Jumlah buku yang dikembalikan melebihi jumlah yang dipinjam.')->autoclose(1500);
+//         return redirect()->back();
+//     }
+
+//     $buku->jumlah_buku += $request->jumlah;
+//     $buku->save();
+
+//     $minjem->status = 'Dikembalikan';
+//     $minjem->save();
+
+//     Alert::success('Success', 'Buku berhasil dikembalikan.')->autoclose(1500);
+
+//     return redirect()->route('peminjaman.index');
+// }
+
+public function history()
+{
+    $minjem = Minjem::latest()->paginate(10); // Ambil data dengan paginasi
+    return view('user.peminjaman.history', compact('minjem'));
+}
+
+
+
     public function index()
     {
         $buku = Buku::all();
@@ -28,8 +67,18 @@ class MinjemController extends Controller
         $kategori = Kategori::all();
         $penulis = Penulis::all();
         $penerbit = Penerbit::all();
-        $minjem = Minjem::latest()->paginate(5);
-        return view('user.peminjaman.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem','user'));
+        $minjem = Minjem::where('nama', $user->name)->latest()->paginate(10);
+        return view('user.peminjaman.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem', 'user'));
+    }
+    public function indexAdmin()
+    {
+        $buku = Buku::all();
+        $user = Auth::user();
+        $kategori = Kategori::all();
+        $penulis = Penulis::all();
+        $penerbit = Penerbit::all();
+        $minjem = Minjem::where('nama', $user->name)->latest()->paginate(10);
+        return view('admin.peminjamanadmin.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem', 'user'));
     }
 
     /**
@@ -82,21 +131,21 @@ class MinjemController extends Controller
         $minjem->tanggal_minjem = $request->tanggal_minjem;
         $minjem->batas_tanggal = $request->batas_tanggal;
         $minjem->tanggal_kembali = $request->tanggal_kembali;
-        $minjem->nama = $request->nama;
-        $minjem->status = $request->status;
+        $minjem->nama = Auth::user()->name;
+        $minjem->status = 'ditahan';
         $minjem->id_buku = $request->id_buku;
         // $minjem->id_user = $request->id_user;
-        
+
 
         // Kurangi stok buku sesuai dengan jumlah yang dipinjam
-        $buku->jumlah_buku -= $request->jumlah;
-        $buku->save();
+        // $buku->jumlah_buku -= $request->jumlah;
+        // $buku->save();
 
         // Simpan data peminjaman
         $minjem->save();
 
         // Tampilkan SweetAlert dengan pesan sukses
-        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
+        Alert::info('Info!', 'Pengajuan peminjaman berhasil dibuat dan masih dalam status ditahan.')->autoclose(1500);
 
         // Redirect ke halaman index peminjaman
         return redirect()->route('peminjaman.index');
@@ -131,40 +180,49 @@ class MinjemController extends Controller
         $user = User::all();
         $penerbit = Penerbit::all();
         $minjem = Minjem::findOrFail($id);
-        return view('user.peminjaman.edit', compact('minjem', 'buku', 'kategori', 'penulis', 'penerbit','user'));
+        return view('user.peminjaman.edit', compact('minjem', 'buku', 'kategori', 'penulis', 'penerbit', 'user'));
     }
+
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'status' => 'required',
+            'status' => 'required|in:ditahan,ditolak,diterima', // validasi status
         ]);
 
         $minjem = Minjem::findOrFail($id);
 
-        if ($validated['status'] === 'Dikembalikan') {
+        // Jika status berubah menjadi "diterima"
+        if ($validated['status'] === 'diterima') {
+            // Ambil data buku yang dipinjam
             $buku = Buku::findOrFail($minjem->id_buku);
-    
-            $buku->jumlah_buku += $minjem->jumlah;
+
+            // Kurangi stok buku sesuai jumlah yang dipinjam
+            $buku->jumlah_buku -= $minjem->jumlah;
             $buku->save();
-    
-            $totalpinjam = Minjem::where('nama')->sum('jumlah');
-            $totalpinjam -= $minjem->jumlah;
-    
-            if ($totalpinjam < 0) {
-                $totalpinjam = 0;
-            }
+
+            Alert::success('Peminjaman diterima', 'Stok buku berhasil dikurangi')->autoclose(1500);
         }
-    
+        // Jika status berubah menjadi "ditolak"
+        elseif ($validated['status'] === 'ditolak') {
+            // Tidak ada perubahan stok buku jika ditolak
+            Alert::error('Peminjaman ditolak', 'Pengajuan peminjaman buku ditolak')->autoclose(1500);
+        }
+        // Jika status tetap "ditahan", tidak ada aksi tambahan
+        else {
+            Alert::info('Status ditahan', 'Pengajuan peminjaman buku masih ditahan')->autoclose(1500);
+        }
+
+        // Update status peminjaman
         $minjem->update($validated);
-        $minjem->save();
-        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
-        return redirect()->route('peminjaman.index');
+
+        return redirect()->route('peminjamanadmin.index')->with('success', 'Status peminjaman berhasil diperbarui.');
     }
+
     public function destroy($id)
     {
         $minjem = minjem::findOrFail($id);
         $minjem->delete();
-        return redirect()->route('peminjaman.index');
+        return redirect()->route('peminjamanadmin.index');
     }
 }

@@ -37,9 +37,17 @@
         <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('kembalian.index') }}">
                 <span class="menu-icon">
-                    <i class="mdi mdi-thumb-up"></i>
+                    <i class="mdi mdi mdi-autorenew"></i>
                 </span>
-                <span class="menu-title">Buku Favorite</span>
+                <span class="menu-title">Data Pengembalian</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjaman.history') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-clock"></i>
+                </span>
+                <span class="menu-title">Riwayat Peminjaman</span>
             </a>
         </li>
     </ul>

@@ -10,49 +10,59 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table mb-0 table-striped" id="example">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Buku</th>
-                        <th scope="col">Jumlah</th>
-                        <th scope="col">Tanggal Peminjaman</th>
-                        <th scope="col">Batas Peminjaman</th>
-                        <th scope="col">Tanggal Pengembalian</th>
-                        <th scope="col">Nama Peminjam</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($minjem as $item)
+                    <thead>
                         <tr>
-                            <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td>{{ $item->buku->judul }}</td>
-                            <td>{{ $item->jumlah }}</td>
-                            <td>{{ $item->tanggal_minjem }}</td>
-                            <td>{{ $item->batas_tanggal }}</td>
-                            <td>{{ $item->tanggal_kembali }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->status }}</td>
-                            <td>
-                                <a href="{{ route('peminjaman.edit', $item->id) }}"
-                                    class="btn btn-grd-warning px-2">Edit</a>
-                                <a class="btn ripple btn-grd-danger px-3" href="#"
-                                    onclick="event.preventDefault();
-                            document.getElementById('destroy-form').submit();">
-                                    Hapus
-                                </a>
-
-                                <form id="destroy-form" action="{{ route('peminjaman.destroy', $item->id) }}" method="POST"
-                                    class="d-none">
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
-                            </td>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Buku</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Tanggal Peminjaman</th>
+                            <th scope="col">Batas Peminjaman</th>
+                            <th scope="col">Tanggal Pengembalian</th>
+                            <th scope="col">Nama Peminjam</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($minjem as $item)
+                            <tr>
+                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                <td>{{ $item->buku->judul }}</td>
+                                <td>{{ $item->jumlah }}</td>
+                                <td>{{ $item->tanggal_minjem }}</td>
+                                <td>{{ $item->batas_tanggal }}</td>
+                                <td>{{ $item->tanggal_kembali }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <!-- Pewarnaan Status -->
+                                <td>
+                                    @if ($item->status == 'diterima')
+                                        <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
+                                    @elseif ($item->status == 'ditolak')
+                                        <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
+                                    @else
+                                        <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
+                                    @endif
+                                </td>
+                                
+                                <td>
+                                    <a href="{{ route('peminjaman.edit', $item->id) }}"
+                                        class="btn btn-grd-warning px-2">Edit</a>
+                                    <!-- Button for Delete with SweetAlert Confirmation -->
+                                    <a class="btn ripple btn-grd-danger px-3" href="#"
+                                        onclick="confirmDelete({{ $item->id }})">
+                                        Hapus
+                                    </a>
+
+                                    <!-- Form Destroy Dinamis -->
+                                    <form id="destroy-form-{{ $item->id }}" action="{{ route('peminjaman.destroy', $item->id) }}" method="POST" class="d-none">
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -69,11 +79,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // DataTables Initialization
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [{
+            buttons: [
+                {
                     text: 'Tambah Peminjaman',
                     className: 'btn btn-success px-4 raised',
                     action: function(e, dt, node, config) {
@@ -83,5 +96,23 @@
                 'pdf', 'excel'
             ]
         });
+
+        // SweetAlert Delete Confirmation
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan bisa mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('destroy-form-' + id).submit();
+                }
+            })
+        }
     </script>
 @endpush

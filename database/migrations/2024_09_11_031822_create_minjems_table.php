@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('tanggal_minjem');
             $table->date('batas_tanggal');
             $table->date('tanggal_kembali');
-            $table->string('status');
+            $table->enum('status', ['ditahan', 'ditolak', 'diterima'])->default('ditahan');
             $table->timestamps();
         
             // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

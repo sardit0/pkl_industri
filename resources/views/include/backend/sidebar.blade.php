@@ -1,6 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        <a class="sidebar-brand brand-logo" href="{{ route('home') }}"><img
+        <a class="sidebar-brand brand-logo" href="{{ route('home') }}">
+            <img
                 src="{{ asset('Admin/assets/images/logo-custom.png') }}" alt="logo" style="width: 100px;height:80px" /></a>
     </div>
     <ul class="nav">
@@ -59,6 +60,14 @@
                     <i class="mdi mdi-account-multiple-plus"></i>
                 </span>
                 <span class="menu-title">User</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjamanadmin.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-library"></i>
+                </span>
+                <span class="menu-title">Pengajuan Peminjam</span>
             </a>
         </li>
     </ul>
