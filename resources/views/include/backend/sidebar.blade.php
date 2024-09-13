@@ -20,10 +20,11 @@
             <a class="nav-link" href="{{ route('peminjamanadmin.index') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-library">
-                    </i> <span class="count bg-danger">5</span>
+                    </i>    <span class="position-absolute top-10 start-100 translate-middle badge bg-danger" style="font-size: 0.6rem; padding: 0.2em 0.4em;">
+                        5
+                    </span>
                 </span>
                 <span class="menu-title">Pengajuan Peminjam</span>
-                
             </a>
         </li>
         <li class="nav-item nav-category">

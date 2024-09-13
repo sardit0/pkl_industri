@@ -5,7 +5,7 @@
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
-            <h1 class="mb-4 mt-5">Buku Dengan Rating Tertinggi</h1>
+            <h1 class="mb-4 mt-5">Buku Yang Paling Banyak Dipinjam</h1>
         </div>
         <div class="row">
             @php
@@ -58,15 +58,15 @@
 
                                     <div class="testimonial-block text-center">
                                         <blockquote class="mb-5">
-                                            <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
+                                            <p>&ldquo;Perpustakaan adalah tempat yang ideal untuk mencari inspirasi dan ide bisnis. Saya sering datang untuk membaca majalah bisnis dan buku-buku terbaru tentang tren industri. Staf perpustakaan juga sangat profesional dan selalu siap membantu saya dalam menemukan materi yang dibutuhkan&rdquo;</p>
                                         </blockquote>
 
                                         <div class="author-info">
                                             <div class="author-pic">
-                                                <img src="{{asset ('User/assets/images/person-1.png')}}" alt="Maria Jones" class="img-fluid">
+                                                <img src="{{asset ('User/assets/images/person_2.jpg')}}" alt="Maria Jones" class="img-fluid">
                                             </div>
-                                            <h3 class="font-weight-bold">Maria Jones</h3>
-                                            <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+                                            <h3 class="font-weight-bold">Andi</h3>
+                                            <span class="position d-block mb-3">Pengusaha</span>
                                         </div>
                                     </div>
 

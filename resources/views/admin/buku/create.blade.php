@@ -14,7 +14,7 @@
 
                         <div class="mb-3">
                             <label for="judul" class="form-label">Judul</label>
-                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Nama Judul">
+                            <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Nama Judul" required>
                             @error('judul')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -24,7 +24,7 @@
 
                         <div class="mb-3">
                             <label for="desk" class="form-label">Deskripsi</label>
-                            <textarea name="desk" class="form-control @error('desk') is-invalid @enderror" id="desk" placeholder="Deskripsi"></textarea>
+                            <textarea name="desk" class="form-control @error('desk') is-invalid @enderror" id="desk" placeholder="Deskripsi" required></textarea>
                             @error('desk')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -34,7 +34,7 @@
 
                         <div class="mb-3">
                             <label for="tahun_penerbit" class="form-label">Tahun Terbit</label>
-                            <input type="date" name="tahun_penerbit" class="form-control @error('tahun_penerbit') is-invalid @enderror" id="tahun_penerbit">
+                            <input type="date" name="tahun_penerbit" class="form-control @error('tahun_penerbit') is-invalid @enderror" id="tahun_penerbit" required>
                             @error('tahun_penerbit')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -44,13 +44,23 @@
 
                         <div class="mb-3">
                             <label for="jumlah_buku" class="form-label">Jumlah Buku</label>
-                            <input type="number" name="jumlah_buku" class="form-control @error('jumlah_buku') is-invalid @enderror" id="jumlah_buku" placeholder="Jumlah buku">
+                            <input type="number" name="jumlah_buku" class="form-control @error('jumlah_buku') is-invalid @enderror" id="jumlah_buku" placeholder="Jumlah buku" required>
                             @error('jumlah_buku')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
+                        {{-- <div class="mb-3">
+                            <label for="stok" class="form-label">Stok Buku</label>
+                            <input type="number" name="stok" class="form-control @error('stok') is-invalid @enderror" id="stok" placeholder="Stok buku" required>
+                            @error('stok')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
@@ -64,7 +74,7 @@
 
                         <div class="mb-3">
                             <label for="id_kategori" class="form-label">Nama Kategori</label>
-                            <select name="id_kategori" id="id_kategori" class="form-control" style="color: #ffffff;">
+                            <select name="id_kategori" id="id_kategori" class="form-control" required>
                                 <option disabled selected>Kategori</option>
                                 @forelse ($kategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
@@ -76,7 +86,7 @@
 
                         <div class="mb-3">
                             <label for="id_penerbit" class="form-label">Nama Penerbit</label>
-                            <select name="id_penerbit" id="id_penerbit" class="form-control" style="color: #ffffff;">
+                            <select name="id_penerbit" id="id_penerbit" class="form-control" required>
                                 <option disabled selected>Penerbit</option>
                                 @forelse ($penerbit as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_penerbit }}</option>
@@ -88,7 +98,7 @@
 
                         <div class="mb-3">
                             <label for="id_penulis" class="form-label">Nama Penulis</label>
-                            <select name="id_penulis" id="id_penulis" class="form-control" style="color: #ffffff;">
+                            <select name="id_penulis" id="id_penulis" class="form-control" required>
                                 <option disabled selected>Penulis</option>
                                 @forelse ($penulis as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_penulis }}</option>
