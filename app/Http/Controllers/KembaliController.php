@@ -2,53 +2,96 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Minjem;
 use App\Models\Kembali;
-use App\Models\Buku;
+use App\Models\Minjem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+
+
+Carbon::setLocale('id');
 
 class KembaliController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function store(Request $request, $id)
-    {
-        // Validasi input
-        $this->validate($request, [
-            'jumlah' => 'required|integer|min:1',
-        ]);
-
-        // Temukan data peminjaman berdasarkan ID
-        $minjem = Minjem::findOrFail($id);
-
-        // Pastikan peminjaman statusnya "Dipinjam"
-        if ($minjem->status !== 'Dipinjam') {
-            Alert::error('Error', 'Status peminjaman tidak valid untuk pengembalian.')->autoclose(1500);
-            return redirect()->back();
-        }
-
-        // Temukan buku berdasarkan ID dari peminjaman
-        $buku = Buku::findOrFail($minjem->id_buku);
-
-        // Tambahkan jumlah buku yang dikembalikan ke stok buku
-        $buku->jumlah_buku += $request->jumlah;
-        $buku->save();
-
-        // Update status peminjaman menjadi "Dikembalikan"
-        $minjem->status = 'Dikembalikan';
-        $minjem->save();
-
-        Alert::success('Success', 'Buku berhasil dikembalikan.')->autoclose(1500);
-
-        return redirect()->route('peminjaman.index');
-    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $kembali = Kembali::all(); // Mengambil semua data pengembalian
-        return view('user.kembalian.index', compact('kembali')); // Mengirim data ke tampilan
+        $kembali = Minjem::where('status', 'sudah Dikembalikan')->get();
+
+        foreach ($kembali as $data) {
+            $data->formatted_tanggal = Carbon::parse($data->tanggal)->translatedForamt('l, d F Y');
+        }
+
+        return view('user.kembalian.index', compact('kembali'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Pengembalian  $pengembalian
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Pengembalian $pengembalian)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Pengembalian  $pengembalian
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Pengembalian $pengembalian)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Pengembalian  $pengembalian
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Pengembalian $pengembalian)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Pengembalian  $pengembalian
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Pengembalian $pengembalian)
+    {
+        //
     }
 }

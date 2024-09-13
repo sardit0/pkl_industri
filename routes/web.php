@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::resource('buku', BukuController::class);
     Route::resource('user', UserController::class);
     Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');
+    Route::get('peminjaman/{id}/detail', [MinjemController::class, 'show'])->name('peminjamanadmin.detail');
 });
 
 
@@ -46,6 +47,8 @@ Route::group(['prefix' => 'peminjam'], function () {
     Route::get('profile', [TakaanController::class, 'profile'])->name('profile');
     Route::get('dashboarduser', [TakaanController::class, 'dashboard'])->name('dashboarduser');
     Route::get('peminjaman/history', [MinjemController::class, 'history'])->name('peminjaman.history');
+    
+
 });
 
 // Rute yang memerlukan middleware umum

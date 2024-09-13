@@ -39,7 +39,9 @@
                                         <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
                                     @elseif ($item->status == 'ditolak')
                                         <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
-                                    @else
+                                        @elseif ($item->status == 'dikembalikan')
+                                        <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
+                                        @else
                                         <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
                                     @endif
                                 </td>

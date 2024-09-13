@@ -12,7 +12,6 @@
                             <th>Nama Peminjam</th>
                             <th>Jumlah</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -25,30 +24,8 @@
                                 <td>{{ $item->jumlah }}</td>
                                 <td>{{ $item->tanggal_minjem }}</td>
                                 <td>
-                                    @if ($item->status == 'diterima')
-                                        <span class="badge bg-success">Diterima</span>
-                                    @elseif($item->status == 'ditolak')
-                                        <span class="badge bg-danger">Ditolak</span>
-                                    @else
-                                        <span class="badge bg-warning">Ditahan</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <form action="{{ route('peminjaman.update', $item->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <select name="status" class="form-control form-control-sm" style="color: white"
-                                            onchange="this.form.submit()">
-                                            <option value="ditahan" {{ $item->status == 'ditahan' ? 'selected' : '' }}>
-                                                Ditahan</option>
-                                            <option value="ditolak" {{ $item->status == 'ditolak' ? 'selected' : '' }}>
-                                                Ditolak</option>
-                                            <option value="diterima" {{ $item->status == 'diterima' ? 'selected' : '' }}>
-                                                Diterima</option>
-                                        </select>
-                                    </form>
+                                    <a href="{{ route('peminjamanadmin.detail', $item->id) }}" class="btn btn-info btn-sm">Lihat
+                                        Detail</a>
                                 </td>
                                 <td>
                                     <form action="{{ route('peminjaman.destroy', $item->id) }}" method="POST"

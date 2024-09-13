@@ -20,7 +20,7 @@
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label for="input17" class="form-label">Jumlah Barang</label>
+                                <label for="input17" class="form-label">Jumlah Buku</label>
                                 <div class="position-relative input-icon">
                                     <input type="number" name="jumlah"
                                         class="form-control @error('jumlah') is-invalid @enderror" id="input17"

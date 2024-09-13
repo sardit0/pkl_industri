@@ -16,6 +16,16 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjamanadmin.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-library">
+                    </i> <span class="count bg-danger">5</span>
+                </span>
+                <span class="menu-title">Pengajuan Peminjam</span>
+                
+            </a>
+        </li>
         <li class="nav-item nav-category">
             <span class="nav-link">Daftar Tabel</span>
         </li>
@@ -60,14 +70,6 @@
                     <i class="mdi mdi-account-multiple-plus"></i>
                 </span>
                 <span class="menu-title">User</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('peminjamanadmin.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-library"></i>
-                </span>
-                <span class="menu-title">Pengajuan Peminjam</span>
             </a>
         </li>
     </ul>

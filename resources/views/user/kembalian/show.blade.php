@@ -1,25 +1,32 @@
 @extends('user.usertemp')
 
 @section('content')
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Detail Peminjaman</h4>
-        <p><strong>Judul Buku:</strong> {{ $minjem->buku->judul }}</p>
-        <p><strong>Nama Peminjam:</strong> {{ $minjem->nama }}</p>
-        <p><strong>Jumlah:</strong> {{ $minjem->jumlah }}</p>
-        <p><strong>Tanggal Peminjaman:</strong> {{ $minjem->tanggal_minjem }}</p>
-        <p><strong>Status:</strong> {{ $minjem->status }}</p>
-
-        @if($minjem->status == 'Dipinjam')
-        <form action="{{ route('kembalian.store', $minjem->id) }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="jumlah">Jumlah Buku yang Dikembalikan</label>
-                <input type="number" name="jumlah" id="jumlah" class="form-control" required>
+    <div class="card">
+        <div class="card-header">
+            <h4>Detail Pengembalian Buku</h4>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label"><strong>Judul Buku:</strong></label>
+                <p>{{ $kembali->minjem->buku->judul }}</p>
             </div>
-            <button type="submit" class="btn btn-success mt-3">Kembalikan Buku</button>
-        </form>
-        @endif
+            <div class="mb-3">
+                <label class="form-label"><strong>Nama Peminjam:</strong></label>
+                <p>{{ $kembali->minjem->nama }}</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Jumlah Buku yang Dipinjam:</strong></label>
+                <p>{{ $kembali->minjem->jumlah }}</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Tanggal Peminjaman:</strong></label>
+                <p>{{ $kembali->minjem->tanggal_minjem }}</p>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Tanggal Pengembalian:</strong></label>
+                <p>{{ $kembali->tanggal_kembali }}</p>
+            </div>
+            <a href="{{ route('kembalian.index') }}" class="btn btn-secondary">Kembali ke Daftar Pengembalian</a>
+        </div>
     </div>
-</div>
 @endsection

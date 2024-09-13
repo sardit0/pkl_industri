@@ -27,22 +27,6 @@
             <span class="nav-link">Daftar Tabel</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('peminjaman.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-arrow-bottom-left"></i>
-                </span>
-                <span class="menu-title">Data Peminjaman</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ route('kembalian.index') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi mdi-autorenew"></i>
-                </span>
-                <span class="menu-title">Data Pengembalian</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
             <a class="nav-link" href="{{ route('peminjaman.history') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-clock"></i>
@@ -50,5 +34,21 @@
                 <span class="menu-title">Riwayat Peminjaman</span>
             </a>
         </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('peminjaman.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-arrow-bottom-left"></i>
+                </span>
+                <span class="menu-title">Data Peminjaman</span>
+            </a>
+        </li>
+        {{-- <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('kembalian.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi mdi-autorenew"></i>
+                </span>
+                <span class="menu-title">Data Pengembalian</span>
+            </a>
+        </li> --}}
     </ul>
 </nav>
