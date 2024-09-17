@@ -4,10 +4,9 @@
         <div class="card-body">
             <h4 class="card-title">Edit Data Peminjaman</h4>
 
-            <form action="{{ route('peminjaman.update', $minjem->id) }}" method="POST" enctype="multipart/form-data" class="forms-sample">
+            <form class="row g-3" method="POST" action="{{ route('peminjaman.update', $minjem->id) }}" enctype="multipart/form-data">
+                @method('PATCH')
                 @csrf
-                @method('PUT')
-                
                 <!-- Pilihan Buku -->
                 <div class="col-md-12 mb-3">
                     <label for="id_buku" class="form-label">Judul Buku</label>
@@ -55,20 +54,20 @@
                         </span>
                     @enderror
                 </div>
-
+                
                 <!-- Status Peminjaman -->
                 <div class="col-md-12 mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control">
-                        <option value="Dipinjam" {{ $minjem->status == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
-                        <option value="Dikembalikan" {{ $minjem->status == 'Dikembalikan' ? 'selected' : '' }}>Dikembalikan</option>
+                        {{-- <option value="Dipinjam" {{ $minjem->status == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option> --}}
+                        <option value="dikembalikan">Dikembalikan</option>
                     </select>
                 </div>
 
                 <!-- Tombol Submit dan Cancel -->
                 <div class="col-md-12 mt-4">
                     <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('peminjamanadmin.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </form>
         </div>

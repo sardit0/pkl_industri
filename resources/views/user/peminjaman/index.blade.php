@@ -39,13 +39,13 @@
                                         <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
                                     @elseif ($item->status == 'ditolak')
                                         <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
-                                        @elseif ($item->status == 'dikembalikan')
+                                    @elseif ($item->status == 'dikembalikan')
                                         <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
-                                        @else
+                                    @else
                                         <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
                                     @endif
                                 </td>
-                                
+
                                 <td>
                                     <a href="{{ route('peminjaman.edit', $item->id) }}"
                                         class="btn btn-grd-warning px-2">Edit</a>
@@ -56,7 +56,9 @@
                                     </a>
 
                                     <!-- Form Destroy Dinamis -->
-                                    <form id="destroy-form-{{ $item->id }}" action="{{ route('peminjaman.destroy', $item->id) }}" method="POST" class="d-none">
+                                    <form id="destroy-form-{{ $item->id }}"
+                                        action="{{ route('peminjaman.destroy', $item->id) }}" method="POST"
+                                        class="d-none">
                                         @method('DELETE')
                                         @csrf
                                     </form>
@@ -87,8 +89,7 @@
         // DataTables Initialization
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Tambah Peminjaman',
                     className: 'btn btn-success px-4 raised',
                     action: function(e, dt, node, config) {

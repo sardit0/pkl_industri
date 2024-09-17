@@ -11,7 +11,6 @@
 
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-
             <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                     <div class="navbar-profile">
