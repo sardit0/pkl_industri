@@ -239,7 +239,7 @@ class MinjemController extends Controller
         $minjem->save();
     
         // Redirect dengan pesan sukses
-        return redirect()->route('peminjaman.index')->with('success', 'Status peminjaman berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Status peminjaman berhasil diperbarui.');
     }
     
 
