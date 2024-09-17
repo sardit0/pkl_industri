@@ -6,12 +6,10 @@
 @section('content')
     <h6 class="mb-0 text-uppercase"></h6>
     <hr>
-    <div class="card-header mb-4">
-        <h3>Tabel Buku</h3>
-    </div>
     <div class="card m-3">
         <div class="table-responsive">
             <div class="card-body position-relative">
+                <h4 class="card-title">Buku</h4>
                 <table class="table mb-0 table-striped" id="example">
                     <thead>
                         <tr>

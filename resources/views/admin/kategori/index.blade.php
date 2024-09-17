@@ -8,6 +8,7 @@
     <hr>
     <div class="card m-3">
         <div class="card-body position-relative">
+            <h4 class="card-title">Kategori</h4>
             <table class="table mb-0 table-striped" id="example">
                 <thead>
                     <tr>
@@ -58,11 +59,10 @@
     <script>
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Tambah Kategori',
                     className: 'btn btn-success px-4 raised',
-                    action: function (e, dt, node, config) {
+                    action: function(e, dt, node, config) {
                         window.location.href = "{{ route('kategori.create') }}";
                     }
                 },
@@ -71,5 +71,3 @@
         });
     </script>
 @endpush
-
-

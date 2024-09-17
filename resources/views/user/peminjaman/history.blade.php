@@ -36,7 +36,7 @@
                                     </td>
                                     <td>{{ $item->tanggal_minjem }}</td>
                                     <td>{{ $item->tanggal_kembali }}</td>
-                                    <td>
+                                    <td style="color: white">
                                         {{-- @if($item->status == 'Dikembalikan')
                                             <span class="badge bg-success">Dikembalikan</span>
                                         @elseif($item->status == 'Ditolak')

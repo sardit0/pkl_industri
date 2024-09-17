@@ -4,10 +4,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
 @endsection
 @section('content')
-<h6 class="mb-0 text-uppercase">ACCESS CONTROL LIST</h6>
+{{-- <h6 class="mb-0 text-uppercase">ACCESS CONTROL LIST</h6> --}}
 <hr>
 <div class="card">
     <div class="card-body">
+        <h4 class="card-title">Access Controller List</h4>
         <table class="table mb-0 table-striped" id="example">
             <thead>
                 <tr>

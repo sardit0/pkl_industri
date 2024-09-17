@@ -8,6 +8,7 @@
     <hr>
     <div class="card m-3">
         <div class="card-body">
+            <h4 class="card-title">Peminjaman</h4>
             <div class="table-responsive">
                 <table class="table mb-0 table-striped" id="example">
                     <thead>

@@ -6,6 +6,7 @@
             <div class="col-12 col-lg-12 col-xxl-12">
                 <div class="card bg">
                     <div class="card-body">
+                        {{-- <h4 class="card-title">Profile</h4> --}}
                         <div class="col-lg-12 d-lg-flex d-none">
                             <div class="p-3 bg-grd-primary">
                                 <img src="{{ asset('images/user/' . $user->fotoprofile) }}" width="100%" height="100%"
