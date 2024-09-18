@@ -9,7 +9,7 @@
     <div class="card m-3">
         <div class="card-body">
             <h4 class="card-title">Peminjaman</h4>
-            <div class="table-responsive">
+            <div class="table">
                 <table class="table mb-0 table-striped" id="example">
                     <thead>
                         <tr>
@@ -21,7 +21,7 @@
                             <th scope="col">Tanggal Pengembalian</th>
                             <th scope="col">Nama Peminjam</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,10 +49,10 @@
 
                                 <td>
                                     <a href="{{ route('peminjaman.edit', $item->id) }}"
-                                        class="btn btn-grd-warning px-2">Edit</a>
+                                        class="btn btn-grd-warning px-2" style="color: black">Edit</a>
                                     <!-- Button for Delete with SweetAlert Confirmation -->
                                     <a class="btn ripple btn-grd-danger px-3" href="#"
-                                        onclick="confirmDelete({{ $item->id }})">
+                                        onclick="confirmDelete({{ $item->id }})" style="color: black">
                                         Hapus
                                     </a>
 
@@ -73,7 +73,7 @@
     </div>
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
@@ -118,5 +118,52 @@
                 }
             })
         }
+    </script>
+@endpush --}}
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+
+    <script>
+        new DataTable('#example', {
+            dom: 'Bfrtip',
+            scrollX: true,
+            fixedColumns: {
+                right: 1,
+                left: 0
+            },
+            buttons: [{
+                    text: 'Tambah Buku',
+                    className: 'btn btn-success px-4 raised',
+                    action: function(e, dt, node, config) {
+                        window.location.href = "{{ route('peminjaman.create') }}";
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                }
+            ]
+        });
     </script>
 @endpush

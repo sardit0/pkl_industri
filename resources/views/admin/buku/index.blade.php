@@ -17,7 +17,6 @@
                             <th scope="col">Judul Buku</th>
                             <th scope="col">Jumlah Buku</th>
                             <th scope="col">Tahun Penerbit</th>
-                            <th scope="col">Gambar</th>
                             <th scope="col">Nama Kategori</th>
                             <th scope="col">Nama Penerbit</th>
                             <th scope="col">Nama Penulis</th>
@@ -33,8 +32,6 @@
                                 <td>{{ $data->judul }}</td>
                                 <td>{{ $data->jumlah_buku }}</td>
                                 <td>{{ $data->tahun_penerbit }}</td>
-                                <td><img src="{{ asset('images/buku/' . $data->image) }}" alt="" width="70%">
-                                </td>
                                 <td>
                                     @if ($data->kategori)
                                         {{ $data->kategori->nama_kategori }}
@@ -78,7 +75,7 @@
                         @endforeach
                     </tbody>
 
-                </table>
+                </table>x
             </div>
         </div>
     </div>

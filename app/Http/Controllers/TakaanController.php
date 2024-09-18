@@ -67,4 +67,5 @@ class TakaanController extends Controller
         $user = Auth::user();
         return view('user.profile',['user' => $user]);
     }
+    
 }

@@ -23,7 +23,7 @@ class KembaliController extends Controller
         $kembali = Minjem::where('status', 'sudah Dikembalikan')->get();
 
         foreach ($kembali as $data) {
-            $data->formatted_tanggal = Carbon::parse($data->tanggal)->translatedForamt('l, d F Y');
+            $data->formatted_tanggal = Carbon::parse($data->tanggal)->translatedFormat('l, d F Y');
         }
 
         return view('user.kembalian.index', compact('kembali'));

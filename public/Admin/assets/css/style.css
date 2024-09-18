@@ -21131,5 +21131,29 @@ div.tagsinput {
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1; }
+/* Untuk pengaturan lebar kolom otomatis dan merapikan teks */
+.table th, table td {
+    width: auto; /* Sesuaikan dengan ukuran konten */
+    text-align: left; /* Atur rata kiri untuk tampilan yang rapi */
+    padding: 10px; /* Jarak di dalam sel agar lebih longgar */
+}
+
+/* Membuat tabel responsif dan teks tetap dalam baris */
+.td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Menambahkan '...' jika teks terlalu panjang */
+}
+
+/* Memberikan ruang antar tombol di kolom aksi */
+.action-buttons {
+    display: flex;
+    justify-content: space-between; /* Ruang antar tombol */
+}
+
+/* Membuat jarak antara border dan konten */
+.table td, table th {
+    padding: 8px 12px;
+}
 
 /*# sourceMappingURL=maps/style.css.map */

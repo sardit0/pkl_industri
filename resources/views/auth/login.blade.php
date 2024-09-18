@@ -79,43 +79,53 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>Corona Login</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('Admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('Admin/assets/vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('Admin/assets/css/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('Admin/assets/images/favicon.png') }}" />
 </head>
-
-<body>
+<body src="{{asset('Admin/assets/images/pp.png')}}" alt="">
+{{-- <body style=" background-image: url('Admin/assets/images/pp.png');
+                background-position: center;
+                background-size: cover;"> --}}
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="row w-100 m-0">
                 <div class="content-wrapper full-page-wrapper d-flex align-items-center">
                     <div class="card col-lg-4 mx-auto">
                         @if (session('success'))
-                        <div class="alert alert-success fade show" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-success fade show" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="card-body px-5 py-5">
-                            <img src="{{asset('Admin/assets/images/logo-custom.png')}}" alt="" width="150" height="120">
-                            <h3 class="card-title text-center mb-3" style="color: #fff">Login</h3>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <img src="{{ asset('Admin/assets/images/logo-custom.png') }}" alt=""
+                                    width="200" height="170">
+                            </div>
+
+                            <h3 class="card-title text-center mb-3" style="color: #fff">Masuk</h3>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row mb-3">
-                                    <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-        
+                                    <label for="email"
+                                        class="col-md-12 col-form-label">{{ __('Alamat Email') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus
+                                            placeholder="Masukan Alamat Email">
+
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -123,13 +133,16 @@
                                         @enderror
                                     </div>
                                 </div>
-        
+
                                 <div class="row mb-3">
-                                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-        
-                                    <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-        
+                                    <label for="password"
+                                        class="col-md-12 col-form-label">{{ __('Kata Sandi') }}</label>
+
+                                    <div class="col-md-12">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required autocomplete="current-password" placeholder="Masukan Kata Sandi">
+
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -142,14 +155,15 @@
                                         d-flex align-items-center justify-content-between">
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Masuk</button>
                                 </div>
                                 <div class="col-12">
                                     <div class="text-start">
-                                      <p class="mb-0">Don't have an account yet? <a href="{{route ('register')}}">Sign up here</a>
-                                      </p>
+                                        <p class="mb-0">Tidak Punya Akun? <a href="{{ route('register') }}">Daftar
+                                                Disini</a>
+                                        </p>
                                     </div>
-                                  </div>
+                                </div>
                             </form>
                         </div>
                     </div>
