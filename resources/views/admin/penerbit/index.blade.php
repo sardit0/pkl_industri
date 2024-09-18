@@ -66,7 +66,18 @@
                         window.location.href = "{{ route('penerbit.create') }}";
                     }
                 },
-                'pdf', 'excel'
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                }
             ]
         });
     </script>

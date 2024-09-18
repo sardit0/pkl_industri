@@ -57,14 +57,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('buku.edit', $data->id) }}" class="btn btn-grd-warning px-2">Edit</a>
+                                    <a href="{{ route('buku.edit', $data->id) }}" class="btn btn-grd-warning px-2" style="color: black">Edit</a>
                                     <a href="{{ route('buku.show', $data->id) }}" class="btn btn-grd-primary float-end"
-                                        data-bs-toggle="modal" data-bs-target="#insertdata">
+                                        data-bs-toggle="modal" data-bs-target="#insertdata" style="color: black">
                                         Show
                                     </a>
                                     <a class="btn ripple btn-grd-danger px-3" href="#"
                                         onclick="event.preventDefault();
-                            document.getElementById('destroy-form').submit();">
+                            document.getElementById('destroy-form').submit();" style="color: black">
                                         Hapus
                                     </a>
 
@@ -95,10 +95,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
 
     <script>
         new DataTable('#example', {
             dom: 'Bfrtip',
+            scrollX: true,
+            fixedColumns: {
+                right: 1,
+                left: 0 
+            },
             buttons: [{
                     text: 'Tambah Buku',
                     className: 'btn btn-success px-4 raised',
@@ -106,7 +113,18 @@
                         window.location.href = "{{ route('buku.create') }}";
                     }
                 },
-                'pdf', 'excel'
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                }
             ]
         });
     </script>

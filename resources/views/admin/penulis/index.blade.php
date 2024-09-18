@@ -59,15 +59,25 @@
     <script>
         new DataTable('#example', {
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     text: 'Tambah Penulis',
                     className: 'btn btn-success px-4 raised',
-                    action: function (e, dt, node, config) {
+                    action: function(e, dt, node, config) {
                         window.location.href = "{{ route('penulis.create') }}";
                     }
                 },
-                'pdf', 'excel'
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
+                    }
+                }
             ]
         });
     </script>

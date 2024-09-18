@@ -17,7 +17,7 @@
                     <th scope="col">Nama Buku</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Tanggal Peminjaman</th>
-                    <th scope="col">Nama</th>
+                       <th scope="col">Nama</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
