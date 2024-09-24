@@ -70,8 +70,8 @@
 
                 <!-- Tombol Submit dan Cancel -->
                 <div class="col-md-12 mt-4">
-                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('peminjamanadmin.index') }}" class="btn btn-danger">Batal</a>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="{{ route('peminjamanadmin.index') }}" class="btn btn-danger">Back</a>
                 </div>
             </form>
         </div>

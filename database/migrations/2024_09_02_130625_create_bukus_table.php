@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('desk');
             $table->integer('jumlah_buku');
             $table->date('tahun_penerbit');
-            
+                
             $table->string('image');
             $table->unsignedBigInteger('id_kategori');
             $table->unsignedBigInteger('id_penerbit');

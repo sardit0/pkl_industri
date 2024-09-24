@@ -148,6 +148,7 @@ class MinjemController extends Controller
         $minjem->tanggal_minjem = $request->tanggal_minjem;
         $minjem->batas_tanggal = $request->batas_tanggal;
         $minjem->tanggal_kembali = $request->tanggal_kembali;
+        $minjem->alasan = $request->alasan;
         $minjem->nama = Auth::user()->name;
         $minjem->status = 'ditahan';
         $minjem->id_buku = $request->id_buku;
@@ -169,14 +170,13 @@ class MinjemController extends Controller
     }
 
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showpengajuanuser($id)
+    {
+        $minjem = Minjem::findOrFail($id);
+        $buku = Buku::all();
+        $user = Auth::user();
+        return view('user.peminjaman.showpengajuan', compact('user', 'buku', 'minjem'));
+    }
     public function show($id)
     {
         $minjem = Minjem::with('buku')->findOrFail($id);
@@ -202,8 +202,11 @@ class MinjemController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , Minjem $minjem)
     {
+
+        $minjem->alasan = $request->alasan;
+
       // Temukan objek Minjem berdasarkan ID
       $minjem = Minjem::findOrFail($id);
 

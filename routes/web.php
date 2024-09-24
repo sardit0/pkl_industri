@@ -54,6 +54,7 @@ Route::group(['prefix' => 'peminjam'], function () {
 Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     Route::resource('peminjaman', MinjemController::class);
     Route::resource('kembalian', KembaliController::class);
+    Route::get('pengajuan/show/{id}', [MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
     // Route::get('pengajuan/show/{id}',[MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
 });
 

@@ -1,9 +1,10 @@
 @extends('layouts.backend.admin')
 @section('content')
+<h3 class="m-3 text-uppercase">Add User</h3>
+<hr>
 <div class="col-12 col-xl-12">
     <div class="card">
         <div class="card-body p-4">
-            <h5 class="mb-4">Add User</h5>
             <form class="row g-3" method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-12">
@@ -19,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input16" class="form-label">Email</label>
+                    <label for="input16" class="form-label">Email (Make sure the email you entered is active!)</label>
                     <div class="position-relative input-icon">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="input16" placeholder="Email" required>
                         <span class="position-absolute top-50 translate-middle-y"></span>
@@ -31,15 +32,15 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input13" class="form-label">Foto Profile</label>
+                    <label for="input13" class="form-label">Image</label>
                     <div class="position-relative ">
                         <input class="form-control mb-3" type="file" name="fotoprofile" required>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input16" class="form-label">Alamat</label>
+                    <label for="input16" class="form-label">Address</label>
                     <div class="position-relative input-icon">
-                        <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" id="input16" placeholder="Alamat" required>
+                        <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" id="input16" placeholder="Addrees" required>
                         <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('alamat')
                             <span class="invalid-feedback" role="alert">
@@ -49,9 +50,9 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input17" class="form-label">NO HP</label>
+                    <label for="input17" class="form-label">Number Phone</label>
                     <div class="position-relative input-icon">
-                        <input type="number" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="input17" placeholder="No HandPhone">
+                        <input type="number" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="input17" placeholder="Your Number">
                         <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('no_hp')
                             <span class="invalid-feedback" role="alert">
@@ -80,11 +81,11 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input17" class="form-label">Is Admin ?</label>
-                    <select id="input17" name="isAdmin" class="form-control text-light">
+                    <label for="input17" class="form-label">Role ?</label>
+                    <select id="input17" name="isAdmin" class="form-control">
                         <option selected="">Choose...</option>
-                        <option value="0" class="text-light">No</option>
-                        <option value="1" class="text-light">Yes</option>
+                        <option value="0" class="">Borrower</option>
+                        <option value="1" class="">Admin</option>
                     </select>
                 </div>
                 <div class="col-md-12 mt-3">

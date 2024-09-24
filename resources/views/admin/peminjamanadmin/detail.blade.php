@@ -59,7 +59,7 @@
                                 <input type="hidden" name="status" value="ditolak">
                                 <div class="form-group">
                                     <label for="reason">Reason:</label>
-                                    <textarea name="reason" id="reason" class="form-control" required></textarea>
+                                    <textarea name="alasan" id="reasonModal" class="form-control" required></textarea>
                                 </div>
                             </form>
                         </div>

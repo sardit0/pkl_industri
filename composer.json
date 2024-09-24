@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.5",
+        "maatwebsite/excel": "^1.1",
         "realrashid/sweet-alert": "^7.2"
     },
     "require-dev": {

@@ -26,12 +26,14 @@
                                 <td class="text-center">{{ $item->tanggal_minjem }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('peminjamanadmin.detail', $item->id) }}"><button type="button"
-                                            class="btn btn-secondary m-1"><i class="ti ti-eye"></i></button></a>
+                                            class="btn btn-secondary m-1"  item-bs-toggle="tooltip" data-bs-placement="left"
+                                            title="Detail View"><i class="ti ti-eye"></i></button></a>
                                     </a>
                                     <a href="#"
                                         onclick="event.preventDefault();
     document.getElementById('destroy-form-{{ $item->id }}').submit();">
-                                        <button type="button" class="btn btn-danger m-1"><i
+                                        <button type="button" class="btn btn-danger m-1"  item-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="Delete Book"><i
                                                 class="ti ti-trash"></i></button>
                                     </a>
                                     <form id="destroy-form-{{ $item->id }}"

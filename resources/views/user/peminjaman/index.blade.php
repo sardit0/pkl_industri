@@ -15,12 +15,15 @@
             <form action="{{ route('peminjaman.index') }}" method="GET" class="mb-3">
                 <select name="status_pengajuan" class="form-select">
                     <option value="">Semua Status</option>
-                    <option value="ditahan" {{ request('status') == 'ditahan' ? 'selected' : '' }}>Menunggu Pengajuan</option>
-                    <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>Pengajuan Diterima</option>
-                    <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Pengajuan Ditolak</option>
+                    <option value="ditahan" {{ request('status') == 'ditahan' ? 'selected' : '' }}>Menunggu Pengajuan
+                    </option>
+                    <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>Pengajuan Diterima
+                    </option>
+                    <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Pengajuan Ditolak
+                    </option>
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Filter</button>
-            </form> 
+            </form>
             <table class="table mb-0 table-striped" id="example2">
                 <thead>
                     <tr>
@@ -58,13 +61,9 @@
 
                             <td>
                                 @if ($item->status === 'ditolak')
-                                    <form action="{{ route('peminjaman.destroy', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                            data-bs-placement="left" title="Delete Book"
-                                            onclick="return confirm('Cancel?')"><i class="ti ti-trash"></i></button>
-                                    </form>
+                                <a href="{{ route('showpengajuanuser', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="See reasons for rejection">
+                                    <i class="ti ti-eye"></i>
+                                </a>
                                 @elseif($item->status === 'diterima')
                                     <a href="{{ route('peminjaman.edit', $item->id) }}"
                                         class="btn btn-warning text-light btn-sm" item-bs-toggle="tooltip"
@@ -78,9 +77,10 @@
                                         action="{{ route('peminjaman.update', $item->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" name="status" value="Success"
-                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Hapus Data"
-                                            onclick="return confirm('Apakah anda yakin??')"><i class="ti ti-trash"></i></button>
+                                        <button type="submit" name="status" value="Success" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="Hapus Data"
+                                            onclick="return confirm('Apakah anda yakin??')"><i
+                                                class="ti ti-trash"></i></button>
                                     </form>
                                     {{--                                 
                                 @elseif($item->status === 'pengembalian ditolak')

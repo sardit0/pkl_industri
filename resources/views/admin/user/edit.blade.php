@@ -1,9 +1,10 @@
 @extends('layouts.backend.admin')
 @section('content')
+<h3 class="m-3 text-uppercase">Edit User {{ $user->name }}</h3>
+<hr>
 <div class="col-12 col-xl-12">
     <div class="card">
         <div class="card-body p-4">
-            <h5 class="mb-4">Edit User {{ $user->name }}</h5>
             <form class="row g-3" method="POST" action="{{ route('user.update', $user->id) }}"enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf

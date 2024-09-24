@@ -105,7 +105,7 @@
               <span>
                 <i class="ti ti-history" style="color: white"></i>
               </span>
-              <span class="hide-menu" style="color: white">History Borrower</span>
+              <span class="hide-menu" style="color: white">History borrower</span>
             </a>
           </li>
       </nav>

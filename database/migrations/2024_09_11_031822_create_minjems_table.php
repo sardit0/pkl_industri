@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('tanggal_minjem');
             $table->date('batas_tanggal');
             $table->date('tanggal_kembali');
+            $table->text('alasan')->nullable();
             $table->enum('status', ['ditahan', 'ditolak', 'diterima','dipinjam'])->default('ditahan');
             $table->timestamps();
         
