@@ -1,133 +1,360 @@
 @extends('layouts.frontend.user')
 @section('content')
+    <section id="billboard">
 
-<!-- Class Start -->
-<div class="container-fluid pt-5">
-    <div class="container">
-        <div class="text-center pb-2">
-            <h1 class="mb-4 mt-5">List book</h1>
-        </div>
-        <div class="row">
-            @php
-            $limitedbuku = $buku ->take(4)
-            @endphp
-            @foreach ($limitedbuku as $data )
-            <div class="col-lg-3 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <a href="{{ url('show' , $data->id) }}">
-                        <img src="{{ asset('images/buku/' . $data->image) }}" alt="" class="card-img-top" alt="..." width="50" height="350">
-                    </a>
-                    <div class="card-body text-center">
-                        <h4 class="card-title">{{$data->judul}}</h4>
-                        <p class="card-text">
-                            {{-- {{$data->deskripsi}} --}}
-                        </p>
-                    </div>
-                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Detail</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <button class="prev slick-arrow">
+                        <i class="icon icon-arrow-left"></i>
+                    </button>
+
+                    <div class="main-slider pattern-overlay">
+                        <div class="slider-item">
+                            <div class="banner-content">
+                                <h2 class="banner-title">Life of the Wild</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
+                                    ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
+                                    urna, a eu.</p>
+                            </div><!--banner-content-->
+                            <img src="{{ asset('User/assets/images/main-banner1.jpg') }}" alt="banner"
+                                class="banner-image">
+                        </div><!--slider-item-->
+
+                        <div class="slider-item">
+                            <div class="banner-content">
+                                <h2 class="banner-title">Birds gonna be Happy</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
+                                    ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
+                                    urna, a eu.</p>
+                            </div><!--banner-content-->
+                            <img src="{{ asset('User/assets/images/main-banner2.jpg') }}" alt="banner"
+                                class="banner-image">
+                        </div><!--slider-item-->
+
+                    </div><!--slider-->
+
+                    <button class="next slick-arrow">
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+
                 </div>
             </div>
-            @endforeach
         </div>
-    </div>
-</div>
-<!-- Class End -->
 
-<!-- Start Testimonial Slider -->
-<div class="testimonial-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <h2 class="section-title">Testimonials</h2>
+    </section>
+
+    <section id="client-holder" data-aos="fade-up">
+        <div class="container">
+            <div class="row">
+                <div class="inner-content">
+                    <div class="logo-wrap">
+                        <div class="grid">
+                            <a href="#"><img src="{{ asset('User/assets/images/client-image1.png') }}"
+                                    alt="client"></a>
+                            <a href="#"><img src="{{ asset('User/assets/images/client-image2.png') }}"
+                                    alt="client"></a>
+                            <a href="#"><img src="{{ asset('User/assets/images/client-image3.png') }}"
+                                    alt="client"></a>
+                            <a href="#"><img src="{{ asset('User/assets/images/client-image4.png') }}"
+                                    alt="client"></a>
+                            <a href="#"><img src="{{ asset('User/assets/images/client-image5.png') }}"
+                                    alt="client"></a>
+                        </div>
+                    </div><!--image-holder-->
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="testimonial-slider-wrap text-center">
+    <section id="featured-books" class="py-5 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-                    <div id="testimonial-nav">
-                        <span class="prev" data-controls="prev"><span class="fa fa-chevron-left"></span></span>
-                        <span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
+                    <div class="section-header align-center">
+                        <div class="title">
+                            <span>Some quality items</span>
+                        </div>
+                        <h2 class="section-title">Featured Books</h2>
                     </div>
 
-                    <div class="testimonial-slider">
-                        
-                        <div class="item">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8 mx-auto">
-
-                                    <div class="testimonial-block text-center">
-                                        <blockquote class="mb-5">
-                                            <p>&ldquo;The library is an ideal place to find inspiration and business ideas. I often come to read business magazines and the latest books on industry trends. The library staff is also very professional and always ready to help me find the materials I need.&rdquo;</p>
-                                        </blockquote>
-
-                                        <div class="author-info">
-                                            <div class="author-pic">
-                                                <img src="{{asset ('User/assets/images/person_2.jpg')}}" alt="Maria Jones" class="img-fluid">
-                                            </div>
-                                            <h3 class="font-weight-bold">Andi</h3>
-                                            <span class="position d-block mb-3">Businessman</span>
-                                        </div>
+                    <div class="product-list" data-aos="fade-up">
+                        <div class="row">
+                            @php
+                                $limitedbuku = $buku->take(4);
+                            @endphp
+                            @foreach ($limitedbuku as $hideng)
+                                <div class="col-md-3">
+                                    <div class="product-item">
+                                        <figure class="product-style">
+                                            <img src="{{ asset('images/buku/' . $hideng->image) }}" alt="Books"
+                                                class="product-item">
+                                            <button type="button" class="add-to-cart" data-product-tile="add-to-cart"><a
+                                                    href="{{ route('peminjaman.create') }}">Want to borrow?</a></button>
+                                        </figure>
+                                        <figcaption>
+                                            <h3>{{ $hideng->judul }}</h3>
+                                        </figcaption>
                                     </div>
-
                                 </div>
-                            </div>
-                        </div> 
-                        <!-- END item -->
+                            @endforeach
+                        </div><!--ft-books-slider-->
+                    </div><!--grid-->
 
-                        <div class="item">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8 mx-auto">
 
-                                    <div class="testimonial-block text-center">
-                                        <blockquote class="mb-5">
-                                            <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
-                                        </blockquote>
+                </div><!--inner-content-->
+            </div>
 
-                                        <div class="author-info">
-                                            <div class="author-pic">
-                                                <img src="{{asset ('User/assets/images/person-1.png')}}" alt="Maria Jones" class="img-fluid">
-                                            </div>
-                                            <h3 class="font-weight-bold">Maria Jones</h3>
-                                            <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                                        </div>
-                                    </div>
+            <div class="row">
+                <div class="col-md-12">
 
-                                </div>
-                            </div>
-                        </div> 
-                        <!-- END item -->
-
-                        <div class="item">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8 mx-auto">
-
-                                    <div class="testimonial-block text-center">
-                                        <blockquote class="mb-5">
-                                            <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
-                                        </blockquote>
-
-                                        <div class="author-info">
-                                            <div class="author-pic">
-                                                <img src="{{asset ('User/assets/images/person-1.png')}}" alt="Maria Jones" class="img-fluid">
-                                            </div>
-                                            <h3 class="font-weight-bold">Masha Chan</h3>
-                                            <span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div> 
-                        <!-- END item -->
-
+                    <div class="btn-wrap align-right">
+                        <a href="{{ route('buku') }}" class="btn-accent-arrow">View all products <i
+                                class="icon icon-ns-arrow-right"></i></a>
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- End Testimonial Slider -->
+    </section>
 
+    <section id="best-selling" class="leaf-pattern-overlay">
+        <div class="corner-pattern-overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-md-8">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            @php
+                                $limitedbuku = $buku->take(1);
+                            @endphp
+                            @foreach ($limitedbuku as $item)
+                                <figure class="products-thumb">
+                                    {{-- <img src="images/single-image.jpg" alt="book" class="single-image"> --}}
+                                    <img src="{{ asset('images/buku/' . $item->image) }}" alt="Books"
+                                        class="product-item">
+                                </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product-entry">
+                                <h2 class="section-title divider">Most borrowed books</h2>
+                                <div class="products-content">
+                                    <div class="author-name">{{ $item->penulis->nama_penulis }}</div>
+                                    <h3 class="item-title">{{ $item->judul }}</h3>
+                                    <p>{{ $item->desk }}</p>
+                                    <div class="btn-wrap">
+                                        <a href="{{ route('peminjaman.create') }}" class="btn-accent-arrow">Borrow
+                                            Now!<i class="icon icon-ns-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- / row -->
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="popular-books" class="bookshelf py-5 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="section-header align-center">
+                        <div class="title">
+                            <span>Some quality items</span>
+                        </div>
+                        <h2 class="section-title">Popular Books</h2>
+                    </div>
+
+                    <ul class="tabs">
+                        @foreach ($kategori as $item)
+                            <li class="tab">
+                                <a href="{{ route('kategori.filter', $item->id) }}#popular-books">{{ $item->nama_kategori }}</a>
+                            </li>
+                        @endforeach
+                        {{-- <li data-tab-target="#all-genre" class="active tab">All Genre</li>
+                        <li data-tab-target="#business" >Business</li>
+                        <li data-tab-target="#technology" class="tab">Tec   hnology</li>
+                        <li data-tab-target="#romantic" class="tab">Romantic</li>
+                        <li data-tab-target="#adventure" class="tab">Adventure</li>
+                        <li data-tab-target="#fictional" class="tab">Fictional</li> --}}
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="all-genre" data-tab-content class="active">
+                            <div class="row">
+                                @php
+                                    $limitedbuku = $buku->take(8);
+                                @endphp
+                                @foreach ($limitedbuku as $item)
+                                    <div class="col-md-3">
+                                        <div class="product-item">
+                                            <figure class="product-style">
+                                                <img src="images/tab-item1.jpg" alt="Books" class="product-item">
+                                                <button type="button" class="add-to-cart"
+                                                    data-product-tile="add-to-cart"><a
+                                                        href="{{ route('peminjaman.create') }}">Want to
+                                                        borrow?</a></button>
+                                            </figure>
+                                            <figcaption>
+                                                <h3>{{ $item->judul }}</h3>
+                                                <span>{{ $item->penulis->nama_penulis }}</span>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div><!--inner-tabs-->
+
+                    </div>
+                </div>
+    </section>
+
+    <section id="quotation" class="align-center pb-5 mb-5">
+        <div class="inner-content">
+            <h2 class="section-title divider">Quote of the day</h2>
+            <blockquote data-aos="fade-up">
+                <q>“The more that you read, the more things you will know. The more that you learn, the more places
+                    you’ll go.”</q>
+                <div class="author-name">Dr. Seuss</div>
+            </blockquote>
+        </div>
+    </section>
+    <section id="latest-blog" class="py-5 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="section-header align-center">
+                        <div class="title">
+                            <span>Read our articles</span>
+                        </div>
+                        <h2 class="section-title">Latest Articles</h2>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <article class="column" data-aos="fade-up">
+
+                                <figure>
+                                    <a href="#" class="image-hvr-effect">
+                                        <img src="{{ asset('User/assets/images/post-img1.jpg') }}" alt="post"
+                                            class="post-image">
+                                    </a>
+                                </figure>
+
+                                <div class="post-item">
+                                    <div class="meta-date">Mar 30, 2021</div>
+                                    <h3><a href="#">Reading books always makes the moments happy</a></h3>
+
+                                    <div class="links-element">
+                                        <div class="categories">inspiration</div>
+                                        <div class="social-links">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-facebook"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-behance-square"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!--links-element-->
+
+                                </div>
+                            </article>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <article class="column" data-aos="fade-up" data-aos-delay="200">
+                                <figure>
+                                    <a href="#" class="image-hvr-effect">
+                                        <img src="{{ asset('User/assets/images/post-img2.jpg') }}" alt="post"
+                                            class="post-image">
+                                    </a>
+                                </figure>
+                                <div class="post-item">
+                                    <div class="meta-date">Mar 29, 2021</div>
+                                    <h3><a href="#">Reading books always makes the moments happy</a></h3>
+
+                                    <div class="links-element">
+                                        <div class="categories">inspiration</div>
+                                        <div class="social-links">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-facebook"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-behance-square"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!--links-element-->
+
+                                </div>
+                            </article>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <article class="column" data-aos="fade-up" data-aos-delay="400">
+                                <figure>
+                                    <a href="#" class="image-hvr-effect">
+                                        <img src="{{ asset('User/assets/images/post-img3.jpg') }}" alt="post"
+                                            class="post-image">
+                                    </a>
+                                </figure>
+                                <div class="post-item">
+                                    <div class="meta-date">Feb 27, 2021</div>
+                                    <h3><a href="#">Reading books always makes the moments happy</a></h3>
+
+                                    <div class="links-element">
+                                        <div class="categories">inspiration</div>
+                                        <div class="social-links">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-facebook"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="icon icon-behance-square"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!--links-element-->
+
+                                </div>
+                            </article>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

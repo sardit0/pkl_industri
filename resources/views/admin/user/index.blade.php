@@ -23,14 +23,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($user as $item)
+                    @foreach ($user as $index => $item)
+                        @if ($item->isAdmin == 'peminjam' || $item->isAdmin == 'petugas')
+                            
                         <tr>
                             <th scope="row" class="text-center">{{ $loop->index + 1 }}</th>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td class="text-center">{{ $item->no_hp }}</td>
-                            <td>{{ $item->isAdmin ? 'Admin' : 'Borrower' }}</td>
+                            <td>{{ $item->isAdmin == 'petugas' ? 'Officer' : 'Borrower' }}</td>
                             <td>
                                 <img src="{{ asset('images/user/' . $item->fotoprofile) }}"
                                     class="rounded-circle p-1 border mb-4" width="80" height="80"
@@ -43,10 +45,9 @@
                                 <a href="{{ route('user.show', $item->id) }}"><button type="button"
                                         class="btn btn-secondary m-1" item-bs-toggle="tooltip" data-bs-placement="left"
                                         title="User Detail"><i class="ti ti-eye"></i></button></a>
-                                </a>
+                                    </a>
                                 <a href="#"
-                                    onclick="event.preventDefault();
-document.getElementById('destroy-form-{{ $item->id }}').submit();">
+                                    onclick="event.preventDefault(); document.getElementById('destroy-form-{{ $item->id }}').submit();">
                                     <button type="button" class="btn btn-danger m-1" item-bs-toggle="tooltip"
                                         data-bs-placement="left" title="Delete User"><i class="ti ti-trash"></i></button>
                                 </a>
@@ -55,9 +56,10 @@ document.getElementById('destroy-form-{{ $item->id }}').submit();">
                                     @method('DELETE')
                                     @csrf
                                 </form>
-
+                                
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

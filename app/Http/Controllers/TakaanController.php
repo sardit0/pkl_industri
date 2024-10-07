@@ -24,7 +24,9 @@ class TakaanController extends Controller
     public function index()
     {
         $buku = Buku::all();
-        return view('user.home', compact('buku'));
+        $kategori = Kategori::all();
+        $buku = Buku::orderBy('jumlah_buku', 'desc')->paginate(20);
+        return view('user.home', compact('buku','kategori'));
     }
     public function dashboard(BukuChart $chart)
     {
@@ -54,6 +56,7 @@ class TakaanController extends Controller
     public function buku()
     {
         $buku = Buku::all();
+        $buku = Buku::orderBy('jumlah_buku', 'desc')->paginate(20);
         return view('user.buku', compact('buku'));
     }
 

@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 
 @section('content')
 <h3 class="m-3 text-uppercase">HISTORY PAGE</h3>

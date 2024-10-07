@@ -67,7 +67,7 @@ class UserController extends Controller
             $user->fotoprofile = $name;
         }
 
-        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
+        Alert::success('Success', 'Data added!')->autoclose(1500);
         return redirect()->route('user.index');
     }
 
@@ -116,7 +116,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
+        Alert::success('Success', 'Data has change')->autoclose(1500);
         return redirect()->route('user.index');
     }
 

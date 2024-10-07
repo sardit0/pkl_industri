@@ -41,16 +41,9 @@
                     </div>
                   
                         <div class="d-flex flex-row justify-content-center">
-                            <div class="col-12 text-center" >
+                            <div class="col-12 text-center">
                                 <h4 class="card-title mt-5">Welcome to Library website</h4>
                                 <h4 class="card-title mt-2">This is the Admin Dashboard page</h4>
-                                <div class="col-sm-6 grid-margin">
-
-                                    
-                                            {!! $chart->container() !!}
-                                         
-
-                                </div>
                             </div>
                         </div>
                    
@@ -206,11 +199,8 @@
             <div class="card m-3">
                 <div class="card-body">
                     <div class="d-sm-flex d-block align-items-center mb-5">
-                        <div class="mb-3 mb-sm-0">
-                            <h5 class="card-title fw-semibold">Sales Overview</h5>
-                        </div>
-                    </div>
-                    <div id="chart"></div>
+                    </div>            
+                        {!! $chart->container() !!}
                 </div>
             </div>
         </div>

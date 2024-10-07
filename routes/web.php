@@ -10,6 +10,9 @@ use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FilterBukuController;
+use App\Http\Middleware\IsPetugas;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +36,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
     Route::resource('user', UserController::class);
-    Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');
+    Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');   
     Route::get('peminjaman/{id}/detail', [MinjemController::class, 'show'])->name('peminjamanadmin.detail');
 });
 
 
 Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
+Route::get('filter/kategori/{id}', [FilterBukuController::class, 'filterkategori'])->name('kategori.filter');
+Route::get('filter/penerbit/{id}', [FilterBukuController::class, 'filterpenerbit'])->name('penerbit.filter');
+Route::get('filter/penulis/{id}', [FilterBukuController::class, 'filterpenulis'])->name('penulis.filter');
 
-// Rute untuk pengguna
 Route::group(['prefix' => 'peminjam'], function () {
     Route::get('buku', [TakaanController::class, 'buku'])->name('buku');
     Route::get('show/{id}', [TakaanController::class, 'show'])->name('show');
@@ -50,7 +55,14 @@ Route::group(['prefix' => 'peminjam'], function () {
 
 });
 
-// Rute yang memerlukan middleware umum
+Route::group(['prefix' => 'petugas', 'middleware' => ['auth', isPetugas::class]], function () {
+    Route::get('', [App\Http\Controllers\Petugas\PetugasController::class, 'index'])->name('petugasdashboard');
+    Route::resource('kategori', App\Http\Controllers\Petugas\KategoriController::class, ['as' => 'petugas']);
+    Route::resource('penerbit', App\Http\Controllers\Petugas\PenerbitController::class, ['as' => 'petugas']);
+    Route::resource('penulis', App\Http\Controllers\Petugas\PenulisController::class, ['as' => 'petugas']);
+    Route::resource('buku', App\Http\Controllers\Petugas\BukuController::class, ['as' => 'petugas']);
+});
+
 Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     Route::resource('peminjaman', MinjemController::class);
     Route::resource('kembalian', KembaliController::class);
@@ -58,5 +70,7 @@ Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     // Route::get('pengajuan/show/{id}',[MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
 });
 
-// Rute untuk autentikasi
+
 Auth::routes();
+
+Route::get('/send-email', [EmailController::class, 'sendEmail']);

@@ -22,7 +22,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        $buku = Buku::latest()->paginate(5);
+        $buku = Buku::orderBy('jumlah_buku', 'desc')->paginate(5);
         return view('admin.buku.index', compact('kategori', 'penerbit', 'penulis','buku'));
     }
 

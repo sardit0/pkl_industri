@@ -1,5 +1,5 @@
 
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 @section('content')
 <div class="col-12 col-xl-12">
     <div class="card">
@@ -48,7 +48,7 @@
 
                 <div class="col-md-12">
                     <label for="input13" class="form-label">Reason for rejection</label>
-                    <textarea class="form-control mb-3" type="text" name="alasan" readonly>{{ $minjem->alasan }}</textarea>
+                    <textarea class="form-control mb-3" id="reasonTextarea" type="text" name="alasan" readonly>{{ $minjem->alasan }}</textarea>
                 </div>
 
                 <div class="col-md-12">

@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 
 @section('content')
     <div class="container">

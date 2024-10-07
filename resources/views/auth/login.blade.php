@@ -93,10 +93,15 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('Admin/assets/images/favicon.png') }}" />
 </head>
-<body src="{{asset('Admin/assets/images/pp.png')}}" alt="">
-{{-- <body style=" background-image: url('Admin/assets/images/pp.png');
+
+    <script>
+        
+    </script>
+<body src="{{ asset('Admin/assets/images/pp.png') }}" alt="">
+    
+    <body style=" background-image: url('Admin/assets/images/pp.png');
                 background-position: center;
-                background-size: cover;"> --}}
+                background-size: cover;">
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="row w-100 m-0">
@@ -135,8 +140,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="password"
-                                        class="col-md-12 col-form-label">{{ __('Password') }}</label>
+                                    <label for="password" class="col-md-12 col-form-label">{{ __('Password') }}</label>
 
                                     <div class="col-md-12">
                                         <input id="password" type="password"
@@ -159,7 +163,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="text-start">
-                                        <p class="mb-0">Dont have an account yet? <a href="{{ route('register') }}">Register here</a>
+                                        <p class="mb-0">Dont have an account yet? <a
+                                                href="{{ route('register') }}">Register here</a>
                                         </p>
                                     </div>
                                 </div>

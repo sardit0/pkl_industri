@@ -69,6 +69,7 @@ class MinjemController extends Controller
 
     public function index(Request $request)
     {
+        $minjem = Buku::orderBy('jumlah', 'desc')->paginate(5);
         $user = Auth::user();
 
            // Query dasar
@@ -202,59 +203,58 @@ class MinjemController extends Controller
     }
 
 
-    public function update(Request $request, $id , Minjem $minjem)
-    {
+public function update(Request $request, $id)
+{
+    // Temukan objek Minjem berdasarkan ID
+    $minjem = Minjem::findOrFail($id);
 
-        $minjem->alasan = $request->alasan;
+    // Tetapkan nilai alasan dari request
+    $minjem->alasan = $request->alasan;
 
-      // Temukan objek Minjem berdasarkan ID
-      $minjem = Minjem::findOrFail($id);
-
-      // Ambil status dari request
-      $status = $request->input('status');
+    // Ambil status dari request
+    $status = $request->input('status');
   
-      // Temukan buku yang dipinjam
-      $buku = Buku::findOrFail($minjem->id_buku);
+    // Temukan buku yang dipinjam
+    $buku = Buku::findOrFail($minjem->id_buku);
   
-      // Terapkan logika berdasarkan status
-      if ($status === 'diterima') {
-          // Kurangi stok buku jika diterima
-          $buku->jumlah_buku -= $minjem->jumlah;
-          $buku->save();
+    // Terapkan logika berdasarkan status
+    if ($status === 'diterima') {
+        // Kurangi stok buku jika diterima
+        $buku->jumlah_buku -= $minjem->jumlah;
+        $buku->save();
         $minjem->status = 'diterima';
-          Alert::success('Accepted', 'your book loan has been approved by the admin')->autoclose(1500);
+        Alert::success('Accepted', 'your book loan has been approved by the admin')->autoclose(1500);
       
-      }elseif ($status === 'ditahan') {
+    } elseif ($status === 'ditahan') {
         // Tambah stok buku jika ditahan
         $buku->jumlah_buku += $minjem->jumlah;
         $buku->save();
         $minjem->status = 'ditahan';
         Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
-    
      
-         }   elseif ($status === 'ditolak') {
-          // Tidak ada perubahan pada stok buku jika ditolak
-          $minjem->status = 'ditolak';
-          Alert::error('Rejected', 'Book loan rejected by admin')->autoclose(1500);
+    } elseif ($status === 'ditolak') {
+        // Tidak ada perubahan pada stok buku jika ditolak
+        $minjem->status = 'ditolak';
+        Alert::error('Rejected', 'Book loan rejected by admin')->autoclose(1500);
       
-      } elseif ($status === 'dikembalikan') {
-          // Tambah stok buku jika dikembalikan
-          $buku->jumlah_buku += $minjem->jumlah;
-          $buku->save();
-        //   $minjem->status = 'dikembalikan';
-          Alert::success('Book returned', 'borrowed book has been returned')->autoclose(1500);
+    } elseif ($status === 'dikembalikan') {
+        // Tambah stok buku jika dikembalikan
+        $buku->jumlah_buku += $minjem->jumlah;
+        $buku->save();
+        Alert::success('Book returned', 'borrowed book has been returned')->autoclose(1500);
       
-      } else {
-          // Jika status "ditahan"
-          Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
-      } 
+    } else {
+        // Jika status tidak dikenal
+        Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
+    } 
 
-        $minjem->save();
-    
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Loan status successfully updated');
-    }
-    
+    // Simpan perubahan pada objek minjem
+    $minjem->save();
+  
+    // Redirect dengan pesan sukses
+    return redirect()->back()->with('success', 'Loan status successfully updated');
+}
+
 
     public function destroy($id)
     {

@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 @section('styles')
     <link href="{{ asset('user/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endsection
@@ -7,12 +7,12 @@
     <hr>
     <div class="card m-3">
         <div class="card-body">
-            {{-- <div class="row d-flex justify-content-end">
+            <div class="row d-flex justify-content-end">
                 <div class="col-md-3">
                     <input type="text" id="searchInput" class="form-control" placeholder="Search...">
                 </div>
-            </div> --}}
-            <form action="{{ route('peminjaman.index') }}" method="GET" class="mb-3">
+            </div>
+            {{-- <form action="{{ route('peminjaman.index') }}" method="GET" class="mb-3">
                 <select name="status_pengajuan" class="form-select">
                     <option value="">Semua Status</option>
                     <option value="ditahan" {{ request('status') == 'ditahan' ? 'selected' : '' }}>Menunggu Pengajuan
@@ -23,7 +23,7 @@
                     </option>
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Filter</button>
-            </form>
+            </form> --}}
             <table class="table mb-0 table-striped" id="example2">
                 <thead>
                     <tr>
@@ -168,7 +168,7 @@
         });
         document.getElementById('searchInput').addEventListener('keyup', function() {
             var input = this.value.toLowerCase();
-            var items = document.querySelectorAll('.item'); // Ganti '.item' dengan kelas elemen yang ingin dicari
+            var items = document.querySelectorAll('.item');
 
             items.forEach(function(item) {
                 var text = item.textContent.toLowerCase();

@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 @section('content')
 <h3 class="mb-0 text-uppercase pb-3">TABEL KATEGORI</h3>
 <hr>

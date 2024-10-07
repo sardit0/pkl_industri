@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 @section('content')
     <!-- Start Title -->
     <div class="container">

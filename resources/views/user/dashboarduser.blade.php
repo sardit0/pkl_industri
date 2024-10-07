@@ -1,4 +1,4 @@
-@extends('user.usertemp')
+@extends('layouts.backend.usertemp')
 
 @section('js')
     <script src="{{ $chart->cdn() }}"></script>
@@ -92,16 +92,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Portfolio Slide</h4>
+                        @foreach ($bukus as $data)
                         <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel"
                             id="owl-carousel-basic">
-                            @foreach ($bukus as $data)
                                <div class="item">
                                 <img src="{{ asset('images/buku/' . $data->image) }}" alt=""
                                 class="card-img-top" class="card-img-top" width="50" height="380">
                             </div>  
-                            @endforeach
-                           
+                            
                         </div>
+                        @endforeach
                         <p class="text-muted">Well, it seems to be working now. </p>
                         <div class="progress progress-md portfolio-progress">
                             <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25"

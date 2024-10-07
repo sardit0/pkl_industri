@@ -29,9 +29,8 @@ class BukuChart
             ->setSubtitle('Data Swiss Library')
             ->addData('Amount', [$booksCount,$publishersCount,$authorsCount,$categoriesCount])
             ->setXAxis(['Book','Publisher','Writter','Category'])
-            ->setColors(['#000000', '#ff6384','#ffe536','#ff7222'])
             ->setHeight(400)
-            ->setWidth(1000)
+            ->setWidth(400)
             ->setMarkers(['#000fff'], 7, 10);
             // ->setYAxis(0, 100);
 

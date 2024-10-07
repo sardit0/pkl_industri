@@ -70,6 +70,7 @@
                     </div>
                 </div>
             </div>
+            <a href="{{ route('peminjamanadmin.index') }}" class="btn btn-danger">Back</a>
             
 @endsection
 

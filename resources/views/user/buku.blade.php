@@ -8,22 +8,21 @@
             <h1 class="mb-4 mt-5">WELCOME TO THE BOOK PAGE</h1>
         </div>
         <div class="row">
-            @foreach ($buku as $data )
-            <div class="col-lg-3 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <a href="{{ url('show' , $data->id) }}">
-                        <img src="{{ asset('images/buku/' . $data->image) }}" alt="" class="card-img-top" alt="..." width="50" height="350">
-                    </a>
-                    <div class="card-body text-center">
-                        <h4 class="card-title">{{$data->judul}}</h4>
-                        <p class="card-text">
-                            {{-- {{$data->deskripsi}} --}}
-                        </p>
-                    </div>
-                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Detail</a>
+            @foreach ($buku as $hideng)
+            <div class="col-md-3">
+                <div class="product-item">
+                    <figure class="product-style">
+                        <img src="{{ asset('images/buku/' . $hideng->image) }}" alt="Books"
+                            class="product-item">
+                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart"><a
+                                href="{{ route('peminjaman.create') }}">Want to borrow?</a></button>
+                    </figure>
+                    <figcaption>
+                        <h3>{{ $hideng->judul }}</h3>
+                    </figcaption>
                 </div>
             </div>
-            @endforeach
+        @endforeach
         </div>
     </div>
 </div>

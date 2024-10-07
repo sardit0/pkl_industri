@@ -9,7 +9,8 @@ class Minjem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','jumlah','tanggal_minjem','tanggal_kembali','batas_tgl','id_user','status','id_buku',
+    protected $fillable = [
+        'id','jumlah','tanggal_minjem','tanggal_kembali','batas_tgl','id_user','status','id_buku', 'alasan'
     ];
 
     public $timestamps = true;

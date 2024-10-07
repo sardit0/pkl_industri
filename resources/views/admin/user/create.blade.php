@@ -85,7 +85,7 @@
                     <select id="input17" name="isAdmin" class="form-control">
                         <option selected="">Choose...</option>
                         <option value="0" class="">Borrower</option>
-                        <option value="1" class="">Admin</option>
+                        <option value="1" class="">Officer</option>
                     </select>
                 </div>
                 <div class="col-md-12 mt-3">

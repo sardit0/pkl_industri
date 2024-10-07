@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('fotoprofile')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('isAdmin')->default(0);
+            $table->enum('isAdmin', ['peminjam', 'petugas', 'admin'])->default('peminjam');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
