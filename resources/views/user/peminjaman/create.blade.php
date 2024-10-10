@@ -24,7 +24,7 @@
                                 <div class="position-relative input-icon">
                                     <input type="number" name="jumlah"
                                         class="form-control @error('jumlah') is-invalid @enderror" id="input17"
-                                        placeholder="Jumlah">
+                                        placeholder="Amount">
                                     <span class="position-absolute top-50 translate-middle-y"></span>
                                     @error('jumlah')
                                         <span class="invalid-feedback" role="alert">

@@ -43,12 +43,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     use HasFactory;
 
 
     public function user()
     {
-        return $this->hasMany(User::class , 'id_user');
+        return $this->hasMany(User::class, 'id_user');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoriteBooks()
+    {
+        return $this->belongsToMany(Buku::class, 'favorites');
     }
 }

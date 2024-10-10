@@ -12,29 +12,29 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul Buku</th>
-                                    <th>Nama Peminjam</th>
-                                    <th>Jumlah</th>
-                                    <th>Foto Buku</th>
-                                    <th>Tanggal Peminjaman</th>
-                                    <th>Tanggal Pengembalian</th>
-                                    <th>Status</th>
+                                    <th>Book title</th>
+                                    <th>Borrrower Name</th>
+                                    <th>Amount</th>
+                                    <th>Book Image</th>
+                                    <th>Borrower Date</th>
+                                    <th>Return Date</th>
+                                    <th class="text-center">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($minjem as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $item->buku->judul }}</td>
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->jumlah }}</td>
+                                    <td class="text-center">{{ $item->jumlah }}</td>
                                     <td>
-                                        <img src="{{ asset('images/buku/' . $item->buku->image) }}" width="100%" height="100%"
+                                        <img src="{{ asset('images/buku/' . $item->buku->image) }}" width="50%" height="50%" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';"
                                             alt="">
                                     </td>
-                                    <td>{{ $item->tanggal_minjem }}</td>
-                                    <td>{{ $item->tanggal_kembali }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $item->tanggal_minjem }}</td>
+                                    <td class="text-center">{{ $item->tanggal_kembali }}</td>
+                                    <td class="text-center">
                                         @if ($item->status == 'diterima')
                                             <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
                                         @elseif ($item->status == 'ditolak')

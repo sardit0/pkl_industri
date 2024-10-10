@@ -52,7 +52,7 @@
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $data->nama_penerbit }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('penerbit.edit', $data->id) }}"><button type="button"
+                                        {{-- <a href="{{ route('penerbit.edit', $data->id) }}"><button type="button"
                                                 class="btn btn-primary m-1" item-bs-toggle="tooltip"
                                                 data-bs-placement="left" title="Editing Book"><i class="ti ti-edit"></i></button></a>
                                         </a>
@@ -67,7 +67,34 @@
                                             method="POST" class="d-none">
                                             @method('DELETE')
                                             @csrf
-                                        </form>
+                                        </form> --}}
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="ti ti-menu-2"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('penerbit.edit', $data->id) }}">
+                                                        <i class="ti ti-edit"></i> Edit 
+                                                    </a>
+                                                </li>
+                                                {{-- <li>
+                                                    <a class="dropdown-item" href=" route('buku.show', $data->id) }}">
+                                                        <i class="ti ti-eye"></i> View
+                                                    </a>
+                                                </li> --}}
+                                                <li>
+                                                    <form action="{{ route('penerbit.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="dropdown-item" type="submit">
+                                                            <i class="ti ti-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

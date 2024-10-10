@@ -56,8 +56,9 @@ class TakaanController extends Controller
     public function buku()
     {
         $buku = Buku::all();
+        $kategori = Kategori::all();
         $buku = Buku::orderBy('jumlah_buku', 'desc')->paginate(20);
-        return view('user.buku', compact('buku'));
+        return view('user.buku', compact('buku','kategori'));
     }
 
     public function show($id)

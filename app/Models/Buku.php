@@ -40,4 +40,10 @@ class Buku extends Model
     {
         return $this->belongsTo(Kembali::class);
     }
+
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
 }

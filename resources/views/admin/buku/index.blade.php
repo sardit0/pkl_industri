@@ -29,7 +29,7 @@
                         <tr>
                             @php $no = 1; @endphp
 
-                            <td>{{ $loop->index + 1 }}</td>
+                            <th scope="row">{{ ($buku->currentPage() - 1) * $buku->perPage() + $loop->index + 1 }}</th>
                             <td>{{ $data->judul }}</td>
                             <td class="text-center">{{ $data->jumlah_buku }}</td>
                             <td>
@@ -54,7 +54,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('buku.edit', $data->id) }}"><button type="button"
+                                {{-- <a href="{{ route('buku.edit', $data->id) }}"><button type="button"
                                         class="btn btn-sm btn-primary m-1" item-bs-toggle="tooltip" data-bs-placement="left"
                                         title="Editing Book"><i class="ti ti-edit"></i></button></a>
                                 <a href="{{ route('buku.show', $data->id) }}"><button type="button"
@@ -71,36 +71,45 @@
                                     action="{{ route('buku.destroy', $data->id) }}" method="POST" class="d-none">
                                     @method('DELETE')
                                     @csrf
-                                </form>
-
+                                </form> --}}
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="ti ti-menu-2"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('buku.edit', $data->id) }}">
+                                                <i class="ti ti-edit"></i> Edit 
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href=" route('buku.show', $data->id) }}">
+                                                <i class="ti ti-eye"></i> View
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form action="{{ route('buku.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="ti ti-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mt-4">
+                {{ $buku->links('pagination::bootstrap-5')  }}
+            </div>
         </div>
     </div>
     </div>
 @endsection
-
-@push('styles')
-    <style>
-        /* Ganti warna tombol */
-        .dt-button {
-            background-color: #007bff; /* Ganti dengan warna yang diinginkan */
-            color: white; /* Ganti warna teks jika diperlukan */
-            border: none; /* Menghilangkan border jika diinginkan */
-            border-radius: 5px; /* Membulatkan sudut tombol */
-            padding: 10px 20px; /* Menambah padding pada tombol */
-            margin: 0 5px; /* Jarak antar tombol */
-            transition: background-color 0.3s; /* Transisi untuk efek hover */
-        }
-
-        .dt-button:hover {
-            background-color: #0056b3; /* Warna saat hover */
-        }
-    </style>
-@endpush
 
 @push('scripts')
     <script src="{{ asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -111,6 +120,8 @@
                 dom: 'Bfrtip',
                 searching: false,
                 lengthChange: false,
+                paging: false,
+                display: none,
                 buttons: [
                     {
                         text: 'Add Book',

@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FilterBukuController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Middleware\IsPetugas;
 
 /*
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
     Route::resource('user', UserController::class);
-    Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');   
+    Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');
     Route::get('peminjaman/{id}/detail', [MinjemController::class, 'show'])->name('peminjamanadmin.detail');
 });
 
@@ -67,6 +68,9 @@ Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     Route::resource('peminjaman', MinjemController::class);
     Route::resource('kembalian', KembaliController::class);
     Route::get('pengajuan/show/{id}', [MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
+    Route::resource('favorite', FavoriteController::class);
+    // Route::get('favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    // Route::post('/favorites/{book}', [FavoriteController::class, 'store'])->name('favorites.store');
     // Route::get('pengajuan/show/{id}',[MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
 });
 

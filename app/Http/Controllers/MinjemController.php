@@ -69,7 +69,7 @@ class MinjemController extends Controller
 
     public function index(Request $request)
     {
-        $minjem = Buku::orderBy('jumlah', 'desc')->paginate(5);
+        $minjem = Buku::orderBy('jumlah_buku', 'desc')->paginate(5);
         $user = Auth::user();
 
            // Query dasar
@@ -153,7 +153,7 @@ class MinjemController extends Controller
         $minjem->nama = Auth::user()->name;
         $minjem->status = 'ditahan';
         $minjem->id_buku = $request->id_buku;
-        // $minjem->id_user = $request->id_user;
+        // $minjem->id_user = $request->id_user
 
 
         // Kurangi stok buku sesuai dengan jumlah yang dipinjam

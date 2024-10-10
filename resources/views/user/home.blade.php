@@ -89,7 +89,7 @@
                                 <div class="col-md-3">
                                     <div class="product-item">
                                         <figure class="product-style">
-                                            <img src="{{ asset('images/buku/' . $hideng->image) }}" alt="Books"
+                                            <img src="{{ asset('images/buku/' . $hideng->image) }}" alt="Books" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';"
                                                 class="product-item">
                                             <button type="button" class="add-to-cart" data-product-tile="add-to-cart"><a
                                                     href="{{ route('peminjaman.create') }}">Want to borrow?</a></button>
@@ -136,7 +136,7 @@
                             @foreach ($limitedbuku as $item)
                                 <figure class="products-thumb">
                                     {{-- <img src="images/single-image.jpg" alt="book" class="single-image"> --}}
-                                    <img src="{{ asset('images/buku/' . $item->image) }}" alt="Books"
+                                    <img src="{{ asset('images/buku/' . $item->image) }}" alt="Books" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';"
                                         class="product-item">
                                 </figure>
                         </div>
@@ -177,21 +177,6 @@
                         </div>
                         <h2 class="section-title">Popular Books</h2>
                     </div>
-
-                    <ul class="tabs">
-                        @foreach ($kategori as $item)
-                            <li class="tab">
-                                <a href="{{ route('kategori.filter', $item->id) }}#popular-books">{{ $item->nama_kategori }}</a>
-                            </li>
-                        @endforeach
-                        {{-- <li data-tab-target="#all-genre" class="active tab">All Genre</li>
-                        <li data-tab-target="#business" >Business</li>
-                        <li data-tab-target="#technology" class="tab">Tec   hnology</li>
-                        <li data-tab-target="#romantic" class="tab">Romantic</li>
-                        <li data-tab-target="#adventure" class="tab">Adventure</li>
-                        <li data-tab-target="#fictional" class="tab">Fictional</li> --}}
-                    </ul>
-
                     <div class="tab-content">
                         <div id="all-genre" data-tab-content class="active">
                             <div class="row">
@@ -202,7 +187,7 @@
                                     <div class="col-md-3">
                                         <div class="product-item">
                                             <figure class="product-style">
-                                                <img src="images/tab-item1.jpg" alt="Books" class="product-item">
+                                                <img src="images/tab-item1.jpg" alt="Books" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';" class="product-item">
                                                 <button type="button" class="add-to-cart"
                                                     data-product-tile="add-to-cart"><a
                                                         href="{{ route('peminjaman.create') }}">Want to
