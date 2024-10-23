@@ -1,13 +1,11 @@
 @extends('user.usertemp')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<h3 class="m-3 text-uppercase">HISTORY PAGE</h3>
+<hr>
+    <div class="row">
         <div class="col-12 col-xl-12">
-            <div class="card m-3">
-                <div class="card-header">
-                    <h3>Riwayat Peminjaman</h3>
-                </div>
+            <div class="card p-3">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -36,19 +34,20 @@
                                     </td>
                                     <td>{{ $item->tanggal_minjem }}</td>
                                     <td>{{ $item->tanggal_kembali }}</td>
-                                    <td style="color: white">
-                                        {{-- @if($item->status == 'Dikembalikan')
-                                            <span class="badge bg-success">Dikembalikan</span>
-                                        @elseif($item->status == 'Ditolak')
-                                            <span class="badge bg-danger">Ditolak</span>
+                                    <td>
+                                        @if ($item->status == 'diterima')
+                                            <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
+                                        @elseif ($item->status == 'ditolak')
+                                            <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
+                                        @elseif ($item->status == 'dikembalikan')
+                                            <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
                                         @else
-                                            <span class="badge bg-warning">Ditahan</span>
-                                        @endif --}}
-                                        {{ $item->status}}
+                                            <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody>    
                         </table>
                         {{ $minjem->links() }}
                     </div>
@@ -56,5 +55,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

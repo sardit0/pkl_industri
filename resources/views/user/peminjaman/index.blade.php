@@ -1,169 +1,179 @@
 @extends('user.usertemp')
 @section('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    <link href="{{ asset('user/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <h6 class="mb-0 text-uppercase"></h6>
+    <h3 class="m-3 text-uppercase">BORROWER PAGE</h3>
     <hr>
     <div class="card m-3">
         <div class="card-body">
-            <h4 class="card-title">Peminjaman</h4>
-            <div class="table">
-                <table class="table mb-0 table-striped" id="example">
-                    <thead>
+            {{-- <div class="row d-flex justify-content-end">
+                <div class="col-md-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+                </div>
+            </div> --}}
+            <form action="{{ route('peminjaman.index') }}" method="GET" class="mb-3">
+                <select name="status_pengajuan" class="form-select">
+                    <option value="">Semua Status</option>
+                    <option value="ditahan" {{ request('status') == 'ditahan' ? 'selected' : '' }}>Menunggu Pengajuan</option>
+                    <option value="diterima" {{ request('status') == 'diterima' ? 'selected' : '' }}>Pengajuan Diterima</option>
+                    <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Pengajuan Ditolak</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Filter</button>
+            </form> 
+            <table class="table mb-0 table-striped" id="example2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">No</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col" class="text-center">Amount</th>
+                        <th scope="col">Borrower Date</th>
+                        <th scope="col">Borrower Name</th>
+                        {{-- <th scope="col">Return Date</th> --}}
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($minjem as $item)
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nama Buku</th>
-                            <th scope="col">Jumlah</th>
-                            <th scope="col">Tanggal Peminjaman</th>
-                            <th scope="col">Batas Peminjaman</th>
-                            <th scope="col">Tanggal Pengembalian</th>
-                            <th scope="col">Nama Peminjam</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($minjem as $item)
-                            <tr>
-                                <th scope="row">{{ $loop->index + 1 }}</th>
-                                <td>{{ $item->buku->judul }}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->tanggal_minjem }}</td>
-                                <td>{{ $item->batas_tanggal }}</td>
-                                <td>{{ $item->tanggal_kembali }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <!-- Pewarnaan Status -->
-                                <td>
-                                    @if ($item->status == 'diterima')
-                                        <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
-                                    @elseif ($item->status == 'ditolak')
-                                        <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
-                                    @elseif ($item->status == 'dikembalikan')
-                                        <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
-                                    @else
-                                        <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
-                                    @endif
-                                </td>
+                            <th scope="row" class="text-center">{{ $loop->index + 1 }}</th>
+                            <td>{{ $item->buku->judul }}</td>
+                            <td class="text-center">{{ $item->jumlah }}</td>
+                            <td>{{ $item->tanggal_minjem }}</td>
+                            <td>{{ $item->nama }}</td>
+                            {{-- <td>{{ $item->tanggal_kembali }}</td> --}}
+                            <!-- Pewarnaan Status -->
+                            <td>
+                                @if ($item->status == 'diterima')
+                                    <span class="badge bg-success">{{ ucfirst($item->status) }}</span>
+                                @elseif ($item->status == 'ditolak')
+                                    <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
+                                @elseif ($item->status == 'dikembalikan')
+                                    <span class="badge bg-danger">{{ ucfirst($item->status) }}</span>
+                                @else
+                                    <span class="badge bg-warning">{{ ucfirst($item->status) }}</span>
+                                @endif
+                            </td>
 
-                                <td>
-                                    <a href="{{ route('peminjaman.edit', $item->id) }}"
-                                        class="btn btn-grd-warning px-2" style="color: black">Edit</a>
-                                    <!-- Button for Delete with SweetAlert Confirmation -->
-                                    <a class="btn ripple btn-grd-danger px-3" href="#"
-                                        onclick="confirmDelete({{ $item->id }})" style="color: black">
-                                        Hapus
-                                    </a>
-
-                                    <!-- Form Destroy Dinamis -->
-                                    <form id="destroy-form-{{ $item->id }}"
-                                        action="{{ route('peminjaman.destroy', $item->id) }}" method="POST"
-                                        class="d-none">
-                                        @method('DELETE')
+                            <td>
+                                @if ($item->status === 'ditolak')
+                                    <form action="{{ route('peminjaman.destroy', $item->id) }}" method="POST">
                                         @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="Delete Book"
+                                            onclick="return confirm('Cancel?')"><i class="ti ti-trash"></i></button>
                                     </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                @elseif($item->status === 'diterima')
+                                    <a href="{{ route('peminjaman.edit', $item->id) }}"
+                                        class="btn btn-warning text-light btn-sm" item-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Book Returned"><i class="ti ti-repeat"></i></a>
+                                    {{--     
+                                @elseif($item->status === 'pengajuan ditolak')
+                                <a href="{{ route('showpengajuanuser', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Lihat Alasan Ditolak"> <i class="material-icons-outlined" style="font-size: 18px;">visibility</i></a>
+     --}}
+                                @elseif($item->status === 'dikembalikan')
+                                    <form enctype="multipart/form-data"
+                                        action="{{ route('peminjaman.update', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" name="status" value="Success"
+                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Hapus Data"
+                                            onclick="return confirm('Apakah anda yakin??')"><i class="ti ti-trash"></i></button>
+                                    </form>
+                                    {{--                                 
+                                @elseif($item->status === 'pengembalian ditolak')
+                                <a href="{{ route('showpengembalianuser', $item->id) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="left" title="Lihat Alasan Ditolak"> <i class="material-icons-outlined" style="font-size: 18px;">visibility</i></a>
+     --}}
+                                    </form>
+                                @endif
+                            </td>
+                            {{-- <td class="text-center">
+                                <a href="{{ route('peminjaman.edit', $item->id) }}"><button type="button"
+                                        class="btn btn-primary m-1"><i class="ti ti-edit"></i></button></a>
+                                <a href="#"
+                                    onclick="event.preventDefault();
+                        document.getElementById('destroy-form').submit();">
+                                    <button type="button" class="btn btn-danger m-1"><i class="ti ti-trash"></i></button>
+                                </a>
+                                <form id="destroy-form" action="{{ route('peminjaman.destroy', $item->id) }}"
+                                    method="POST" class="d-none">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+
+                                <!-- Form Destroy Dinamis -->
+                                <form id="destroy-form-{{ $item->id }}"
+                                    action="{{ route('peminjaman.destroy', $item->id) }}" method="POST" class="d-none">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </td> --}}
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
 
-{{-- @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        // DataTables Initialization
-        new DataTable('#example', {
-            dom: 'Bfrtip',
-            buttons: [{
-                    text: 'Tambah Peminjaman',
-                    className: 'btn btn-success px-4 raised',
-                    action: function(e, dt, node, config) {
-                        window.location.href = "{{ route('peminjaman.create') }}";
-                    }
-                },
-                'pdf', 'excel'
-            ]
-        });
-
-        // SweetAlert Delete Confirmation
-        function confirmDelete(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda tidak akan bisa mengembalikan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('destroy-form-' + id).submit();
-                }
-            })
-        }
-    </script>
-@endpush --}}
-
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.bootstrap5.min.css">
-    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="{{ asset('user/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 
     <script>
-        new DataTable('#example', {
-            dom: 'Bfrtip',
-            scrollX: true,
-            fixedColumns: {
-                right: 1,
-                left: 0
-            },
-            buttons: [{
-                    text: 'Tambah Buku',
-                    className: 'btn btn-success px-4 raised',
-                    action: function(e, dt, node, config) {
-                        window.location.href = "{{ route('peminjaman.create') }}";
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
+                dom: 'Bfrtip',
+                searching: false,
+                lengthChange: false,
+                buttons: [{
+                        text: 'Add Borrower',
+                        action: function(e, dt, node, config) {
+                            window.location.href = "{{ route('peminjaman.create') }}";
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Exclude the last column (Aksi)
+                        },
+                        customize: function(doc) {
+                            var win = window.open('', '_blank');
+                            win.document.write(
+                                '<iframe width="100%" height="100%" src="data:application/pdf;base64,' +
+                                btoa(doc) + '"></iframe>');
+                        }
+
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Exclude the last column (Aksi)
+                        }
                     }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                },
-                {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                }
-            ]
+                ]
+            });
+
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#example2 tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input = this.value.toLowerCase();
+            var items = document.querySelectorAll('.item'); // Ganti '.item' dengan kelas elemen yang ingin dicari
+
+            items.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                item.style.display = text.includes(input) ? '' : 'none';
+            });
         });
     </script>
 @endpush

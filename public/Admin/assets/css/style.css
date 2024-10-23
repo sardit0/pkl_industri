@@ -21156,4 +21156,10 @@ div.tagsinput {
     padding: 8px 12px;
 }
 
+.dataTables_filter {
+    float: right;
+    margin-bottom: 10px;
+}
+
+
 /*# sourceMappingURL=maps/style.css.map */

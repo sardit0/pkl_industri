@@ -47,7 +47,6 @@ Route::group(['prefix' => 'peminjam'], function () {
     Route::get('profile', [TakaanController::class, 'profile'])->name('profile');
     Route::get('dashboarduser', [TakaanController::class, 'dashboard'])->name('dashboarduser');
     Route::get('peminjaman/history', [MinjemController::class, 'history'])->name('peminjaman.history');
-    
 
 });
 
@@ -55,6 +54,7 @@ Route::group(['prefix' => 'peminjam'], function () {
 Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     Route::resource('peminjaman', MinjemController::class);
     Route::resource('kembalian', KembaliController::class);
+    // Route::get('pengajuan/show/{id}',[MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
 });
 
 // Rute untuk autentikasi

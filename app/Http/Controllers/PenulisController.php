@@ -55,7 +55,7 @@ class PenulisController extends Controller
     public function show($id)
     {
         $penulis = penulis::findOrFail($id);
-        return view('admin.penulis.show', compact('penulis'));
+        return view('penulis.show', compact('penulis'));
     }
 
     /**

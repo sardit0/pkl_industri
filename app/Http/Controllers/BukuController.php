@@ -57,8 +57,8 @@ class BukuController extends Controller
 
         ],
     [
-        'judul.required' => 'Judul Buku Harus Di isi!',
-        'judul.unique' => 'Judul Buku dengan Nama tersebut sudah ada!',
+        'judul.required' => 'Book Title Must be Filled!',
+        'judul.unique' => 'Book Title with that Name already exists!',
     ]);
 
         $buku = new buku();
@@ -79,7 +79,7 @@ class BukuController extends Controller
         }
 
         $buku->save();
-        Alert::success('Success', 'Data Berhasil Ditambah')->autoclose(1500);
+        Alert::success('Success', 'Data Added Successfully')->autoclose(1500);
         return redirect()->route('buku.index');
     }
 
@@ -107,7 +107,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        return view('admin.buku.create', compact('kategori','penerbit','penulis'));
+        return view('admin.buku.edit', compact('kategori','penerbit','penulis','buku'));
     }
 
     /**
@@ -127,8 +127,7 @@ class BukuController extends Controller
             'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
         ],
     [
-        'judul.required' => 'Judul Buku Harus Di isi!',
-        'judul.unique' => 'Judul Buku dengan Nama tersebut sudah ada!',
+        
     ]);
 
         $buku = buku::findOrFail($id);
@@ -158,7 +157,7 @@ class BukuController extends Controller
         }
 
         $buku->save();
-        Alert::success('Success', 'Data Berhasil Diubah')->autoclose(1500);
+        Alert::success('Success', 'Data has change')->autoclose(1500);
         return redirect()->route('buku.index');
     }
 

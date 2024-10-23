@@ -24,7 +24,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="input13" class="form-label">Alamat Rumah</label>
+                                        <label for="input13" class="form-label">Address</label>
                                         <input class="form-control mb-3" type="text" name="nama_peminjam"
                                             placeholder="Nama Peminjam" value="{{ $user->alamat }}" disabled
                                             style="color: black">
@@ -38,14 +38,14 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="input13" class="form-label">Nomor Telepon</label>
+                                        <label for="input13" class="form-label">Number</label>
                                         <input class="form-control mb-3" type="text" name="nama_peminjam"
                                             placeholder="Nama Peminjam" value="{{ $user->no_hp }}" disabled
                                             style="color: black">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-warning mr-2">Edit</button>
+                                        {{-- <button type="submit" class="btn btn-warning mr-2">Edit</button> --}}
                                     </div>
                                 </form>
                             </div>

@@ -15,9 +15,9 @@
                     </div>
                     <center>
                         <div class="d-flex flex-row justify-content-center">
-                            <div class="col-12">
-                                <h4 class="card-title mt-5">Selamat datang di Web Perpustakaan</h4>
-                                <h4 class="card-title mt-2">Ini adalah halaman Admin Dashboard</h4>
+                            <div class="col-6">
+                                <h4 class="card-title mt-5">Welcome to Library website</h4>
+                                <h4 class="card-title mt-2">This is the admin dashboard page</h4>
                                 <div class="col-sm-6 grid-margin">
                                     <div class="card m-3">
                                         <div class="card">
@@ -39,7 +39,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Data Kategori</h5>
+                    <h5>Number of Category data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -60,7 +60,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Penerbit</h5>
+                    <h5>Number of Publisher data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -82,7 +82,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Penulis</h5>
+                    <h5>Number of Author data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -106,7 +106,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Buku</h5>
+                    <h5>Number of Book data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -128,7 +128,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Peminjaman</h5>
+                    <h5>Amount of loan data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -150,7 +150,7 @@
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">
                 <div class="card-body">
-                    <h5>Jumlah Data di Pengembalian</h5>
+                    <h5>Number of return data</h5>
                     <div class="row">
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">

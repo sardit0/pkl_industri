@@ -16,7 +16,7 @@
                 </li> --}}
 
                 <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                    <li><a class="nav-link" href="{{ route('buku') }}">Buku</a></li>
+                    <li><a class="nav-link" href="{{ route('buku') }}">Book</a></li>
                 </ul>
 
                 @auth

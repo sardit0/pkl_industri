@@ -1,84 +1,80 @@
 @extends('layouts.backend.admin')
-@section('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
-@endsection
 @section('content')
-    <h6 class="mb-0 text-uppercase"></h6>
+<h3 class="m-3 text-uppercase">PUBLISHER PAGE</h3>
     <hr>
-    <div class="card m-3">
-        <div class="card-body position-relative">
-            <h4 class="card-title">Penerbit</h4>
-            <table class="table mb-0 table-striped" id="example">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Penerbit</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($penerbit as $data)
-                        <tr>
-                            <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td>{{ $data->nama_penerbit }}</td>
-                            <td>
-                                <a href="{{ route('penerbit.edit', $data->id) }}" class="btn btn-grd-warning px-2">Edit</a>
-                                <a class="btn ripple btn-grd-danger px-3" href="#"
-                                    onclick="event.preventDefault();
-                            document.getElementById('destroy-form').submit();">
-                                    Hapus
-                                </a>
-
-                                <form id="destroy-form" action="{{ route('penerbit.destroy', $data->id) }}" method="POST"
-                                    class="d-none">
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="col-6 col-xl-6">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <div class="card-header mb-4">
+                            <h4>Add Publisher</h4>
+                        </div>
+                        <form class="row g-3" method="POST" action="{{ route('penerbit.store') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="col-md-12">
+                                <label for="input17" class="form-label">Publisher Name</label>
+                                <div class="position-relative input-icon">
+                                    <input type="text" name="nama_penerbit"
+                                        class="form-control @error('nama_penerbit') is-invalid @enderror" id="input17"
+                                        placeholder="Name">
+                                    <span class="position-absolute top-50 translate-middle-y"></span>
+                                    @error('nama_penerbit')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-7 mt-3">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-success px-4 mr-3">Submit</button>
+                                    <a type="submit" href="{{ route('kategori.index') }}" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xl-6">
+                <div class="card-body position-relative">
+                    <table class="table mb-0 table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Publisher Name</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($penerbit as $data)
+                                <tr>
+                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td>{{ $data->nama_penerbit }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('penerbit.edit', $data->id) }}"><button type="button"
+                                                class="btn btn-primary m-1" item-bs-toggle="tooltip"
+                                                data-bs-placement="left" title="Editing Book"><i class="ti ti-edit"></i></button></a>
+                                        </a>
+                                        <a href="#"
+                                            onclick="event.preventDefault();
+                        document.getElementById('destroy-form').submit();">
+                                            <button type="button" class="btn btn-danger m-1" item-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="Delete Book"><i
+                                                    class="ti ti-trash"></i></button>
+                                        </a>
+                                        <form id="destroy-form" action="{{ route('penerbit.destroy', $data->id) }}"
+                                            method="POST" class="d-none">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-
-    <script>
-        new DataTable('#example', {
-            dom: 'Bfrtip',
-            buttons: [{
-                    text: 'Tambah Penerbit',
-                    className: 'btn btn-success px-4 raised',
-                    action: function(e, dt, node, config) {
-                        window.location.href = "{{ route('penerbit.create') }}";
-                    }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                },
-                {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                }
-            ]
-        });
-    </script>
-@endpush

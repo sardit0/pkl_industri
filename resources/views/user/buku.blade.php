@@ -5,7 +5,7 @@
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
-            <h1 class="mb-4 mt-5">Selamat datang di halaman Buku</h1>
+            <h1 class="mb-4 mt-5">WELCOME TO THE BOOK PAGE</h1>
         </div>
         <div class="row">
             @foreach ($buku as $data )
@@ -20,7 +20,7 @@
                             {{-- {{$data->deskripsi}} --}}
                         </p>
                     </div>
-                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Lihat Detail</a>
+                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Detail</a>
                 </div>
             </div>
             @endforeach

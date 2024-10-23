@@ -54,7 +54,7 @@ class PenerbitController extends Controller
     public function show($id)
     {
         $penerbit = penerbit::findOrFail($id);
-        return view('admin.penerbit.show', compact('penerbit'));
+        return view('penerbit.show', compact('penerbit'));
     }
 
     /**

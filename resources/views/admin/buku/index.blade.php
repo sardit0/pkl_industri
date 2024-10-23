@@ -1,128 +1,147 @@
 @extends('layouts.backend.admin')
 @section('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
+    <link href="{{ asset('admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
-    <h6 class="mb-0 text-uppercase"></h6>
+    <h3 class="m-3 text-uppercase">BOOK PAGE</h3>
     <hr>
-    <div class="card m-3">
-        <div class="table-responsive">
-            <div class="card-body position-relative">
-                <h4 class="card-title">Buku</h4>
-                <table class="table mb-0 table-striped" id="example">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Judul Buku</th>
-                            <th scope="col">Jumlah Buku</th>
-                            <th scope="col">Tahun Penerbit</th>
-                            <th scope="col">Nama Kategori</th>
-                            <th scope="col">Nama Penerbit</th>
-                            <th scope="col">Nama Penulis</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($buku as $data)
-                            <tr>
-                                @php $no = 1; @endphp
-
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $data->judul }}</td>
-                                <td>{{ $data->jumlah_buku }}</td>
-                                <td>{{ $data->tahun_penerbit }}</td>
-                                <td>
-                                    @if ($data->kategori)
-                                        {{ $data->kategori->nama_kategori }}
-                                    @else
-                                        kategori tidak ditemukan
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->penerbit)
-                                        {{ $data->penerbit->nama_penerbit }}
-                                    @else
-                                        penerbit tidak ditemukan
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->penulis)
-                                        {{ $data->penulis->nama_penulis }}
-                                    @else
-                                        penulis tidak ditemukan
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('buku.edit', $data->id) }}" class="btn btn-grd-warning px-2" style="color: black">Edit</a>
-                                    <a href="{{ route('buku.show', $data->id) }}" class="btn btn-grd-primary float-end"
-                                        data-bs-toggle="modal" data-bs-target="#insertdata" style="color: black">
-                                        Show
-                                    </a>
-                                    <a class="btn ripple btn-grd-danger px-3" href="#"
-                                        onclick="event.preventDefault();
-                            document.getElementById('destroy-form').submit();" style="color: black">
-                                        Hapus
-                                    </a>
-
-                                    <form id="destroy-form" action="{{ route('buku.destroy', $data->id) }}" method="POST"
-                                        class="d-none">
-                                        @method('DELETE')
-                                        @csrf
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-
-                </table>x
+    <div class="card p-3">
+        <div class="card-body">
+            <div class="row d-flex justify-content-end">
+                <div class="col-md-3">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+                </div>
             </div>
+            <table class="table mb-0 table-striped" id="example2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">No</th>
+                        <th scope="col">Title Book</th>
+                        <th scope="col">Number of Books</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Publiser Name</th>
+                        <th scope="col">Writter Name</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($buku as $data)
+                        <tr>
+                            @php $no = 1; @endphp
+
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $data->judul }}</td>
+                            <td class="text-center">{{ $data->jumlah_buku }}</td>
+                            <td>
+                                @if ($data->kategori)
+                                    {{ $data->kategori->nama_kategori }}
+                                @else
+                                    category not found
+                                @endif
+                            </td>
+                            <td>
+                                @if ($data->penerbit)
+                                    {{ $data->penerbit->nama_penerbit }}
+                                @else
+                                    publisher not found
+                                @endif
+                            </td>
+                            <td>
+                                @if ($data->penulis)
+                                    {{ $data->penulis->nama_penulis }}
+                                @else
+                                    writter not found
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ route('buku.edit', $data->id) }}"><button type="button"
+                                        class="btn btn-primary m-1" item-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="Editing Book"><i class="ti ti-edit"></i></button></a>
+                                <a href="{{ route('buku.show', $data->id) }}"><button type="button"
+                                        class="btn btn-secondary m-1" item-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="Book Detail"><i class="ti ti-eye"></i></button></a>
+                                </a>
+                                <a href="#"
+                                    onclick="event.preventDefault();
+    document.getElementById('destroy-form-{{ $data->id }}').submit();">
+                                    <button type="button" class="btn btn-danger m-1" item-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="Delete Book"><i class="ti ti-trash"></i></button>
+                                </a>
+                                <form id="destroy-form-{{ $data->id }}"
+                                    action="{{ route('buku.destroy', $data->id) }}" method="POST" class="d-none">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
     </div>
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.bootstrap5.min.css">
-    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="{{ asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 
     <script>
-        new DataTable('#example', {
-            dom: 'Bfrtip',
-            scrollX: true,
-            fixedColumns: {
-                right: 1,
-                left: 0 
-            },
-            buttons: [{
-                    text: 'Tambah Buku',
-                    className: 'btn btn-success px-4 raised',
-                    action: function(e, dt, node, config) {
-                        window.location.href = "{{ route('buku.create') }}";
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
+                dom: 'Bfrtip',
+                searching: false,
+                lengthChange: false,
+                buttons: [{
+                        text: 'Add Book',
+                        action: function(e, dt, node, config) {
+                            window.location.href = "{{ route('buku.create') }}";
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Exclude the last column (Aksi)
+                        },
+                        customize: function(doc) {
+                            var win = window.open('', '_blank');
+                            win.document.write(
+                                '<iframe width="100%" height="100%" src="data:application/pdf;base64,' +
+                                btoa(doc) + '"></iframe>');
+                        }
+
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Exclude the last column (Aksi)
+                        }
                     }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                },
-                {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: ':not(:last-child)' // Exclude the last column ("Aksi")
-                    }
-                }
-            ]
+                ]
+            });
+
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
+        $(document).ready(function() {
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#example2 tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input = this.value.toLowerCase();
+            var items = document.querySelectorAll('.item'); // Ganti '.item' dengan kelas elemen yang ingin dicari
+
+            items.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                item.style.display = text.includes(input) ? '' : 'none';
+            });
+        });
+    </script>
+
+
     </script>
 @endpush

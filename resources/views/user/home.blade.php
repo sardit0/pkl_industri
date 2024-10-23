@@ -5,7 +5,7 @@
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
-            <h1 class="mb-4 mt-5">Buku Yang Paling Banyak Dipinjam</h1>
+            <h1 class="mb-4 mt-5">List book</h1>
         </div>
         <div class="row">
             @php
@@ -23,7 +23,7 @@
                             {{-- {{$data->deskripsi}} --}}
                         </p>
                     </div>
-                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Lihat Detail</a>
+                    <a href="{{ url('peminjam/show' , $data->id) }}" type="button" class="btn btn-primary px-4 mx-auto mb-4">Detail</a>
                 </div>
             </div>
             @endforeach
@@ -58,7 +58,7 @@
 
                                     <div class="testimonial-block text-center">
                                         <blockquote class="mb-5">
-                                            <p>&ldquo;Perpustakaan adalah tempat yang ideal untuk mencari inspirasi dan ide bisnis. Saya sering datang untuk membaca majalah bisnis dan buku-buku terbaru tentang tren industri. Staf perpustakaan juga sangat profesional dan selalu siap membantu saya dalam menemukan materi yang dibutuhkan&rdquo;</p>
+                                            <p>&ldquo;The library is an ideal place to find inspiration and business ideas. I often come to read business magazines and the latest books on industry trends. The library staff is also very professional and always ready to help me find the materials I need.&rdquo;</p>
                                         </blockquote>
 
                                         <div class="author-info">
@@ -66,7 +66,7 @@
                                                 <img src="{{asset ('User/assets/images/person_2.jpg')}}" alt="Maria Jones" class="img-fluid">
                                             </div>
                                             <h3 class="font-weight-bold">Andi</h3>
-                                            <span class="position d-block mb-3">Pengusaha</span>
+                                            <span class="position d-block mb-3">Businessman</span>
                                         </div>
                                     </div>
 

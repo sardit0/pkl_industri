@@ -2,14 +2,14 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Edit Data Peminjaman</h4>
+            <h4 class="card-title">Edit data loan</h4>
 
             <form class="row g-3" method="POST" action="{{ route('peminjaman.update', $minjem->id) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <!-- Pilihan Buku -->
                 <div class="col-md-12 mb-3">
-                    <label for="id_buku" class="form-label">Judul Buku</label>
+                    <label for="id_buku" class="form-label">Title Book</label>
                     <select name="id_buku" id="id_buku" class="form-control">
                         @foreach ($buku as $data)
                             <option value="{{ $data->id }}" {{ $data->id == $minjem->id_buku ? 'selected' : '' }}>
@@ -21,7 +21,7 @@
 
                 <!-- Jumlah Buku -->
                 <div class="col-md-12 mb-3">
-                    <label for="jumlah" class="form-label">Jumlah Barang</label>
+                    <label for="jumlah" class="form-label">Amount Book</label>
                     <input type="number" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror"
                         placeholder="Jumlah" value="{{ old('jumlah', $minjem->jumlah) }}" required>
                     @error('jumlah')
@@ -33,7 +33,7 @@
 
                 <!-- Nama Peminjam -->
                 <div class="col-md-12 mb-3">
-                    <label for="nama" class="form-label">Nama Peminjam</label>
+                    <label for="nama" class="form-label">Borrower Name</label>
                     <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
                         placeholder="Nama Peminjam" value="{{ old('nama', $minjem->nama) }}" required>
                     @error('nama')
@@ -45,7 +45,7 @@
 
                 <!-- Tanggal Pengembalian -->
                 <div class="col-md-12 mb-3">
-                    <label for="tanggal_kembali" class="form-label">Tanggal Pengembalian</label>
+                    <label for="tanggal_kembali" class="form-label">Return Date</label>
                     <input type="date" name="tanggal_kembali" class="form-control @error('tanggal_kembali') is-invalid @enderror"
                         value="{{ old('tanggal_kembali', $minjem->tanggal_kembali) }}" required>
                     @error('tanggal_kembali')
@@ -60,14 +60,14 @@
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control">
                         {{-- <option value="Dipinjam" {{ $minjem->status == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option> --}}
-                        <option value="dikembalikan">Dikembalikan</option>
+                        <option value="dikembalikan">Returned</option>
                     </select>
                 </div>
 
                 <!-- Tombol Submit dan Cancel -->
                 <div class="col-md-12 mt-4">
-                    <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Batal</a>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>

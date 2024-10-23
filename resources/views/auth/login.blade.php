@@ -113,18 +113,18 @@
                                     width="200" height="170">
                             </div>
 
-                            <h3 class="card-title text-center mb-3" style="color: #fff">Masuk</h3>
+                            <h3 class="card-title text-center mb-3" style="color: #fff">Login</h3>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="email"
-                                        class="col-md-12 col-form-label">{{ __('Alamat Email') }}</label>
+                                        class="col-md-12 col-form-label">{{ __('Email Address') }}</label>
 
                                     <div class="col-md-12">
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required autocomplete="email" autofocus
-                                            placeholder="Masukan Alamat Email">
+                                            placeholder="example@gmail.com">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -136,12 +136,12 @@
 
                                 <div class="row mb-3">
                                     <label for="password"
-                                        class="col-md-12 col-form-label">{{ __('Kata Sandi') }}</label>
+                                        class="col-md-12 col-form-label">{{ __('Password') }}</label>
 
                                     <div class="col-md-12">
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="current-password" placeholder="Masukan Kata Sandi">
+                                            required autocomplete="current-password" placeholder="Password">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -155,12 +155,11 @@
                                         d-flex align-items-center justify-content-between">
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Masuk</button>
+                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
                                 </div>
                                 <div class="col-12">
                                     <div class="text-start">
-                                        <p class="mb-0">Tidak Punya Akun? <a href="{{ route('register') }}">Daftar
-                                                Disini</a>
+                                        <p class="mb-0">Dont have an account yet? <a href="{{ route('register') }}">Register here</a>
                                         </p>
                                     </div>
                                 </div>

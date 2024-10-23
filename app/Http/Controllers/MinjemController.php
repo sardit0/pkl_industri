@@ -33,7 +33,7 @@ class MinjemController extends Controller
 
         // Cek apakah status peminjaman masih "diterima" (belum dikembalikan)
         if ($minjem->status !== 'diterima') {
-            Alert::error('Error', 'Buku belum diterima atau sudah dikembalikan.')->autoclose(1500);
+            Alert::error('Error','book not received or returned')->autoclose(1500);
             return redirect()->back();
         }
 
@@ -42,7 +42,7 @@ class MinjemController extends Controller
 
         // Validasi jumlah buku yang dikembalikan tidak lebih dari jumlah yang dipinjam
         if ($request->jumlah > $minjem->jumlah) {
-            Alert::error('Error', 'Jumlah buku yang dikembalikan melebihi jumlah yang dipinjam.')->autoclose(1500);
+            Alert::error('error' , 'the books returned exceed the amount borrowed')->autoclose(1500);
             return redirect()->back();
         }
 
@@ -67,10 +67,20 @@ class MinjemController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $buku = Buku::all();
         $user = Auth::user();
+
+           // Query dasar
+           $query = Minjem::where('nama_peminjam', $user->name)
+           ->whereIn('status', ['ditahan', 'diterima', 'ditolak']);
+   
+       // Filter berdasarkan status jika ada
+       if ($request->filled('status')) {
+           $query->where('status', $request->status);
+       }
+
+        $buku = Buku::all();
         $kategori = Kategori::all();
         $penulis = Penulis::all();
         $penerbit = Penerbit::all();
@@ -128,7 +138,7 @@ class MinjemController extends Controller
         // Cek apakah jumlah yang diminta lebih dari stok buku yang tersedia
         if ($request->jumlah > $buku->jumlah_buku) {
             // Jika lebih, tampilkan SweetAlert dengan pesan error
-            Alert::error('Error', 'Jumlah buku yang diminta melebihi stok yang tersedia.')->autoclose(1500);
+            Alert::error('Error' , 'Quantity requested exceeds available stock')->autoclose(1500);
             return redirect()->back();
         }
 
@@ -152,7 +162,7 @@ class MinjemController extends Controller
         $minjem->save();
 
         // Tampilkan SweetAlert dengan pesan sukses
-        Alert::info('Info!', 'Pengajuan peminjaman berhasil dibuat dan masih dalam status ditahan.')->autoclose(1500);
+        Alert::info('Info!', 'Loan application successfully created and still in hold status')->autoclose(1500);
 
         // Redirect ke halaman index peminjaman
         return redirect()->route('peminjaman.index');
@@ -209,37 +219,37 @@ class MinjemController extends Controller
           $buku->jumlah_buku -= $minjem->jumlah;
           $buku->save();
         $minjem->status = 'diterima';
-          Alert::success('Peminjaman diterima', 'Stok buku berhasil dikurangi')->autoclose(1500);
+          Alert::success('Accepted', 'your book loan has been approved by the admin')->autoclose(1500);
       
       }elseif ($status === 'ditahan') {
         // Tambah stok buku jika ditahan
         $buku->jumlah_buku += $minjem->jumlah;
         $buku->save();
         $minjem->status = 'ditahan';
-        Alert::info('Peminjaman ditahan', 'Peminjaman buku ditahan')->autoclose(1500);
+        Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
     
      
          }   elseif ($status === 'ditolak') {
           // Tidak ada perubahan pada stok buku jika ditolak
           $minjem->status = 'ditolak';
-          Alert::error('Peminjaman ditolak', 'Pengajuan peminjaman buku ditolak')->autoclose(1500);
+          Alert::error('Rejected', 'Book loan rejected by admin')->autoclose(1500);
       
       } elseif ($status === 'dikembalikan') {
           // Tambah stok buku jika dikembalikan
           $buku->jumlah_buku += $minjem->jumlah;
           $buku->save();
         //   $minjem->status = 'dikembalikan';
-          Alert::success('Peminjaman dikembalikan', 'Peminjaman buku dikembalikan')->autoclose(1500);
+          Alert::success('Book returned', 'borrowed book has been returned')->autoclose(1500);
       
       } else {
           // Jika status "ditahan"
-          Alert::info('Status ditahan', 'Pengajuan peminjaman buku masih ditahan')->autoclose(1500);
+          Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
       } 
 
         $minjem->save();
     
         // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Status peminjaman berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Loan status successfully updated');
     }
     
 
