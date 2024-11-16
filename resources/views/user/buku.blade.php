@@ -28,6 +28,9 @@
                                 <button type="button" class="add-to-cart" data-product-tile="add-to-cart"><a
                                         href="{{ route('peminjaman.create') }}">Want to borrow?</a></button>
                             </figure>
+                            <figcaption>
+                                <h3>{{ $hideng->judul }}</h3>
+                            </figcaption>
                             {{-- <figcaption>
                                 @foreach ($buku as $book)
                                     <div>

@@ -22,7 +22,7 @@ class FilterBukuController extends Controller
         $minjem = Minjem::all();
 
         $buku = $id ? Buku::where('id_kategori', $id)->paginate(16) : Buku::paginate(16);
-        return view('user.home', compact('penerbit', 'penulis', 'user', 'minjem', 'buku', 'kategori'));
+        return view('user.buku', compact('penerbit', 'penulis', 'user', 'minjem', 'buku', 'kategori'));
     }
 
     public function filterpenerbit($id = null)
@@ -34,7 +34,7 @@ class FilterBukuController extends Controller
         $minjem = Minjem::all();
 
         $buku = $id ? Buku::where('id_penerbit', $id)->paginate(16) : Buku::paginate(16);
-        return view('user.home', compact('kategori', 'penerbit', 'penulis', 'user', 'minjem', 'buku'));
+        return view('user.buku', compact('kategori', 'penerbit', 'penulis', 'user', 'minjem', 'buku'));
     }
 
     public function filterpenulis($id = null)
@@ -46,6 +46,6 @@ class FilterBukuController extends Controller
         $minjem = Minjem::all();
 
         $buku = $id ? Buku::where('id_penulis', $id)->paginate(16) : Buku::paginate(16);
-        return view('user.home', compact('kategori', 'penerbit', 'penulis', 'user', 'minjem', 'buku'));
+        return view('user.buku', compact('kategori', 'penerbit', 'penulis', 'user', 'minjem', 'buku'));
     }
 }
