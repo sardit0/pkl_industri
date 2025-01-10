@@ -38,7 +38,7 @@
                                         <form action="" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-light">
-                                                ❤❤🤣🤣❤❤🤣
+                                                ❤❤❤❤
                                             </button>
                                         </form>
                                     </div>

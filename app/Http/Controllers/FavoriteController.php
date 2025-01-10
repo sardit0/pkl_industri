@@ -1,8 +1,8 @@
-// app/Http/Controllers/FavoriteController.php
+<?php
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
-use App\Models\Book;
+use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,23 +10,23 @@ class FavoriteController extends Controller
 {
     public function index()
     {
-        $favorites = Auth::user()->favoriteBooks()->get(); // Mendapatkan semua buku favorit user
-        return view('favorites.index', compact('favorites'));
+        $favorites = Auth::user()->favoriteBooks()->get();
+        return view('favorite.index', compact('favorites'));
     }
 
-    public function store(Book $book)
+    public function store(Buku $buku)
     {
         $favorite = Favorite::firstOrCreate([
-            'user_id' => Auth::id(),
-            'book_id' => $book->id,
+            'id_user' => Auth::id(),
+            'id_buku' => $buku->id,
         ]);
 
         return back()->with('success', 'Buku ditambahkan ke favorit!');
     }
 
-    public function destroy(Book $book)
+    public function destroy(Buku $buku)
     {
-        $favorite = Favorite::where('user_id', Auth::id())->where('book_id', $book->id)->first();
+        $favorite = Favorite::where('id_user', Auth::id())->where('id_buku', $buku->id)->first();
 
         if ($favorite) {
             $favorite->delete();

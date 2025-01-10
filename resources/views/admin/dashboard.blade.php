@@ -5,7 +5,7 @@
     {{ $chart->script() }}
 @endsection
 @section('content')
-    {{-- <div class="row">
+    <div class="row">
         <div class="col-12 col-xl-12">
             <div class="card m-3">
                 <div class="card-body p-4">
@@ -31,9 +31,9 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-12 col-xl-12">
             <div class="card m-3">
                 <div class="card-body p-4">
@@ -50,8 +50,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> --}}
 
     <div class="row">
         <div class="col-sm-4 grid-margin">
@@ -204,7 +203,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="col-sm-4 grid-margin">
             <div class="card m-3">

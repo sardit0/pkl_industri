@@ -55,8 +55,6 @@
                     </ul>
                 </div>
             </div>
-            <h5>Our Location</h5>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.361157048754!2d107.58974617419356!3d-6.966651668211156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e8deccecb6f1%3A0x658cc60fbe5017b9!2sSMK%20Assalaam%20Bandung%20(PUSAT%20KEUNGGULAN)!5e0!3m2!1sid!2sid!4v1728531916541!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             @guest
             <div class="col-md-2">
                 <div class="footer-menu">
@@ -72,6 +70,23 @@
                 </div>
             </div>
             @endguest
+            <h5>Our Location</h5>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.361157048754!2d107.58974617419356!3d-6.966651668211156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e8deccecb6f1%3A0x658cc60fbe5017b9!2sSMK%20Assalaam%20Bandung%20(PUSAT%20KEUNGGULAN)!5e0!3m2!1sid!2sid!4v1728531916541!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            {{-- @guest
+            <div class="col-md-2">
+                <div class="footer-menu">
+                    <h5>Login/Register Account Here</h5>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <a href="{{('login')}}">Sign In</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{('register')}}">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @endguest --}}
         </div> <!-- / row -->
     </div>
 </footer>

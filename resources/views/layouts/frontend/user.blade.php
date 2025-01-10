@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Assalaam Library</title>
     <meta charset="utf-8">
@@ -30,7 +29,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="social-links">
+                        {{-- <div class="social-links">
                             <ul>
                                 <li>
                                     <a href="#"><i class="icon icon-facebook"></i></a>
@@ -45,12 +44,12 @@
                                     <a href="#"><i class="icon icon-behance-square"></i></a>
                                 </li>
                             </ul>
-                        </div><!--social-links-->
+                        </div><!--social-links--> --}}
                     </div>
                     <div class="col-md-6">
                         <div class="right-element">
                             <div class="action-menu">
-                                <div class="search-bar">
+                                {{-- <div class="search-bar">
                                     <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
                                         <i class="icon icon-search"></i>
                                     </a>
@@ -58,7 +57,7 @@
                                         <input class="search-field text search-input" placeholder="Search"
                                             type="search">
                                     </form>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div><!--top-right-->
