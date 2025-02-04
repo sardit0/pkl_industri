@@ -26,7 +26,7 @@ class BukuChart
         
         return $this->chart->barChart()
             ->setTitle('Grafic')
-            ->setSubtitle('Data Swiss Library')
+            ->setSubtitle('Data Assalaam Library')
             ->addData('Amount', [$booksCount,$publishersCount,$authorsCount,$categoriesCount])
             ->setXAxis(['Book','Publisher','Writter','Category'])
             ->setHeight(400)
