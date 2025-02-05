@@ -92,24 +92,45 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Portfolio Slide</h4>
-                        @foreach ($bukus as $data)
-                        <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel"
-                            id="owl-carousel-basic">
-                               <div class="item">
-                                <img src="{{ asset('images/buku/' . $data->image) }}" alt=""
-                                class="card-img-top" class="card-img-top" width="50" height="380">
-                            </div>  
+            
+                        <!-- Bootstrap 5 Carousel -->
+                        <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
                             
+                            <!-- Indicators -->
+                            <div class="carousel-indicators">
+                                @foreach ($bukus as $index => $data)
+                                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="{{ $index }}" 
+                                    class="{{ $index == 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index + 1 }}">
+                                </button>
+                                @endforeach
+                            </div>
+            
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                @foreach ($bukus as $index => $data)
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('images/buku/' . $data->image) }}" class="d-block w-100" 
+                                        alt="Buku" alt="Books" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';" class="product-item" {{ $index + 1 }} height="350">
+                                        <!-- Judul Buku -->
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ $data->judul }}</h5>
                         </div>
-                        @endforeach
-                        <p class="text-muted">Well, it seems to be working now. </p>
-                        <div class="progress progress-md portfolio-progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                @endforeach
+                            </div>
+            
+                            <!-- Left and right controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
 
         

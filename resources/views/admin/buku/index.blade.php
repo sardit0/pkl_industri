@@ -7,17 +7,16 @@
     <hr>
     <div class="card p-3">
         <div class="card-body">
-            <div class="row d-flex justify-content-end">
-                <div class="col-md-3">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search...">
-                </div>
+            <div class="d-flex justify-content-between mb-3">
+                <div id="example2_wrapper"></div> <!-- Container untuk tombol export -->
+                <input type="text" id="searchInput" class="form-control w-25" placeholder="Search...">
             </div>
             <table class="table mb-0 table-striped" id="example2">
                 <thead>
                     <tr>
                         <th scope="col" class="text-center">No</th>
                         <th scope="col">Title Book</th>
-                        <th scope="col">Number of Books</th>
+                        <th scope="col">Amount of Books</th>
                         <th scope="col">Category Name</th>
                         <th scope="col">Publiser Name</th>
                         <th scope="col">Writter Name</th>
@@ -115,62 +114,49 @@
     <script src="{{ asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable({
-                dom: 'Bfrtip',
-                searching: false,
-                lengthChange: false,
-                paging: false,
-                display: none,
-                buttons: [
-                    {
-                        text: 'Add Book',
-                        action: function(e, dt, node, config) {
-                            window.location.href = "{{ route('buku.create') }}";
-                        }
-                    },
-                    {
-                        text: 'Export PDF',
-                        title: 'Book Page',
-                        filename: 'Library Book',
-                        extend: 'print',
-                        exportOptions: {
-                            columns: ':not(:last-child)' // Exclude the last column (Actions)
-                        }
-                    },
-                    {
-                        text: 'Export EXCEL',
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: ':not(:last-child)' // Exclude the last column (Actions)
-                        }
-                    }
-                ]
-            });
+       $(document).ready(function() {
+    var table = $('#example2').DataTable({
+        dom: "<'row'<'col-md-6'B><'col-md-6'f>>" + // Pindahkan search ke kanan
+             "<'row'<'col-sm-12'tr>>" +
+             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        lengthChange: false,
+        paging: false,
+        buttons: [
+            {
+                text: 'Add Book',
+                action: function() {
+                    window.location.href = "{{ route('buku.create') }}";
+                }
+            },
+            {
+                text: 'Export PDF',
+                extend: 'print',
+                exportOptions: {
+                    columns: ':not(:last-child)' 
+                }
+            },
+            {
+                text: 'Export EXCEL',
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
+            }
+        ]
+    });
 
-            // Tambahkan tombol ke dalam container yang ditentukan
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+    // Masukkan tombol export ke dalam wrapper
+    table.buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
-            // Fungsi pencarian
-            $("#searchInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#example2 tbody tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
+    // Buat input search bawaan tetap berfungsi
+    $('#searchInput').on('keyup', function() {
+        table.search(this.value).draw();
+    });
 
-            // Event listener untuk pencarian di elemen dengan kelas 'item'
-            document.getElementById('searchInput').addEventListener('keyup', function() {
-                var input = this.value.toLowerCase();
-                var items = document.querySelectorAll('.item'); // Ganti '.item' dengan kelas elemen yang ingin dicari
+    // Hapus search input duplikat bawaan DataTables
+    $('#example2_filter').hide();
+});
 
-                items.forEach(function(item) {
-                    var text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(input) ? '' : 'none';
-                });
-            });
-        });
     </script>
 @endpush
 
