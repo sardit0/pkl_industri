@@ -20,7 +20,7 @@
                                 <h4 class="card-title mt-5">Writter Name : {{ $buku->penulis->nama_penulis }}</h4>
                             </div>
                         </div>
-                        <a href="{{ route('buku.index') }}" class="btn btn-md btn-info" style="float: right">Back</a>
+                        <a href="{{ route('admin.buku.index') }}" class="btn btn-md btn-info" style="float: right">Back</a>
                     </center>
                 </div>
             </div>

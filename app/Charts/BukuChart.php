@@ -24,7 +24,7 @@ class BukuChart
         $authorsCount = Penulis::count();
         $categoriesCount = Kategori::count();
         
-        return $this->chart->barChart()
+        return $this->chart->lineChart()
             ->setTitle('Grafic')
             ->setSubtitle('Data Assalaam Library')
             ->addData('Amount', [$booksCount,$publishersCount,$authorsCount,$categoriesCount])

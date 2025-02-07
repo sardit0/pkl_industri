@@ -1,3 +1,4 @@
+
 @extends('layouts.backend.usertemp')
 @section('content')
     <div class="card">
@@ -59,7 +60,6 @@
                 <div class="col-md-12 mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select name="status" class="form-control">
-                        {{-- <option value="Dipinjam" {{ $minjem->status == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option> --}}
                         <option value="dikembalikan">Returned</option>
                     </select>
                 </div>

@@ -15,7 +15,7 @@
                                     <th>Book title</th>
                                     <th>Borrrower Name</th>
                                     <th>Amount</th>
-                                    <th>Book Image</th>
+                                    <th class="text-center">Book Image</th>
                                     <th>Borrower Date</th>
                                     <th>Return Date</th>
                                     <th class="text-center">Status</th>
@@ -28,7 +28,7 @@
                                     <td>{{ $item->buku->judul }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td class="text-center">{{ $item->jumlah }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <img src="{{ asset('images/buku/' . $item->buku->image) }}" width="50%" height="50%" onerror="this.onerror=null; this.src='{{ asset('User/assets/images/available.png') }}';"
                                             alt="">
                                     </td>

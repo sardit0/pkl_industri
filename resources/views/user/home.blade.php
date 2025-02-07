@@ -96,14 +96,18 @@
                                         </figure>
                                         <figcaption>
                                             <h3>{{ $hideng->judul }}</h3>
+                                            <p>
+                                                Status: 
+                                                <span class="badge {{ $hideng->jumlah_buku > 0 ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $hideng->jumlah_buku > 0 ? 'Available' : 'Empty' }}
+                                                </span>
+                                            </p>
                                         </figcaption>
                                     </div>
                                 </div>
                             @endforeach
                         </div><!--ft-books-slider-->
                     </div><!--grid-->
-
-
                 </div><!--inner-content-->
             </div>
 
@@ -146,6 +150,12 @@
                                 <div class="products-content">
                                     <div class="author-name">{{ $item->penulis->nama_penulis }}</div>
                                     <h3 class="item-title">{{ $item->judul }}</h3>
+                                    <p>
+                                        Status: 
+                                        <span class="badge {{ $item->jumlah_buku > 0 ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $item->jumlah_buku > 0 ? 'Available' : 'Empty' }}
+                                        </span>
+                                    </p>
                                     <p>{{ $item->desk }}</p>
                                     <div class="btn-wrap">
                                         <a href="{{ route('peminjaman.create') }}" class="btn-accent-arrow">Borrow
@@ -195,7 +205,12 @@
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $item->judul }}</h3>
-                                                <span>{{ $item->penulis->nama_penulis }}</span>
+                                                <p>
+                                                    Status: 
+                                                    <span class="badge {{ $item->jumlah_buku > 0 ? 'bg-success' : 'bg-danger' }}">
+                                                        {{ $item->jumlah_buku > 0 ? 'Available' : 'Empty' }}
+                                                    </span>
+                                                </p>
                                             </figcaption>
                                         </div>
                                     </div>
@@ -214,7 +229,7 @@
             <blockquote data-aos="fade-up">
                 <q>“The more that you read, the more things you will know. The more that you learn, the more places
                     you’ll go.”</q>
-                <div class="author-name">Dr. Seuss</div>
+                <div class="author-name">Insinyur Muhammad Adhitya</div>
             </blockquote>
         </div>
     </section>

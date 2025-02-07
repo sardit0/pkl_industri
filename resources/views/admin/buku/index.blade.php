@@ -81,11 +81,11 @@
                                                 <i class="ti ti-edit"></i> Edit 
                                             </a>
                                         </li>
-                                        <li>
+                                        {{-- <li>
                                             <a class="dropdown-item" href=" route('buku.show', $data->id) }}">
                                                 <i class="ti ti-eye"></i> View
                                             </a>
-                                        </li>
+                                        </li> --}}
                                         <li>
                                             <form action="{{ route('buku.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 @csrf

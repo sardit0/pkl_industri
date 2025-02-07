@@ -1,15 +1,15 @@
 @extends('layouts.backend.usertemp')
 @section('content')
-<h3 class="mb-0 text-uppercase pb-3">TABEL KATEGORI</h3>
+<h3 class="mb-0 text-uppercase pb-3">TABLE RETURN BOOK</h3>
 <hr>
 <div class="card">
     <div class="card-body">
         @if (session('success'))
+        {{ session('success') }}
         <div class="alert alert-success">
-            {{ session('success') }}
         </div>
         @endif
-        <a href="{{ route('peminjaman.create') }}" class="btn btn-grd btn-primary px-5 mb-2">Tambah Data Pengembalian</a>
+        <a href="{{ route('peminjaman.create') }}" class="btn btn-grd btn-primary px-5 mb-2">+</a>
         <table class="table mb-0 table-striped" id="example2">
             <thead>
                 <tr>
@@ -17,7 +17,7 @@
                     <th scope="col">Nama Buku</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Tanggal Peminjaman</th>
-                       <th scope="col">Nama</th>
+                    <th scope="col">Nama</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>

@@ -49,7 +49,7 @@
                         <tbody>
                             @foreach ($penulis as $data)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <th scope="row">{{ ($penulis->currentPage() - 1) * $penulis->perPage() + $loop->index + 1 }}</th>
                                     <td>{{ $data->nama_penulis }}</td>
                                     <td class="text-center">
                                         {{-- <a href="{{ route('penulis.edit', $data->id) }}"><button type="button"
@@ -100,6 +100,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $penulis->links('pagination::bootstrap-5')  }}
+                    </div>
                 </div>
             </div>
         </div>

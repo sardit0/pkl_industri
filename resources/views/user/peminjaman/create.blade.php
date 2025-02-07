@@ -48,7 +48,7 @@
                             <div class="col-md-6">
                                 <label for="input13" class="form-label">Borrower name</label>
                                 <input class="form-control mb-3" type="text" name="nama" placeholder="Nama Peminjam"
-                                    value="{{ Auth::user()->name }}" required>
+                                    value="{{ Auth::user()->name }}" disabled>
                             </div>
 
                             <div class="col-md-6">
@@ -56,13 +56,13 @@
                                 <input class="form-control mb-3" type="date" name="tanggal_kembali" required>
                             </div>
 
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <label for="input17" class="form-label">Status</label>
                                 <select name="status" class="form-control" id="" >
                                     <option value="Dipinjam">Borrowed</option>
                                     <option value="Dikembalikan">Returned</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12 mt-5">
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <a href="{{ route('peminjaman.index') }}" class="btn btn-danger">Cancel</a>

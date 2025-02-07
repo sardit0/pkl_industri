@@ -33,12 +33,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider"
-                    ],
                     "aliases": {
                         "LarapexChart": "ArielMejiaDev\\LarapexCharts\\Facades\\LarapexChart"
-                    }
+                    },
+                    "providers": [
+                        "ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider"
+                    ]
                 }
             },
             "autoload": {

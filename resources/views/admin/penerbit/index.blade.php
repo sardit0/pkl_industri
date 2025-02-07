@@ -49,7 +49,7 @@
                         <tbody>
                             @foreach ($penerbit as $data)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <th scope="row">{{ ($penerbit->currentPage() - 1) * $penerbit->perPage() + $loop->index + 1 }}</th>
                                     <td>{{ $data->nama_penerbit }}</td>
                                     <td class="text-center">
                                         {{-- <a href="{{ route('penerbit.edit', $data->id) }}"><button type="button"
@@ -100,6 +100,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $penerbit->links('pagination::bootstrap-5')  }}
+                    </div>
                 </div>
             </div>
         </div>

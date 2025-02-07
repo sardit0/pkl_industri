@@ -30,6 +30,12 @@
                             </figure>
                             <figcaption>
                                 <h3>{{ $hideng->judul }}</h3>
+                                <p>
+                                    Status: 
+                                    <span class="badge {{ $hideng->jumlah_buku > 0 ? 'bg-success' : 'bg-danger' }}">
+                                        {{ $hideng->jumlah_buku > 0 ? 'Available' : 'Empty' }}
+                                    </span>
+                                </p>
                             </figcaption>
                             {{-- <figcaption>
                                 @foreach ($buku as $book)
