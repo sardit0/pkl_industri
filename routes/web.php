@@ -9,6 +9,7 @@ use App\Http\Controllers\MinjemController;
 use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FilterBukuController;
@@ -47,9 +48,12 @@ Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
 Route::get('filter/kategori/{id}', [FilterBukuController::class, 'filterkategori'])->name('kategori.filter');
 Route::get('filter/penerbit/{id}', [FilterBukuController::class, 'filterpenerbit'])->name('penerbit.filter');
 Route::get('filter/penulis/{id}', [FilterBukuController::class, 'filterpenulis'])->name('penulis.filter');
+Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('admin.laporan');
+
 
 Route::group(['prefix' => 'peminjam'], function () {
     Route::get('buku', [TakaanController::class, 'buku'])->name('buku');
+    // Route::get('/dashboard', [TakaanController::class, 'dashboard'])->name('dashboard');
     Route::get('show/{id}', [TakaanController::class, 'show'])->name('show');
     Route::get('profile', [TakaanController::class, 'profile'])->name('profile');
     Route::get('dashboarduser', [TakaanController::class, 'dashboard'])->name('dashboarduser');

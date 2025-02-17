@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('jumlah');
             $table->date('tanggal_kembali');
             $table->string('status');
+            $table->decimal('denda', 10, 2)->default(0);
             $table->unsignedBigInteger('id_minjem');
             $table->unsignedBigInteger('id_buku');
 

@@ -49,7 +49,9 @@
                                 @endforeach
                             </tbody>    
                         </table>
-                        {{ $minjem->links() }}
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ $minjem->links('pagination::bootstrap-5')  }}
+                        </div>
                     </div>
                 </div>
             </div>

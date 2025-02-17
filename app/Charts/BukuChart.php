@@ -5,6 +5,8 @@ use ArielMejiaDev\LarapexCharts\LarapexChart;
 use App\Models\Buku;
 use App\Models\Penerbit;
 use App\Models\Penulis;
+use App\Models\Minjem;
+use App\Models\Kembali;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
 class BukuChart

@@ -53,7 +53,7 @@
 
                             <div class="col-md-6">
                                 <label for="input13" class="form-label">Return Date</label>
-                                <input class="form-control mb-3" type="date" name="tanggal_kembali" required>
+                                <input class="form-control mb-3" type="date" name="tanggal_kembali" id="tanggal_kembali" required>
                             </div>
 
                             {{-- <div class="col-md-12">
@@ -74,3 +74,23 @@
         </div>
     </div>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date();
+        let maxDate = new Date();
+        
+        // Tambah 7 hari ke tanggal sekarang
+        maxDate.setDate(today.getDate() + 7);
+
+        // Format tanggal ke YYYY-MM-DD
+        let formattedToday = today.toISOString().split('T')[0];
+        let formattedMaxDate = maxDate.toISOString().split('T')[0];
+
+        // Set atribut min dan max pada input date
+        document.getElementById("tanggal_kembali").setAttribute("min", formattedToday);
+        document.getElementById("tanggal_kembali").setAttribute("max", formattedMaxDate);
+    });
+</script>
+
+

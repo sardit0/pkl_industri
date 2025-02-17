@@ -153,7 +153,7 @@ class MinjemController extends Controller
         $minjem->nama = Auth::user()->name;
         $minjem->status = 'ditahan';
         $minjem->id_buku = $request->id_buku;
-        // $minjem->id_user = $request->id_user
+        $minjem->id_user = Auth::id();;
 
 
         // Kurangi stok buku sesuai dengan jumlah yang dipinjam

@@ -4,94 +4,103 @@ namespace App\Http\Controllers;
 
 use App\Models\Kembali;
 use App\Models\Minjem;
+use App\Models\Buku;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 Carbon::setLocale('id');
 
 class KembaliController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Tampilkan daftar pengembalian
      */
     public function index()
     {
-        $kembali = Minjem::where('status', 'sudah Dikembalikan')->get();
+        $kembalis = Kembali::with('minjem', 'buku', 'user')->get();
 
-        foreach ($kembali as $data) {
-            $data->formatted_tanggal = Carbon::parse($data->tanggal)->translatedFormat('l, d F Y');
+        foreach ($kembalis as $data) {
+            $data->formatted_tanggal = Carbon::parse($data->tanggal_kembali)->translatedFormat('l, d F Y');
         }
 
-        return view('user.kembalian.index', compact('kembali'));
+        return view('admin.kembalian.index', compact('kembalis'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Simpan data pengembalian
      */
     public function store(Request $request)
     {
-        //
+        // Ambil data peminjaman berdasarkan id_minjem
+        $minjem = Minjem::findOrFail($request->id_minjem);
+
+        // Hitung selisih hari antara batas_tanggal dan tanggal_kembali
+        $batas_tanggal = Carbon::parse($minjem->batas_tanggal);
+        $tanggal_kembali = Carbon::parse($request->tanggal_kembali);
+
+        // Hitung jumlah hari keterlambatan
+        $selisih_hari = $tanggal_kembali->diffInDays($batas_tanggal, false); // false untuk mendapatkan hari negatif jika lebih awal
+
+        // Hitung denda (hanya jika terlambat)
+        $denda = $selisih_hari > 0 ? $selisih_hari * 1000 : 0;
+
+        // Simpan data pengembalian
+        $kembali = new Kembali();
+        $kembali->jumlah = $request->jumlah;
+        $kembali->tanggal_kembali = $request->tanggal_kembali;
+        $kembali->status = 'dikembalikan';
+        $kembali->id_minjem = $request->id_minjem;
+        $kembali->id_buku = $request->id_buku;
+        $kembali->denda = $denda; // Simpan denda
+        $kembali->save();
+
+        // Update status peminjaman menjadi dikembalikan
+        $minjem->status = 'dikembalikan';
+        $minjem->save();
+
+        return redirect()->back()->with('success', 'Buku berhasil dikembalikan' . ($denda > 0 ? " dengan denda Rp$denda" : ""));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pengembalian  $pengembalian
-     * @return \Illuminate\Http\Response
+     * Tampilkan detail pengembalian
      */
-    public function show(Pengembalian $pengembalian)
+    public function show(Kembali $kembali)
     {
-        //
+        return view('admin.kembalian.show', compact('kembali'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pengembalian  $pengembalian
-     * @return \Illuminate\Http\Response
+     * Form edit pengembalian
      */
-    public function edit(Pengembalian $pengembalian)
+    public function edit(Kembali $kembali)
     {
-        //
+        return view('admin.kembalian.edit', compact('kembali'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pengembalian  $pengembalian
-     * @return \Illuminate\Http\Response
+     * Update data pengembalian
      */
-    public function update(Request $request, Pengembalian $pengembalian)
+    public function update(Request $request, Kembali $kembali)
     {
-        //
+        $request->validate([
+            'tanggal_kembali' => 'required|date',
+            'jumlah' => 'required|integer|min:1',
+        ]);
+
+        $kembali->tanggal_kembali = $request->tanggal_kembali;
+        $kembali->jumlah = $request->jumlah;
+        $kembali->save();
+
+        return redirect()->route('kembali.index')->with('success', 'Data pengembalian berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pengembalian  $pengembalian
-     * @return \Illuminate\Http\Response
+     * Hapus data pengembalian
      */
-    public function destroy(Pengembalian $pengembalian)
+    public function destroy(Kembali $kembali)
     {
-        //
+        $kembali->delete();
+        return redirect()->route('kembali.index')->with('success', 'Data pengembalian berhasil dihapus.');
     }
 }

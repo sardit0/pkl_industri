@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('minjems', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_buku');
             $table->integer('jumlah');
             $table->string('nama');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('status', ['ditahan', 'ditolak', 'diterima','dipinjam'])->default('ditahan');
             $table->timestamps();
         
-            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_buku')->references('id')->on('bukus')->onDelete('cascade');
         });
         
