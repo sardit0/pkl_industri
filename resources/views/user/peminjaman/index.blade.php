@@ -5,13 +5,16 @@
 @endsection
 
 @section('content')
-    <h3 class="m-3 text-uppercase">BORROWER PAGE</h3>
+    <h3 class="m-3 text-uppercase">Borrower Page</h3>
     <hr>
     <div class="card m-3">
         <div class="card-body">
             <div class="row d-flex justify-content-end">
                 <div class="col-md-3">
                     {{-- <input type="text" id="searchInput" class="form-control" placeholder="Search..."> --}}
+                    {{-- @foreach ($buku as $data)
+                        <button class="btn btn-primary" data-id="{{ $data->id }}">Add Borrower</button>
+                    @endforeach --}}
                 </div>
             </div>
 
@@ -36,49 +39,38 @@
                             <td class="text-center">{{ $item->jumlah }}</td>
                             <td>{{ $item->tanggal_minjem }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>Rp. {{ number_format($item->denda) }}
-                            
-                            <!-- Pewarnaan Status -->
+                            <td>Rp. {{ number_format($item->denda) }}</td>
                             <td class="text-center">
                                 @php
                                     $statusColor = [
                                         'diterima' => 'success',
                                         'ditolak' => 'danger',
                                         'dikembalikan' => 'primary',
-                                        'ditahan' => 'warning'
+                                        'ditahan' => 'warning',
                                     ];
                                 @endphp
                                 <span class="badge bg-{{ $statusColor[$item->status] ?? 'secondary' }}">
                                     {{ ucfirst($item->status) }}
                                 </span>
                             </td>
-
-                            <!-- Actions -->
                             <td class="text-center">
                                 @if ($item->status === 'ditolak')
-                                    <a href="{{ route('showpengajuanuser', $item->id) }}" 
-                                       class="btn btn-primary btn-sm" 
-                                       title="See reasons for rejection">
+                                    <a href="{{ route('showpengajuanuser', $item->id) }}" class="btn btn-primary btn-sm"
+                                        title="See reasons for rejection">
                                         <i class="ti ti-eye"></i>
                                     </a>
-
                                 @elseif($item->status === 'diterima')
-                                    <a href="{{ route('peminjaman.edit', $item->id) }}" 
-                                       class="btn btn-warning text-light btn-sm" 
-                                       title="Book Returned">
+                                    <a href="{{ route('peminjaman.edit', $item->id) }}"
+                                        class="btn btn-warning text-light btn-sm" title="Book Returned">
                                         <i class="ti ti-repeat"></i>
                                     </a>
-
                                 @elseif($item->status === 'dikembalikan')
-                                    <form action="{{ route('peminjaman.update', $item->id) }}" 
-                                          method="POST" 
-                                          class="d-inline">
+                                    <form action="{{ route('peminjaman.update', $item->id) }}" method="POST"
+                                        class="d-inline">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" name="status" value="Success" 
-                                                class="btn btn-danger btn-sm" 
-                                                title="Delete Data"
-                                                onclick="return confirm('Are you sure?')">
+                                        <button type="submit" name="status" value="Success" class="btn btn-danger btn-sm"
+                                            title="Delete Data" onclick="return confirm('Are you sure?')">
                                             <i class="ti ti-trash"></i>
                                         </button>
                                     </form>
@@ -99,8 +91,8 @@
         $(document).ready(function() {
             var table = $('#example2').DataTable({
                 dom: "<'row'<'col-md-6'B><'col-md-6'f>>" + // Pindahkan search ke kanan
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 searching: true,
                 lengthChange: false,
                 buttons: [
@@ -112,11 +104,15 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        exportOptions: { columns: ':not(:last-child)' }
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
                     },
                     {
                         extend: 'excelHtml5',
-                        exportOptions: { columns: ':not(:last-child)' }
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
                     }
                 ]
             });

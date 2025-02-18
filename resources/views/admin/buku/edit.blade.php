@@ -100,7 +100,12 @@
                                 @endforeach
                             </select>
                         </div>
-
+                            {{-- <label for="status_buku">Status Buku</label>
+                            <select name="status_buku" id="status_buku" class="form-control">
+                                <option value="Good" {{ $buku->kondisi_buku == 'good' ? 'selected' : '' }}>Baik</option>
+                                <option value="Damaged" {{ $buku->kondisi_buku == 'damaged' ? 'selected' : '' }}>Rusak</option>
+                                <option value="Lost" {{ $buku->kondisi_buku == 'lost' ? 'selected' : '' }}>Hilang</option>
+                            </select> --}}
                         <div class="mt-3 d-flex justify-content-between">
                             <button type="submit" class="btn btn-success">Update</button>
                             <a href="{{ route('buku.index') }}" class="btn btn-danger">Cancel</a>

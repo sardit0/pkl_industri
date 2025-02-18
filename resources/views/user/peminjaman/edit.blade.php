@@ -64,6 +64,15 @@
                     </select>
                 </div>
 
+                {{-- <div class="form-group">
+                    <label for="kondisi_buku">Kondisi Buku:</label>
+                    <select name="kondisi_buku" id="kondisi_buku" class="form-control">
+                        <option value="good" {{ old('kondisi_buku', $minjem->buku->kondisi_buku) == 'good' ? 'selected' : '' }}>Good</option>
+                        <option value="damaged" {{ old('kondisi_buku', $minjem->buku->kondisi_buku) == 'damaged' ? 'selected' : '' }}>Damaged</option>
+                        <option value="lost" {{ old('kondisi_buku', $minjem->buku->kondisi_buku) == 'lost' ? 'selected' : '' }}>Lost</option>
+                    </select>
+                </div> --}}
+
                 <!-- Tombol Submit dan Cancel -->
                 <div class="col-md-12 mt-4">
                     <button type="submit" class="btn btn-success">Update</button>

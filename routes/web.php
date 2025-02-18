@@ -9,7 +9,8 @@ use App\Http\Controllers\MinjemController;
 use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanPeminjamanController;
+use App\Http\Controllers\LaporanPengembalianController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FilterBukuController;
@@ -38,27 +39,29 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::resource('penulis', PenulisController::class);
     Route::resource('buku', BukuController::class);
     Route::resource('user', UserController::class);
+    Route::post('/buku/{id}/status', [BukuController::class, 'markAsDamagedOrLost'])->name('buku.status');
 
+    Route::get('minjem/notifications', [MinjemController::class, 'getNotifications'])->name('minjem.notifications');
+    
     Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');
     Route::get('peminjaman/{id}/detail', [MinjemController::class, 'show'])->name('peminjamanadmin.detail');
 });
-
 
 Route::get('', [TakaanController::class, 'index'])->name('halamanuser');
 Route::get('filter/kategori/{id}', [FilterBukuController::class, 'filterkategori'])->name('kategori.filter');
 Route::get('filter/penerbit/{id}', [FilterBukuController::class, 'filterpenerbit'])->name('penerbit.filter');
 Route::get('filter/penulis/{id}', [FilterBukuController::class, 'filterpenulis'])->name('penulis.filter');
-Route::get('/admin/laporan', [LaporanController::class, 'index'])->name('admin.laporan');
-
+Route::get('/admin/laporan_peminjaman', [LaporanPeminjamanController::class, 'index'])->name('admin.laporan_peminjaman');
+Route::get('/admin/laporan_pengembalian', [LaporanPengembalianController::class, 'index'])->name('admin.laporan_pengembalian');
 
 Route::group(['prefix' => 'peminjam'], function () {
     Route::get('buku', [TakaanController::class, 'buku'])->name('buku');
-    // Route::get('/dashboard', [TakaanController::class, 'dashboard'])->name('dashboard');
     Route::get('show/{id}', [TakaanController::class, 'show'])->name('show');
     Route::get('profile', [TakaanController::class, 'profile'])->name('profile');
     Route::get('dashboarduser', [TakaanController::class, 'dashboard'])->name('dashboarduser');
     Route::get('peminjaman/history', [MinjemController::class, 'history'])->name('peminjaman.history');
-
+    Route::get('peminjaman/create', [TakaanController::class, 'createPeminjaman'])->name('peminjaman.create');
+    Route::post('peminjaman/store', [TakaanController::class, 'storePeminjaman'])->name('peminjaman.store');
 });
 
 Route::group(['prefix' => 'petugas', 'middleware' => ['auth', isPetugas::class]], function () {
@@ -74,11 +77,7 @@ Route::group(['prefix' => 'peminjam', 'middleware' => ['auth']], function () {
     Route::resource('kembalian', KembaliController::class);
     Route::get('pengajuan/show/{id}', [MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
     Route::resource('favorite', FavoriteController::class);
-    // Route::get('favorites', [FavoriteController::class, 'index'])->name('favorites.index');
-    // Route::post('/favorites/{book}', [FavoriteController::class, 'store'])->name('favorites.store');
-    // Route::get('pengajuan/show/{id}',[MinjemController::class, 'showpengajuanuser'])->name('showpengajuanuser');
 });
-
 
 Auth::routes();
 

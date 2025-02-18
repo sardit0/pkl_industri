@@ -149,6 +149,14 @@
                 <i class="ti ti-building-bank" style="color: white"></i>
               </span>
               <span class="hide-menu" style="color: white">Apply for a loan</span>
+
+              <span id="notification-count" class="badge bg-danger">
+                {{ isset($loanNotification) && $loanNotification->count() > 0 ? $loanNotification->count() : 0 }}
+              </span>
+
+              <audio id="cuti-notification-sound">
+                  <source src="{{ asset('sounds/notif_shopee.mp3') }}" type="audio/mpeg">
+              </audio>
             </a>
           </li>
           <li class="nav-small-cap">
@@ -168,11 +176,19 @@
             <span class="hide-menu" style="color: white">Report</span>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('admin.laporan') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('admin.laporan_peminjaman') }}" aria-expanded="false">
               <span>
-                <i class="ti ti-mood-happy" style="color: white"></i>
+                <i class="ti ti-report" style="color: white"></i>
               </span>
-              <span class="hide-menu" style="color: white">Borrowing and Returned Report</span>
+              <span class="hide-menu" style="color: white">Borrowing Report</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="{{ route('admin.laporan_pengembalian') }}" aria-expanded="false">
+              <span>
+                <i class="ti ti-report" style="color: white"></i>
+              </span>
+              <span class="hide-menu" style="color: white">Returned Report</span>
             </a>
           </li>
       </nav>
@@ -181,3 +197,32 @@
     <!-- End Sidebar scroll-->
   </aside>
   <!--  Sidebar End -->
+
+  <script>
+    let previousNotificationCount = {{ isset($loanNotification) ? $loanNotification->count() : 0 }};
+
+    function checkNotifications() {
+        $.ajax({
+            url: '{{ route('minjem.notifications') }}',
+            type: 'GET',
+            success: function(response) {
+                let newCount = response.count;
+
+                $('#notification-count').text(newCount).show();
+
+                if (newCount > previousNotificationCount) {
+                    let audio = document.getElementById('loan-notification-sound');
+                    audio.play().catch(error => console.log('Gagal memutar audio:', error));
+                }
+
+                previousNotificationCount = newCount;
+            },
+            error: function() {
+                console.log('Gagal memuat notifikasi');
+            }
+        });
+    }
+
+    // Memanggil fungsi setiap 5 detik
+    setInterval(checkNotifications, 5000);
+</script>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Penulis;
@@ -22,6 +21,7 @@ class DashboardController extends Controller
     public function index(BukuChart $chart)
     {
         $chartInstance = $chart->build(); // Membuat chart
+        $loanReturnChart = $chart->buildLoanReturnChart(); // Membuat chart peminjaman dan pengembalian
 
         $kategori = Kategori::count('id');
         $penulis = Penulis::count('id');
@@ -38,6 +38,7 @@ class DashboardController extends Controller
             'kembali' => $kembali,
             'minjem' => $minjem,
             'chart' => $chartInstance, // Pastikan ini adalah objek chart
+            'loanReturnChart' => $loanReturnChart, // Chart peminjaman dan pengembalian
         ]);
     }
 

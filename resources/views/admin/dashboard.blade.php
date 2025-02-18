@@ -11,23 +11,22 @@
                             <div class="col-12">
                                 <h4 class="card-title mt-5">Welcome to Library website</h4>
                                 <h4 class="card-title mt-2">This is the Admin Dashboard page</h4>
-                                <div class="col-sm-6 grid-margin">
-                                    <body class="h-screen bg-gray-100">
-
-                                        <div class="container px-4 mx-auto">
-                                        
-                                            <div class="p-6 m-20 bg-white rounded shadow">
-                                                {!! $chart->container() !!}
-                                            </div>
-                                        
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="p-6 m-20 bg-white rounded shadow">
+                                            {!! $chart->container() !!}
                                         </div>
-                                        
-                                        <script src="{{ $chart->cdn() }}"></script>
-                                        
-                                        {{ $chart->script() }}
-                                        
-
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-6 m-20 bg-white rounded shadow">
+                                            {!! $loanReturnChart->container() !!}
+                                        </div>
+                                    </div>
                                 </div>
+                                <script src="{{ $chart->cdn() }}"></script>
+                                {{ $chart->script() }}
+                                <script src="{{ $loanReturnChart->cdn() }}"></script>
+                                {{ $loanReturnChart->script() }}
                             </div>
                         </div>
                     </center>
@@ -35,25 +34,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <div class="row">
-        <div class="col-12 col-xl-12">
-            <div class="card m-3">
-                <div class="card-body p-4">
-                    <div class="d-flex flex-row justify-content-center">
-                    </div>
-                  
-                        <div class="d-flex flex-row justify-content-center">
-                            <div class="col-12 text-center">
-                                <h4 class="card-title mt-5">Welcome to Library website</h4>
-                                <h4 class="card-title mt-2">This is the Admin Dashboard page</h4>
-                            </div>
-                        </div>
-                   
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <div class="row">
         <div class="col-sm-4 grid-margin">
@@ -71,7 +51,6 @@
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
                                 <span class="mdi mdi-table-large"></span>
-
                             </div>
                         </div>
                     </div>
@@ -89,7 +68,6 @@
                             </div>
                             <a href="{{ route('penerbit.index') }}" class="btn btn-primary btn-sm mt-2">See <i
                                     class="ti ti-eye"></i></a>
-
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
@@ -109,11 +87,9 @@
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
                                 <h2 class="mb-0">{{ $penulis }} Data</h2>
-
                             </div>
                             <a href="{{ route('penulis.index') }}" class="btn btn-primary btn-sm mt-2">See <i
                                     class="ti ti-eye"></i></a>
-
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-primary">
@@ -134,7 +110,6 @@
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
                                 <h2 class="mb-0">{{ $buku }} Data</h2>
-
                             </div>
                             <a href="{{ route('buku.index') }}" class="btn btn-primary btn-sm mt-2">See <i
                                     class="ti ti-eye"></i></a>
@@ -156,11 +131,9 @@
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
                                 <h2 class="mb-0">{{ $minjem }} Data</h2>
-
                             </div>
                             <a href="{{ route('peminjaman.index') }}" class="btn btn-primary btn-sm mt-2">See <i
                                     class="ti ti-eye"></i></a>
-
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-danger">
@@ -179,11 +152,9 @@
                         <div class="col-8 col-sm-12 col-xl-8 my-auto">
                             <div class="d-flex d-sm-block d-md-flex align-items-center">
                                 <h2 class="mb-0">{{ $kembali }} Data</h2>
-
                             </div>
                             <a href="{{ route('kembalian.index') }}" class="btn btn-primary btn-sm mt-2">See <i
                                     class="ti ti-eye"></i></a>
-
                         </div>
                         <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                             <div class="icon icon-box-success">

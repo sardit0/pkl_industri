@@ -18,13 +18,13 @@ class KembaliController extends Controller
      */
     public function index()
     {
-        $kembalis = Kembali::with('minjem', 'buku', 'user')->get();
+        $kembalis = Kembali::with('buku', 'user')->where('status', 'dikembalikan')->get();
 
         foreach ($kembalis as $data) {
             $data->formatted_tanggal = Carbon::parse($data->tanggal_kembali)->translatedFormat('l, d F Y');
         }
 
-        return view('admin.kembalian.index', compact('kembalis'));
+        return view('user.kembalian.index', compact('kembalis'));
     }
 
     /**

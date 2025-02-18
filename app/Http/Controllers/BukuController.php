@@ -6,9 +6,11 @@ use App\Models\Buku;
 use App\Models\Penerbit;
 use App\Models\Penulis;
 use App\Models\Kategori;
+use App\Models\Minjem;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class BukuController extends Controller
 {
@@ -17,13 +19,34 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function markAsDamagedOrLost(Request $request, $id)
+    {
+        // Validasi input
+        $this->validate($request, [
+            'status_buku' => 'required|in:damaged,lost',
+        ]);
+
+        // Cari buku berdasarkan ID
+        $buku = Buku::findOrFail($id);
+
+        // Update status buku
+        $buku->kondisi_buku = $request->status_buku;
+        $buku->save();
+
+        // Pesan alert untuk sukses
+        Alert::success('Success', 'The book has been successfully updated its condition status.')->autoclose(1500);
+
+        return redirect()->route('admin.buku.index');
+    }
+
     public function index()
     {
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
         $buku = Buku::orderBy('jumlah_buku', 'desc')->paginate(5);
-        return view('admin.buku.index', compact('kategori', 'penerbit', 'penulis','buku'));
+        return view('admin.buku.index', compact('kategori', 'penerbit', 'penulis', 'buku'));
     }
 
     /**
@@ -36,7 +59,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        return view('admin.buku.create', compact('kategori','penerbit','penulis'));
+        return view('admin.buku.create', compact('kategori', 'penerbit', 'penulis'));
     }
 
     /**
@@ -48,18 +71,21 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         //validate form
-        $this->validate($request, [
-            'judul' => 'required|min:1|unique:bukus,judul',
-            'desk' => 'required|min:1|',
-            'jumlah_buku' => 'required',
-            'tahun_penerbit' => 'required|date',
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
+        $this->validate(
+            $request,
+            [
+                'judul' => 'required|min:1|unique:bukus,judul',
+                'desk' => 'required|min:1|',
+                'jumlah_buku' => 'required',
+                'tahun_penerbit' => 'required|date',
+                'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
 
-        ],
-    [
-        'judul.required' => 'Book Title Must be Filled!',
-        'judul.unique' => 'Book Title with that Name already exists!',
-    ]);
+            ],
+            [
+                'judul.required' => 'Book Title Must be Filled!',
+                'judul.unique' => 'Book Title with that Name already exists!',
+            ]
+        );
 
         $buku = new buku();
         $buku->judul = $request->judul;
@@ -69,7 +95,7 @@ class BukuController extends Controller
         $buku->id_kategori = $request->id_kategori;
         $buku->id_penerbit = $request->id_penerbit;
         $buku->id_penulis = $request->id_penulis;
-        
+
         // update img
         if ($request->hasFile('image')) {
             $img = $request->file('image');
@@ -107,7 +133,7 @@ class BukuController extends Controller
         $kategori = kategori::all();
         $penerbit = penerbit::all();
         $penulis = penulis::all();
-        return view('admin.buku.edit', compact('kategori','penerbit','penulis','buku'));
+        return view('admin.buku.edit', compact('kategori', 'penerbit', 'penulis', 'buku'));
     }
 
     /**
@@ -120,15 +146,18 @@ class BukuController extends Controller
     public function update(Request $request, $id)
     {
         //validate form
-        $this->validate($request, [
-            'judul' => 'required|min:1|unique:bukus,judul',
-            'jumlah_buku' => 'required',
-            'tahun_penerbit' => 'required|date',
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048'
-        ],
-    [
-        
-    ]);
+        $this->validate(
+            $request,
+            [
+                'judul' => 'required|min:1|unique:bukus,judul',
+                'jumlah_buku' => 'required',
+                'tahun_penerbit' => 'required|date',
+                'image' => 'image|mimes:jpeg,jpg,png|max:2048'
+            ],
+            [
+
+            ]
+        );
 
         $buku = buku::findOrFail($id);
         $buku->judul = $request->judul;
@@ -138,17 +167,8 @@ class BukuController extends Controller
         $buku->id_kategori = $request->id_kategori;
         $buku->id_penerbit = $request->id_penerbit;
         $buku->id_penulis = $request->id_penulis;
-        
+
         // update img
-        if ($request->hasFile('image')) {
-            $img = $request->file('image');
-            $name = rand(1000, 9999) . $img->getClientOriginalName();
-            $img->move('images/buku', $name);
-            $buku->image = $name;
-        }
-        
-        
-           // delete img
         if ($request->hasFile('image')) {
             $img = $request->file('image');
             $name = rand(1000, 9999) . $img->getClientOriginalName();
@@ -172,5 +192,58 @@ class BukuController extends Controller
         $buku = buku::findOrFail($id);
         $buku->delete();
         return redirect()->route('buku.index');
+    }
+
+    /**
+     * Show the form for creating a new loan.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createLoan($id)
+    {
+        $buku = Buku::findOrFail($id);
+        $batastanggal = Carbon::now()->addWeek()->format('Y-m-d');
+        $sekarang = now()->format('Y-m-d');
+
+        return view('user.peminjaman.create', compact('buku', 'sekarang', 'batastanggal'));
+    }
+
+    /**
+     * Store a newly created loan in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeLoan(Request $request)
+    {
+        $this->validate($request, [
+            'jumlah' => 'required|min:1|max:1000',
+            'id_buku' => 'required',
+        ]);
+
+        $buku = Buku::findOrFail($request->id_buku);
+
+        if ($request->jumlah > $buku->jumlah_buku) {
+            Alert::error('Error', 'Quantity requested exceeds available stock')->autoclose(1500);
+            return redirect()->back();
+        }
+
+        $minjem = new Minjem();
+        $minjem->jumlah = $request->jumlah;
+        $minjem->tanggal_minjem = now();
+        $minjem->batas_tanggal = now()->addDays(7);
+        $minjem->tanggal_kembali = now()->addDays(7);
+        $minjem->alasan = $request->alasan;
+        $minjem->nama = Auth::user()->name;
+        $minjem->status = 'ditahan';
+        $minjem->id_buku = $request->id_buku;
+        $minjem->id_user = Auth::id();
+
+        $minjem->save();
+
+        Alert::info('Info!', 'Loan application successfully created and still in hold status')->autoclose(1500);
+
+        return redirect()->route('peminjaman.index');
     }
 }
