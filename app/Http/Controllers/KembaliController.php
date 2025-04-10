@@ -18,7 +18,7 @@ class KembaliController extends Controller
      */
     public function index()
     {
-        $kembalis = Kembali::with('buku', 'user')->where('status', 'dikembalikan')->get();
+        $kembalis = Kembali::with('buku', 'user')->get();
 
         foreach ($kembalis as $data) {
             $data->formatted_tanggal = Carbon::parse($data->tanggal_kembali)->translatedFormat('l, d F Y');
@@ -59,7 +59,7 @@ class KembaliController extends Controller
         $minjem->status = 'dikembalikan';
         $minjem->save();
 
-        return redirect()->back()->with('success', 'Buku berhasil dikembalikan' . ($denda > 0 ? " dengan denda Rp$denda" : ""));
+        return redirect()->route('kembalian.index')->with('success', 'Buku berhasil dikembalikan' . ($denda > 0 ? " dengan denda Rp$denda" : ""));
     }
 
     /**
@@ -92,7 +92,7 @@ class KembaliController extends Controller
         $kembali->jumlah = $request->jumlah;
         $kembali->save();
 
-        return redirect()->route('kembali.index')->with('success', 'Data pengembalian berhasil diperbarui.');
+        return redirect()->route('kembalian.index')->with('success', 'Data pengembalian berhasil diperbarui.');
     }
 
     /**

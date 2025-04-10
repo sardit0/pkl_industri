@@ -129,7 +129,7 @@
                 }
             },
             {
-                text: 'Export PDF',
+                text: 'Print',
                 extend: 'print',
                 exportOptions: {
                     columns: ':not(:last-child)' 
@@ -138,6 +138,13 @@
             {
                 text: 'Export EXCEL',
                 extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
+            },
+            {
+                text: 'Export PDF',
+                extend: 'pdfHtml5',
                 exportOptions: {
                     columns: ':not(:last-child)'
                 }

@@ -49,6 +49,17 @@ class BukuController extends Controller
         return view('admin.buku.index', compact('kategori', 'penerbit', 'penulis', 'buku'));
     }
 
+    public function indexapi()
+    {
+        $buku = Buku::with(['kategori','penulis','penerbit'])->get();
+        $res = [
+            'success' => true,
+            'message' => 'Daftar Buku',
+            'data' => $buku,
+        ];
+        return response()->json($res, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

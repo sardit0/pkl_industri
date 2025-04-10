@@ -26,6 +26,8 @@ use App\Http\Middleware\IsPetugas;
 |
 */
 
+
+
 // Route default untuk halaman depan admin
 Route::get('/', function () {
     return view('layouts.backend.admin');

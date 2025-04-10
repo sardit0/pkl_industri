@@ -46,19 +46,19 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('kembalian.index') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-building-bank" style="color: white"></i>
+                        </span>
+                        <span class="hide-menu" style="color: white">Return Data</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('peminjaman.history') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-history" style="color: white"></i>
                         </span>
                         <span class="hide-menu" style="color: white">History Borrower</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('kembalian.index') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-autorenew" style="color: white"></i>
-                        </span>
-                        <span class="hide-menu" style="color: white">Return Data</span>
                     </a>
                 </li>
             </ul>

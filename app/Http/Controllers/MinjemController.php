@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Penulis;
 use App\Models\Penerbit;
+use App\Models\Kembali;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -43,11 +44,23 @@ class MinjemController extends Controller
         $buku->jumlah_buku += $request->jumlah;
         $buku->save();
 
+        // Simpan data pengembalian
+        $kembali = new Kembali();
+        $kembali->jumlah = $request->jumlah;
+        $kembali->tanggal_kembali = now();
+        $kembali->status = 'dikembalikan';
+        $kembali->id_minjem = $minjem->id;
+        $kembali->id_buku = $minjem->id_buku;
+        $kembali->nama = $minjem->nama;
+        $kembali->id_user = $minjem->id_user;
+        $kembali->save();
+
+        // Update status peminjaman menjadi dikembalikan
         $minjem->status = 'dikembalikan';
         $minjem->save();
 
         Alert::success('Success', 'Book successfully returned')->autoclose(1500);
-        return redirect()->route('peminjaman.index');
+        return redirect()->route('kembalian.index');
     }
 
     public function history()
@@ -87,16 +100,16 @@ class MinjemController extends Controller
         return view('admin.peminjamanadmin.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem', 'user'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $buku = Buku::all();
-        $user = User::all();
-        $minjem = Minjem::all();
+        $user = Auth::user();
+        $selectedBuku = $request->input('id_buku', $buku->first()->id); // Ambil buku yang dipilih atau buku pertama
 
         $batastanggal = Carbon::now()->addWeek()->format('Y-m-d');
         $sekarang = now()->format('Y-m-d');
 
-        return view('user.peminjaman.create', compact('minjem', 'buku', 'sekarang', 'batastanggal'));
+        return view('user.peminjaman.create', compact('buku', 'sekarang', 'batastanggal', 'selectedBuku'));
     }
 
     public function store(Request $request)

@@ -6,15 +6,20 @@
             <div class="col-12 col-xl-12">
                 <div class="card m-3">
                     <div class="card-header">
-                        <h3>Add Borrower</h3>
+                        <h3>ADD BORROWER</h3>
                     </div>
                     <div class="card-body">
                         <form class="row" method="POST" action="{{ route('peminjaman.store') }}">
                             @csrf
                             <div class="col-md-12">
                                 <label for="judul_buku" class="form-label">Book Title</label>
-                                <input type="text" id="judul_buku" class="form-control" value="{{ $buku->first()->judul }}" disabled>
-                                <input type="hidden" name="id_buku" value="{{ $buku->first()->id }}">
+                                <select name="id_buku" id="judul_buku" class="form-control">
+                                    @foreach ($buku as $book)
+                                        <option value="{{ $book->id }}" {{ $book->id == $selectedBuku ? 'selected' : '' }}>
+                                            {{ $book->judul }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-12">
                                 <label for="input17" class="form-label">Book Amount</label>
@@ -78,5 +83,3 @@
         document.getElementById("tanggal_kembali").setAttribute("max", formattedMaxDate);
     });
 </script>
-
-

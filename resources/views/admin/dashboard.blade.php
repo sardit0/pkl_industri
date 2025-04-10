@@ -10,7 +10,7 @@
                         <div class="d-flex flex-row justify-content-center">
                             <div class="col-12">
                                 <h4 class="card-title mt-5">Welcome to Library website</h4>
-                                <h4 class="card-title mt-2">This is the Admin Dashboard page</h4>
+                                <h4 class="card-title mt-2 mb-5">This is the Admin Dashboard page</h4>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="p-6 m-20 bg-white rounded shadow">
