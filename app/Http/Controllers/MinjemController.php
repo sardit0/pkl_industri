@@ -100,6 +100,17 @@ class MinjemController extends Controller
         return view('admin.peminjamanadmin.index', compact('buku', 'kategori', 'penulis', 'penerbit', 'minjem', 'user'));
     }
 
+    public function indexapi()
+    {
+        $minjem = minjem::all();
+        $res = [
+            'success' => true,
+            'message' => 'Daftar Minjem',
+            'minjem' => $minjem,
+        ];
+        return response()->json($res, 200);
+    }
+
     public function create(Request $request)
     {
         $buku = Buku::all();
@@ -171,36 +182,35 @@ class MinjemController extends Controller
 
     public function update(Request $request, $id)
     {
-        $minjem = Minjem::findOrFail($id);
-        $minjem->alasan = $request->alasan;
-        $status = $request->input('status');
-        $buku = Buku::findOrFail($minjem->id_buku);
+        // Ambil data peminjaman berdasarkan ID
+        $peminjaman = minjem::findOrFail($id);
 
-        if ($status === 'diterima') {
-            $buku->jumlah_buku -= $minjem->jumlah;
-            $buku->save();
-            $minjem->status = 'diterima';
-            Alert::success('Accepted', 'Your book loan has been approved by the admin')->autoclose(1500);
-        } elseif ($status === 'ditahan') {
-            $buku->jumlah_buku += $minjem->jumlah;
-            $buku->save();
-            $minjem->status = 'ditahan';
-            Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
-        } elseif ($status === 'ditolak') {
-            $minjem->status = 'ditolak';
-            Alert::error('Rejected', 'Book loan rejected by admin')->autoclose(1500);
-        } elseif ($status === 'dikembalikan') {
-            $buku->jumlah_buku += $minjem->jumlah;
-            $buku->save();
-            Alert::success('Book returned', 'Borrowed book has been returned')->autoclose(1500);
-        } else {
-            Alert::info('On hold', 'Book loan is still in admin submission process')->autoclose(1500);
+        // Debugging: Check if 'id_user' exists in 'peminjaman'
+        if (!$peminjaman->id_user) {
+            return redirect()->route('peminjaman.index')->with('error', 'ID user tidak ditemukan pada peminjaman.');
         }
 
-        $minjem->save();
+        // Cek apakah status yang dipilih adalah 'Kembalikan' (1)
+        if ($request->status == 1) {
+            // Buat data pengembalian baru ke tabel kembalis
+            $kembali = new Kembali();
+            $kembali->jumlah = $peminjaman->jumlah; // Asumsikan ada field 'jumlah' di peminjaman
+            $kembali->tanggal_kembali = now(); // Menggunakan tanggal sekarang
+            $kembali->status = 'ditahan'; // Status awal
+            $kembali->denda = 0; // Default denda
+            $kembali->id_minjem = $peminjaman->id;
+            $kembali->id_buku = $peminjaman->id_buku; // Asumsikan ada kolom id_buku di peminjaman
+            $kembali->id_user = $peminjaman->id_user;
+            $kembali->save();
 
-        return redirect()->back()->with('success', 'Loan status successfully updated');
+            // Update status peminjaman
+            $peminjaman->status = 'disetujui';
+            $peminjaman->save();
+        }
+
+        return redirect()->route('peminjaman.index')->with('success', 'Proses pengembalian berhasil.');
     }
+
 
     public function destroy($id)
     {

@@ -19,6 +19,17 @@ class KategoriController extends Controller
         return view('admin.kategori.index', compact('kategori'));
     }
 
+    public function indexapi()
+    {
+        $kategori = kategori::all();
+        $res = [
+            'success' => true,
+            'message' => 'Daftar kategori',
+            'kategori' => $kategori,
+        ];
+        return response()->json($res, 200);
+    }
+
     public function create()
     {
         return view('admin.kategori.create');

@@ -1,7 +1,7 @@
 @extends('layouts.backend.usertemp')
 
 @section('content')
-    <h3 class="mb-0 text-uppercase pb-3">TABLE RETURN BOOK</h3>
+    <h3 class="m-3 text-uppercase">Return Page</h3>
     <hr>
     <div class="card">
         <div class="card-body">

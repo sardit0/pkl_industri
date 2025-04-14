@@ -51,11 +51,11 @@ class BukuController extends Controller
 
     public function indexapi()
     {
-        $buku = Buku::with(['kategori','penulis','penerbit'])->get();
+        $buku = Buku::all();
         $res = [
             'success' => true,
             'message' => 'Daftar Buku',
-            'data' => $buku,
+            'buku' => $buku,
         ];
         return response()->json($res, 200);
     }
