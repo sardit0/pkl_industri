@@ -25,6 +25,7 @@ Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login'])
 Route::middleware('auth:sanctum')->group( function () {
     Route::get('/buku', [\App\Http\Controllers\BukuController::class, 'indexapi']);
     Route::get('/minjem', [\App\Http\Controllers\MinjemController::class, 'indexapi']);
+    Route::get('/kembali', [\App\Http\Controllers\KembaliController::class, 'indexapi']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

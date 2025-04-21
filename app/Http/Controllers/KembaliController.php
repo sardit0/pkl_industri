@@ -27,6 +27,17 @@ class KembaliController extends Controller
         return view('user.kembalian.index', compact('kembalis'));
     }
 
+    public function indexapi()
+    {
+        $kembali = kembali::all();
+        $res = [
+            'success' => true,
+            'message' => 'Daftar kembali',
+            'kembali' => $kembali,
+        ];
+        return response()->json($res, 200);
+        }
+
     /**
      * Simpan data pengembalian
      */

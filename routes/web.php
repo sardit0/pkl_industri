@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::post('/buku/{id}/status', [BukuController::class, 'markAsDamagedOrLost'])->name('buku.status');
 
     Route::get('minjem/notifications', [MinjemController::class, 'getNotifications'])->name('minjem.notifications');
-    
+
     Route::get('peminjaman', [MinjemController::class, 'indexadmin'])->name('peminjamanadmin.index');
     Route::get('peminjaman/{id}/detail', [MinjemController::class, 'show'])->name('peminjamanadmin.detail');
 });
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'peminjam'], function () {
 });
 
 Route::group(['prefix' => 'petugas', 'middleware' => ['auth', isPetugas::class]], function () {
-    Route::get('', [App\Http\Controllers\Petugas\PetugasController::class, 'index'])->name('petugasdashboard');
+    Route::get('', [App\Http\Controllers\Petugas\PetugasController::class, 'index'])    ->name('petugasdashboard');
     Route::resource('kategori', App\Http\Controllers\Petugas\KategoriController::class, ['as' => 'petugas']);
     Route::resource('penerbit', App\Http\Controllers\Petugas\PenerbitController::class, ['as' => 'petugas']);
     Route::resource('penulis', App\Http\Controllers\Petugas\PenulisController::class, ['as' => 'petugas']);

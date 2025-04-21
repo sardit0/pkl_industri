@@ -182,34 +182,51 @@ class MinjemController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Ambil data peminjaman berdasarkan ID
-        $peminjaman = minjem::findOrFail($id);
+        $peminjaman = Minjem::findOrFail($id);
 
-        // Debugging: Check if 'id_user' exists in 'peminjaman'
+        // Validasi jika user tidak ditemukan
         if (!$peminjaman->id_user) {
-            return redirect()->route('peminjaman.index')->with('error', 'ID user tidak ditemukan pada peminjaman.');
+            return redirect()->route('peminjamanadmin.index')->with('error', 'ID user tidak ditemukan pada peminjaman.');
         }
 
-        // Cek apakah status yang dipilih adalah 'Kembalikan' (1)
+        if ($request->status === 'diterima') {
+            $peminjaman->status = 'diterima';
+            $peminjaman->save();
+
+            Alert::success('Success!', 'Successful loan received by Admin!')->autoclose(1500);
+            return redirect()->route('peminjamanadmin.index')->with('success', 'Peminjaman diterima.');
+        }
+
+        if ($request->status === 'ditolak') {
+            $peminjaman->status = 'ditolak';
+            $peminjaman->alasan = $request->alasan ?? null;
+            $peminjaman->save();
+
+            Alert::error('Rejected!', 'Too bad, Your book was rejected by the admin')->autoclose(1500);
+            return redirect()->route('peminjamanadmin.index')->with('success', 'Peminjaman ditolak.');
+        }
+
+        // Cek untuk pengembalian (jika ada logika tersebut)
         if ($request->status == 1) {
-            // Buat data pengembalian baru ke tabel kembalis
             $kembali = new Kembali();
-            $kembali->jumlah = $peminjaman->jumlah; // Asumsikan ada field 'jumlah' di peminjaman
-            $kembali->tanggal_kembali = now(); // Menggunakan tanggal sekarang
-            $kembali->status = 'ditahan'; // Status awal
-            $kembali->denda = 0; // Default denda
+            $kembali->jumlah = $peminjaman->jumlah;
+            $kembali->tanggal_kembali = now();
+            $kembali->status = 'ditahan';
+            $kembali->denda = 0;
             $kembali->id_minjem = $peminjaman->id;
-            $kembali->id_buku = $peminjaman->id_buku; // Asumsikan ada kolom id_buku di peminjaman
+            $kembali->id_buku = $peminjaman->id_buku;
             $kembali->id_user = $peminjaman->id_user;
             $kembali->save();
 
-            // Update status peminjaman
             $peminjaman->status = 'disetujui';
             $peminjaman->save();
+
+            return redirect()->route('peminjamanadmin.index')->with('success', 'Proses pengembalian berhasil.');
         }
 
-        return redirect()->route('peminjaman.index')->with('success', 'Proses pengembalian berhasil.');
+        return redirect()->route('peminjamanadmin.index')->with('info', 'Tidak ada perubahan status dilakukan.');
     }
+
 
 
     public function destroy($id)
