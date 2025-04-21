@@ -181,51 +181,64 @@ class MinjemController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $peminjaman = Minjem::findOrFail($id);
+{
+    $peminjaman = Minjem::findOrFail($id);
 
-        // Validasi jika user tidak ditemukan
-        if (!$peminjaman->id_user) {
-            return redirect()->route('peminjamanadmin.index')->with('error', 'ID user tidak ditemukan pada peminjaman.');
-        }
+    // Validasi jika user tidak ditemukan
+    if (!$peminjaman->id_user) {
+        return redirect()->route('peminjamanadmin.index')->with('error', 'ID user tidak ditemukan pada peminjaman.');
+    }
 
-        if ($request->status === 'diterima') {
+    $buku = Buku::find($peminjaman->id_buku);
+
+    // Jika status diterima
+    if ($request->status === 'diterima') {
+        if ($buku && $buku->jumlah_buku >= $peminjaman->jumlah) {
+            $buku->jumlah_buku -= $peminjaman->jumlah;
+            $buku->save();
+
             $peminjaman->status = 'diterima';
             $peminjaman->save();
 
             Alert::success('Success!', 'Successful loan received by Admin!')->autoclose(1500);
             return redirect()->route('peminjamanadmin.index')->with('success', 'Peminjaman diterima.');
+        } else {
+            Alert::error('Error!', 'Insufficient book stock')->autoclose(1500);
+            return redirect()->route('peminjamanadmin.index')->with('error', 'Stok buku tidak mencukupi.');
         }
-
-        if ($request->status === 'ditolak') {
-            $peminjaman->status = 'ditolak';
-            $peminjaman->alasan = $request->alasan ?? null;
-            $peminjaman->save();
-
-            Alert::error('Rejected!', 'Too bad, Your book was rejected by the admin')->autoclose(1500);
-            return redirect()->route('peminjamanadmin.index')->with('success', 'Peminjaman ditolak.');
-        }
-
-        // Cek untuk pengembalian (jika ada logika tersebut)
-        if ($request->status == 1) {
-            $kembali = new Kembali();
-            $kembali->jumlah = $peminjaman->jumlah;
-            $kembali->tanggal_kembali = now();
-            $kembali->status = 'ditahan';
-            $kembali->denda = 0;
-            $kembali->id_minjem = $peminjaman->id;
-            $kembali->id_buku = $peminjaman->id_buku;
-            $kembali->id_user = $peminjaman->id_user;
-            $kembali->save();
-
-            $peminjaman->status = 'disetujui';
-            $peminjaman->save();
-
-            return redirect()->route('peminjamanadmin.index')->with('success', 'Proses pengembalian berhasil.');
-        }
-
-        return redirect()->route('peminjamanadmin.index')->with('info', 'Tidak ada perubahan status dilakukan.');
     }
+
+    // Jika status ditolak
+    if ($request->status === 'ditolak') {
+        $peminjaman->status = 'ditolak';
+        $peminjaman->alasan = $request->alasan ?? null;
+        $peminjaman->save();
+
+        Alert::error('Rejected!', 'Too bad, Your book was rejected by the admin')->autoclose(1500);
+        return redirect()->route('peminjamanadmin.index')->with('success', 'Peminjaman ditolak.');
+    }
+
+    // Jika status == 1 (logika pengembalian)
+    if ($request->status == 1) {
+        $kembali = new Kembali();
+        $kembali->jumlah = $peminjaman->jumlah;
+        $kembali->tanggal_kembali = now();
+        $kembali->status = 'ditahan';
+        $kembali->denda = 0;
+        $kembali->id_minjem = $peminjaman->id;
+        $kembali->id_buku = $peminjaman->id_buku;
+        $kembali->id_user = $peminjaman->id_user;
+        $kembali->save();
+
+        $peminjaman->status = 'disetujui';
+        $peminjaman->save();
+
+        return redirect()->route('peminjamanadmin.index')->with('success', 'Proses pengembalian berhasil.');
+    }
+
+    return redirect()->route('peminjamanadmin.index')->with('info', 'Tidak ada perubahan status dilakukan.');
+}
+
 
 
 
