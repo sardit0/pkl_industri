@@ -11,7 +11,7 @@
                 <div class="col-md-12">
                     <label for="input17" class="form-label">Nama Kategori</label>
                     <div class="position-relative input-icon">
-                        <input type="text" name="nama_kategori" class="form-control @error('nama_kategori') is-invalid @enderror" id="input17" placeholder="Nama Kategori">
+                        <input type="text" name="nama_kategori" value="{{ $kategori->nama_kategori }}" class="form-control @error('nama_kategori') is-invalid @enderror" id="input17" placeholder="Nama Kategori">
                         <span class="position-absolute top-50 translate-middle-y"></span>
                         @error('nama_kategori')
                             <span class="invalid-feedback" role="alert">

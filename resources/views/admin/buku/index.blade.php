@@ -78,7 +78,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li>
                                             <a class="dropdown-item" href="{{ route('buku.edit', $data->id) }}">
-                                                <i class="ti ti-edit"></i> Edit 
+                                                <i class="ti ti-edit"></i> Edit
                                             </a>
                                         </li>
                                         {{-- <li>
@@ -87,12 +87,13 @@
                                             </a>
                                         </li> --}}
                                         <li>
-                                            <form action="{{ route('buku.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                            <button class="dropdown-item" onclick="confirmDelete({{ $data->id }})">
+                                                <i class="ti ti-trash"></i> Delete
+                                            </button>
+
+                                            <form id="delete-form-{{ $data->id }}" action="{{ route('buku.destroy', $data->id) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="dropdown-item" type="submit">
-                                                    <i class="ti ti-trash"></i> Delete
-                                                </button>
                                             </form>
                                         </li>
                                     </ul>
@@ -114,6 +115,25 @@
     <script src="{{ asset('admin/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
 
     <script>
+
+  function confirmDelete(id) {
+    Swal.fire({
+      title: 'Are You sure Delete it?',
+      text: "This data cannot be Restored!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, Delete!',
+      cancelButtonText: 'Cancelled'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById('delete-form-' + id).submit();
+      }
+    });
+  }
+
+
        $(document).ready(function() {
     var table = $('#example2').DataTable({
         dom: "<'row'<'col-md-6'B><'col-md-6'f>>" + // Pindahkan search ke kanan
@@ -132,7 +152,7 @@
                 text: 'Print',
                 extend: 'print',
                 exportOptions: {
-                    columns: ':not(:last-child)' 
+                    columns: ':not(:last-child)'
                 }
             },
             {

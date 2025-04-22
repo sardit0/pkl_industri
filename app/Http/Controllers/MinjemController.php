@@ -69,6 +69,17 @@ class MinjemController extends Controller
         return view('user.peminjaman.history', compact('minjem'));
     }
 
+    public function historyapi()
+    {
+        $minjem = minjem::all();
+        $res = [
+            'success' => true,
+            'message' => 'History Borrowed',
+            'minjem' => $minjem,
+        ];
+        return response()->json($res, 200);
+    }
+
     public function index(Request $request)
     {
         $user = Auth::user();

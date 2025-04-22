@@ -116,7 +116,7 @@ class BukuController extends Controller
         }
 
         $buku->save();
-        Alert::success('Success', 'Data Added Successfully')->autoclose(1500);
+        Alert::success('Success', 'Book Added Successfully')->autoclose(1500);
         return redirect()->route('buku.index');
     }
 
